@@ -1,7 +1,7 @@
 import React from "react";
-import { AccidentData } from "../../types/Accident";
-import useFetchData from "../../hooks/useFetchData";
-import { LoadingIndicator } from "../../components/loading";
+// import { AccidentData } from "../../types/Accident";
+// import useFetchData from "../../hooks/useFetchData";
+// import { LoadingIndicator } from "../../components/loading";
 import * as S from "./styles";
 import { Title } from "../../components/title";
 import { MockSpace } from "../../components/mockspace";

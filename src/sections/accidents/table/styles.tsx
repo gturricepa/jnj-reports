@@ -3,8 +3,6 @@ export const Table = styled.table`
   width: 40rem;
   border-radius: 5px;
   border-collapse: collapse;
-  margin-top: 1rem;
-
   thead {
     background-color: #ee1100;
     color: white;

@@ -5,8 +5,7 @@ export const Holder = styled.div`
   width: 45rem;
   height: 600px;
   flex-direction: column;
-  margin-top: 1rem;
-
+  margin-top: 1.7rem;
   h3 {
     display: flex;
     width: 50%;

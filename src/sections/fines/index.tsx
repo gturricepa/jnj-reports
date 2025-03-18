@@ -6,10 +6,12 @@ import { Title } from "../../components/title";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
 import { separeByYear } from "../accidents/helper";
-import * as XLSX from "xlsx";
 import { AccidentsTable } from "../accidents/table";
 import { AccidentsBarChart } from "../accidents/radarChart";
 import { FinesData } from "../../types/Fines";
+import { UnsedData } from "../../components/unsedata";
+import { CenterTitle } from "../../components/centerTitle";
+import { downloadExcel } from "../../helper/downloadExcel";
 
 export const Fines: React.FC = () => {
   const { filteredData, loading } = useFetchData<FinesData>(
@@ -17,6 +19,8 @@ export const Fines: React.FC = () => {
   );
   const perspective = useSelector((state: RootState) => state.user.perspective);
   const escope = useSelector((state: RootState) => state.user.Escope);
+
+  const user = useSelector((state: RootState) => state.user);
 
   if (loading) return <LoadingIndicator />;
 
@@ -30,17 +34,60 @@ export const Fines: React.FC = () => {
   };
 
   const handleDownload = () => {
-    const worksheet = XLSX.utils.json_to_sheet(filteredData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Dados");
-
-    XLSX.writeFile(workbook, "download.xlsx");
+    const columnsToDownload: (keyof FinesData)[] = [
+      "Country",
+      "Corporate ID",
+      "Operating Group",
+      "Franchise",
+      "Sector",
+      "Type",
+    ];
+    downloadExcel(filteredData, columnsToDownload, "fines.xlsx");
   };
+
+  if (
+    (user.selectedCountry!.length === 1 &&
+      user.selectedCountry![0] === "United States of America") ||
+    (user.selectedCountry!.length === 1 &&
+      user.selectedCountry![0] === "Canada") ||
+    (user.selectedCountry!.length === 1 &&
+      user.selectedCountry![0] === "Puerto Rico NA") ||
+    user.selectedCountry === "United States of America" ||
+    (user.selectedCountry!.length === 2 &&
+      user.selectedCountry![0] === "United States of America" &&
+      user.selectedCountry![1] === "Canada") ||
+    (user.selectedCountry!.length === 2 &&
+      user.selectedCountry![0] === "Canada" &&
+      user.selectedCountry![1] === "United States of America")
+  ) {
+    return (
+      <div style={{ width: "99.5%" }}>
+        <Title title="fines" />
+        <UnsedData />
+      </div>
+    );
+  }
+
+  const getAllClassifications = () => {
+    const classifications = new Set<string>();
+    filteredData.forEach((accident) => {
+      if (accident.Classification) {
+        classifications.add(accident.Classification);
+      }
+    });
+    return Array.from(classifications);
+  };
+
+  const allClassifications = getAllClassifications();
 
   return (
     <S.Holder>
       <Title title="fines" />
+      {user!.selectedCountry!.length > 0 && perspective === "country" && (
+        <CenterTitle value="Fines by Classification" />
+      )}
       <S.Content>
+        {}
         {perspective === "country" ? (
           <>
             <S.Divsion />
@@ -48,12 +95,19 @@ export const Fines: React.FC = () => {
               last={result[years[0]] || []}
               actual={result[years[1]] || []}
               years={years}
-              data={filteredData}
+              classifications={allClassifications}
             />
-            <AccidentsBarChart actual={result[years[1]] || []} />
+            {years[1] && (
+              <AccidentsBarChart
+                classifications={allClassifications}
+                actual={result[years[1]] || []}
+              />
+            )}
           </>
         ) : (
           <>
+            <CenterTitle value="Fines Classification by Region" />
+
             <S.Divsion>
               {escope!.map((region, index) => {
                 const filteredDataByRegion = filterDataByRegion(region);
@@ -62,26 +116,34 @@ export const Fines: React.FC = () => {
 
                 return (
                   <div key={index}>
-                    <h2
-                      style={{
-                        margin: 0,
-                        padding: 0,
-                        marginBottom: ".5rem",
-                        marginTop: ".5rem",
-                      }}
-                    >
-                      {region}
-                    </h2>
-                    <AccidentsTable
-                      last={resultByRegion[yearsByRegion[0]] || []}
-                      actual={resultByRegion[yearsByRegion[1]] || []}
-                      years={yearsByRegion}
-                      data={filteredDataByRegion}
-                    />
+                    {region !== "NA" && (
+                      <h2
+                        style={{
+                          margin: 0,
+                          padding: 0,
+                          marginBottom: ".5rem",
+                          marginTop: ".5rem",
+                        }}
+                      >
+                        {region}
+                      </h2>
+                    )}
+
+                    {region === "NA" && filteredDataByRegion.length === 0 ? (
+                      <UnsedData />
+                    ) : (
+                      <AccidentsTable
+                        last={resultByRegion[yearsByRegion[0]] || []}
+                        actual={resultByRegion[yearsByRegion[1]] || []}
+                        years={yearsByRegion}
+                        classifications={allClassifications}
+                      />
+                    )}
                   </div>
                 );
               })}
             </S.Divsion>
+            <CenterTitle value="Distribution of Fines by Country/Region" />
 
             <S.Divsion>
               {escope!.map((region, index) => {
@@ -91,12 +153,20 @@ export const Fines: React.FC = () => {
 
                 return (
                   <div key={`chart-${index}`}>
-                    <h2>
-                      {region} - {years[1]}
-                    </h2>
-                    <AccidentsBarChart
-                      actual={resultByRegion[yearsByRegion[1]] || []}
-                    />
+                    {region !== "NA" && (
+                      <h2>
+                        {region} - {years[1]}
+                      </h2>
+                    )}
+
+                    {region === "NA" && filteredDataByRegion.length === 0 ? (
+                      <UnsedData />
+                    ) : (
+                      <AccidentsBarChart
+                        actual={resultByRegion[yearsByRegion[1]] || []}
+                        classifications={allClassifications}
+                      />
+                    )}
                   </div>
                 );
               })}

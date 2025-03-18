@@ -32,7 +32,6 @@ const useFetchData = <T extends DataUser>(filename: string) => {
     fetchData();
   }, [filename, user, isToggled]);
 
-  console.log(filteredData);
   return { filteredData, loading };
 };
 

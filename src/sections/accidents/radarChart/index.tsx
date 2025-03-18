@@ -17,15 +17,19 @@ import { NoData } from "../../../components/nodata";
 
 interface AccidentsBarChartProps {
   actual: AccidentData[];
+  classifications: string[];
 }
 
 export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
   actual,
+  classifications,
 }) => {
   const { t } = useTranslation();
   const selectedCountries = useSelector(
     (state: RootState) => state.user.selectedCountry
   );
+
+  console.log(classifications);
 
   if (!actual || actual.length === 0) {
     return <NoData />;
@@ -45,9 +49,9 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
     }
   });
 
-  const data = Object.keys(dataMap).map((classification) => ({
+  const data = classifications.map((classification) => ({
     classification: t(classification),
-    ...dataMap[classification],
+    ...(dataMap[classification] || {}),
   }));
 
   const uniqueCountries = Array.from(
@@ -62,6 +66,8 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
     "#ff9999",
     "#ffcccc",
   ];
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <S.Holder>
@@ -90,6 +96,8 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
       </ResponsiveContainer>
 
       <S.Legend>
+        <p>{currentYear}</p>
+
         {uniqueCountries.map((country, index) => (
           <div
             key={country}

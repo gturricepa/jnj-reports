@@ -3,26 +3,24 @@ import { AccidentData } from "../../../types/Accident";
 import * as S from "./styles";
 import { useTranslation } from "react-i18next";
 import { NoData } from "../../../components/nodata";
+// import { RootState } from "../../../store/store";
+// import { useSelector } from "react-redux";
 
 interface AccidentsTableProps {
   last: AccidentData[];
   actual: AccidentData[];
   years: string[];
-  data: AccidentData[];
+  classifications: string[];
 }
 
 export const AccidentsTable: React.FC<AccidentsTableProps> = ({
   last,
   actual,
   years,
+  classifications,
 }) => {
   const { t } = useTranslation();
-  const uniqueClassifications = Array.from(
-    new Set([
-      ...last.map((accident) => accident.Classification),
-      ...actual.map((accident) => accident.Classification),
-    ])
-  );
+  // const perspective = useSelector((state: RootState) => state.user.perspective);
 
   const classificationCounts: {
     [key: string]: { last: number; actual: number };
@@ -31,7 +29,7 @@ export const AccidentsTable: React.FC<AccidentsTableProps> = ({
   let totalLast = 0;
   let totalActual = 0;
 
-  uniqueClassifications.forEach((classification) => {
+  classifications.forEach((classification) => {
     const lastCount = last.filter(
       (accident) => accident.Classification === classification
     ).length;
@@ -48,47 +46,46 @@ export const AccidentsTable: React.FC<AccidentsTableProps> = ({
     totalActual += actualCount;
   });
 
-  if (uniqueClassifications.length === 0) {
+  if (classifications.length === 0) {
     return <NoData />;
   }
 
   return (
-    <S.Table>
-      <thead>
-        <tr>
-          <th>{t("classification")}</th>
-          <th>{years[0]}</th>
-          <th>{years[1]}</th>
-          {/* <th></th> */}
-        </tr>
-      </thead>
-      <tbody>
-        {uniqueClassifications.map((classification) => (
-          <tr key={classification}>
-            <td>{t(classification)}</td>
-            <td>{classificationCounts[classification].last}</td>
-            <td>{classificationCounts[classification].actual}</td>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <S.Table>
+        <thead>
+          <tr>
+            <th>{t("classification")}</th>
+            <th>{years[0]}</th>
+            <th>{years[1]}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {classifications.map((classification) => (
+            <tr key={classification}>
+              <td>{t(classification)}</td>
+              <td>{classificationCounts[classification]?.last || 0}</td>
+              <td>{classificationCounts[classification]?.actual || 0}</td>
+            </tr>
+          ))}
+          <tr>
             <td>
-              <strong>
-                {/* {classificationCounts[classification].last +
-                  classificationCounts[classification].actual} */}
-              </strong>
+              <strong>TOTAL</strong>
+            </td>
+            <td>
+              <strong>{totalLast}</strong>
+            </td>
+            <td>
+              <strong>{totalActual}</strong>
             </td>
           </tr>
-        ))}
-        <tr>
-          <td>
-            <strong>TOTAL</strong>
-          </td>
-          <td>
-            <strong>{totalLast}</strong>
-          </td>
-          <td>
-            <strong>{totalActual}</strong>
-          </td>
-          <td>{/* <strong>{grandTotal}</strong> */}</td>
-        </tr>
-      </tbody>
-    </S.Table>
+        </tbody>
+      </S.Table>
+    </div>
   );
 };

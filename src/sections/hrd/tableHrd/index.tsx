@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { HRDData } from "../../../types/HRD";
 import * as S from "./styles";
 import { NoData } from "../../../components/nodata";
-import * as XLSX from "xlsx";
+import { downloadExcel } from "../../../helper/downloadExcel";
+// import * as XLSX from "xlsx";
 
 interface TableHrdProps {
   data: HRDData[];
@@ -10,7 +11,7 @@ interface TableHrdProps {
 
 export const TableHrd: React.FC<TableHrdProps> = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
+  const itemsPerPage = 10;
 
   if (data.length === 0) {
     return <NoData />;
@@ -24,12 +25,25 @@ export const TableHrd: React.FC<TableHrdProps> = ({ data }) => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const handleDownload = () => {
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Dados");
+  // const handleDownload = () => {
+  //   const worksheet = XLSX.utils.json_to_sheet(data);
+  //   const workbook = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(workbook, worksheet, "Dados");
 
-    XLSX.writeFile(workbook, "download.xlsx");
+  //   XLSX.writeFile(workbook, "download.xlsx");
+  // };
+
+  const handleDownload = () => {
+    const columnsToDownload: (keyof HRDData)[] = [
+      "Country",
+      "E-mail",
+      "Corporate ID",
+      "Operating Group",
+      "Franchise",
+      "Sector",
+      "Type",
+    ];
+    downloadExcel(data, columnsToDownload, "hrd.xlsx");
   };
 
   return (
@@ -37,8 +51,8 @@ export const TableHrd: React.FC<TableHrdProps> = ({ data }) => {
       <S.Table>
         <thead>
           <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
+            {/* <th>First Name</th> */}
+            {/* <th>Last Name</th> */}
             <th>Country</th>
             <th>Corporate ID</th>
             <th>Operating Group</th>
@@ -50,8 +64,8 @@ export const TableHrd: React.FC<TableHrdProps> = ({ data }) => {
         <tbody>
           {currentItems.map((item, index) => (
             <tr key={index}>
-              <td>{item["First Name"]}</td>
-              <td>{item["Last Name"]}</td>
+              {/* <td>{item["First Name"]}</td> */}
+              {/* <td>{item["Last Name"]}</td> */}
               <td>{item["Country"]}</td>
               <td>{item["Corporate ID"]}</td>
               <td>{item["Operating Group"]}</td>

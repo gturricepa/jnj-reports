@@ -1,7 +1,6 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { AccidentData } from "../../../types/Accident";
-import { useTranslation } from "react-i18next";
 
 interface AvoidableChartProps {
   data: AccidentData[];
@@ -9,7 +8,6 @@ interface AvoidableChartProps {
 }
 
 const AvoidableChart: React.FC<AvoidableChartProps> = ({ data, title }) => {
-  const { t } = useTranslation();
   const avoidableData = data.reduce((acc, curr) => {
     const key = curr.Avoidable.trim() || "No data";
     acc[key] = (acc[key] || 0) + 1;
@@ -39,7 +37,8 @@ const AvoidableChart: React.FC<AvoidableChartProps> = ({ data, title }) => {
         margin: 0,
         alignItems: "center",
         justifyContent: "center",
-        height: "14rem",
+        height: "13rem",
+        justifySelf: "center",
       }}
     >
       <PieChart width={410} height={350}>
@@ -63,13 +62,7 @@ const AvoidableChart: React.FC<AvoidableChartProps> = ({ data, title }) => {
         <Tooltip />
         <Legend />
       </PieChart>{" "}
-      {chartData.length > 0 ? (
-        <p>
-          {t("accidents")} {t("avoidability")} {title}
-        </p>
-      ) : (
-        <></>
-      )}
+      {chartData.length > 0 ? <p>{title}</p> : <></>}
     </div>
   );
 };

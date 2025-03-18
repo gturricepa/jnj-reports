@@ -8,9 +8,10 @@ import { HRDCard } from "./card";
 import { TableHrd } from "./tableHrd";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import * as XLSX from "xlsx";
 import { PercetageHrd } from "./percetage";
 import { Select } from "antd";
+import { downloadExcel } from "../../helper/downloadExcel";
+import BarChartHrd from "./barchart";
 
 export const HRD: React.FC = () => {
   const { filteredData, loading } = useFetchData<HRDData>("HRD.xlsx");
@@ -42,41 +43,60 @@ export const HRD: React.FC = () => {
   if (loading) return <LoadingIndicator />;
 
   const handleDownload = () => {
-    const worksheet = XLSX.utils.json_to_sheet(filteredData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Dados");
-
-    XLSX.writeFile(workbook, "download.xlsx");
+    const columnsToDownload: (keyof HRDData)[] = [
+      "Country",
+      "E-mail",
+      "Corporate ID",
+      "Operating Group",
+      "Franchise",
+      "Sector",
+      "Type",
+    ];
+    downloadExcel(filteredDataByOperatingGroup, columnsToDownload, "hrd.xlsx");
   };
-
   return (
     <S.Holder>
       <Title title="HRD" />
 
       {perspective === "country" ? (
         <>
-          <Select
-            mode="multiple"
-            style={{
-              width: "30%",
-              marginTop: 16,
-              display: "flex",
-              justifySelf: "flex-start",
-              alignSelf: "flex-start",
-            }}
-            placeholder="Operation Groups"
-            onChange={handleOperatingGroupChange}
-          >
-            {Array.from(
-              new Set(filteredData.map((item) => item["Operating Group"]))
-            ).map((group) => (
-              <Select.Option key={group} value={group}>
-                {group}
-              </Select.Option>
-            ))}
-          </Select>
+          {filteredDataByOperatingGroup.length > 0 && (
+            <Select
+              mode="multiple"
+              style={{
+                width: "30%",
+                marginTop: 16,
+                display: "flex",
+                justifySelf: "flex-start",
+                alignSelf: "flex-start",
+              }}
+              placeholder="Operation Groups"
+              onChange={handleOperatingGroupChange}
+            >
+              {Array.from(
+                new Set(filteredData.map((item) => item["Operating Group"]))
+              ).map((group) => (
+                <Select.Option key={group} value={group}>
+                  {group}
+                </Select.Option>
+              ))}
+            </Select>
+          )}
 
-          <HRDCard data={filteredDataByOperatingGroup} />
+          {filteredDataByOperatingGroup.length > 0 && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <HRDCard data={filteredDataByOperatingGroup} />
+              <BarChartHrd data={filteredDataByOperatingGroup} />
+            </div>
+          )}
+
           <TableHrd data={filteredDataByOperatingGroup} />
         </>
       ) : (

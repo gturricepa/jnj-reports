@@ -20,7 +20,7 @@ const userSlice = createSlice({
       return { ...state, ...action.payload };
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    clearUser: (state) => initialState,
+    clearUser: (_state) => initialState,
   },
 });
 

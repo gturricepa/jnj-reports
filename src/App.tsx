@@ -3,6 +3,7 @@ import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./pages/protected/ProtectedRoute";
+import "./translation/in18.ts";
 
 function App() {
   // const loggedUser = "renato.gominho";

@@ -30,6 +30,12 @@ export const Country: React.FC = () => {
     maxTagCount: "responsive",
   };
 
+  const selectedCountries = Array.isArray(user.selectedCountry)
+    ? user.selectedCountry
+    : user.selectedCountry
+    ? [user.selectedCountry]
+    : [];
+
   const truncateString = (str: string, maxLength: number) => {
     return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
   };
@@ -37,7 +43,7 @@ export const Country: React.FC = () => {
     <S.Holder>
       <Select
         {...sharedProps}
-        value={user.selectedCountry}
+        value={selectedCountries}
         onChange={handleChange}
       >
         {allowedCountries.map((country, index) => (

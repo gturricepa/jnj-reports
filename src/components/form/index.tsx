@@ -28,7 +28,6 @@ export const LoginForm: React.FC = () => {
       );
 
       if (currentUser) {
-        console.log("Usuário logado:", currentUser);
         const userPayload: UserState = {
           name: currentUser.Name,
           allowedGroups: currentUser["Operating Group"]?.split(",") || [],
@@ -37,6 +36,7 @@ export const LoginForm: React.FC = () => {
           Nick: currentUser.Nick,
           selectedCountry: currentUser["Country"].split(",")[0] || [],
           Escope: currentUser["Escope"].split(",") || [],
+          perspective: "country",
         };
 
         dispatch(setUser(userPayload));

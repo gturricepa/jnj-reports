@@ -34,31 +34,21 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
   const dataMap: Record<string, Record<string, number>> = {};
 
   actual.forEach((accident) => {
-    const country = accident.Country;
-    const classification = accident.Classification;
+    const { Country: country, Classification: classification } = accident;
 
     if (selectedCountries?.includes(country)) {
       if (!dataMap[classification]) {
         dataMap[classification] = {};
       }
-
-      if (!dataMap[classification][country]) {
-        dataMap[classification][country] = 0;
-      }
-
-      dataMap[classification][country]++;
+      dataMap[classification][country] =
+        (dataMap[classification][country] || 0) + 1;
     }
   });
 
-  const data = Object.keys(dataMap).map((classification) => {
-    const classificationData: { classification: string } = {
-      classification: t(classification),
-    };
-    Object.entries(dataMap[classification]).forEach(([country, count]) => {
-      classificationData[country] = count;
-    });
-    return classificationData;
-  });
+  const data = Object.keys(dataMap).map((classification) => ({
+    classification: t(classification),
+    ...dataMap[classification],
+  }));
 
   const uniqueCountries = Array.from(
     new Set(actual.map((accident) => accident.Country))
@@ -72,13 +62,10 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
     "#ff9999",
     "#ffcccc",
   ];
-  const currentYear = new Date().getFullYear();
 
   return (
     <S.Holder>
       <ResponsiveContainer height={560}>
-        {/* <h3>{currentYear}</h3> */}
-
         <BarChart layout="vertical" data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <YAxis
@@ -119,7 +106,6 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
                 backgroundColor: colors[index % colors.length],
                 marginLeft: 5,
                 marginRight: 3,
-
                 borderRadius: "50%",
               }}
             />

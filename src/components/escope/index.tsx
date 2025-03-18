@@ -8,7 +8,7 @@ export const Escope: React.FC = () => {
   return (
     <S.Holder>
       <EyeOutlined />
-      {escope.map((item, index) => (
+      {escope!.map((item, index) => (
         <p
           key={index}
           style={{

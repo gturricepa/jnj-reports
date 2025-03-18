@@ -57,7 +57,7 @@ export const Accidents: React.FC = () => {
           </>
         ) : (
           <>
-            {escope.map((region, index) => {
+            {escope!.map((region, index) => {
               const filteredDataByRegion = filterDataByRegion(region);
               const resultByRegion = separeByYear(filteredDataByRegion);
               const yearsByRegion = Object.keys(resultByRegion);
@@ -84,7 +84,7 @@ export const Accidents: React.FC = () => {
               );
             })}
 
-            {escope.map((region, index) => {
+            {escope!.map((region, index) => {
               const filteredDataByRegion = filterDataByRegion(region);
               const resultByRegion = separeByYear(filteredDataByRegion);
               const yearsByRegion = Object.keys(resultByRegion);
@@ -101,7 +101,7 @@ export const Accidents: React.FC = () => {
               );
             })}
             <S.Divsion>
-              {escope.map((region, index) => {
+              {escope!.map((region, index) => {
                 const filteredDataByRegion = filterDataByRegion(region);
                 const resultByRegion = separeByYear(filteredDataByRegion);
                 const yearsByRegion = Object.keys(resultByRegion);

@@ -2,7 +2,6 @@ import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { AccidentData } from "../../../types/Accident";
 import { useTranslation } from "react-i18next";
-import { NoData } from "../../../components/nodata";
 
 interface AvoidableChartProps {
   data: AccidentData[];

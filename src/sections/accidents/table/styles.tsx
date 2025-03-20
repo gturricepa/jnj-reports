@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { paleteColors } from "../../../styles/theme";
 export const Table = styled.table`
   width: 40rem;
   border-radius: 5px;
   border-collapse: collapse;
   thead {
-    background-color: #ee1100;
+    /* background-color: #ee1100; */
+    background-color: ${paleteColors[0]};
     color: white;
     font-size: 14px;
 

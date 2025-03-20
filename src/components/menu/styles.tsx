@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
+import { paleteColors } from "../../styles/theme";
+
 export const Menu = styled.header`
   display: flex;
-  color: ${(props) => props.theme.colors.red};
+  /* color: ${(props) => props.theme.colors.red}; */
+  color: ${paleteColors[0]};
+
   width: 100%;
   justify-content: space-around;
   align-items: center;
@@ -17,7 +21,9 @@ export const Menu = styled.header`
   }
   h4 {
     /* border-bottom: 1px solid white; */
-    border: 1px solid ${(props) => props.theme.colors.red};
+    /* border: 1px solid ${(props) => props.theme.colors.red}; */
+    border: 1px solid ${paleteColors[0]};
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +32,8 @@ export const Menu = styled.header`
     transition: background-color 0.3s, color 0.3s;
     cursor: pointer;
     &:hover {
-      background-color: ${(props) => props.theme.colors.red};
+      /* background-color: ${(props) => props.theme.colors.red}; */
+      background-color: ${paleteColors[0]};
       color: white;
     }
   }

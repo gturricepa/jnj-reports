@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { paleteColors } from "../../styles/theme";
 const appearAnimation = keyframes`
   0% {
     opacity: 0;
@@ -42,7 +43,10 @@ export const Filters = styled.div`
 
 export const DButton = styled.button`
   padding: 0.5rem;
-  background-color: #ee1100;
+  /* background-color: #ee1100;
+   */
+  background-color: ${paleteColors[1]};
+
   color: white;
   border: none;
   border-radius: 4px;
@@ -52,6 +56,7 @@ export const DButton = styled.button`
   margin-top: 4rem;
 
   &:hover {
-    background-color: #b10000;
+    /* background-color: #b10000; */
+    background-color: ${paleteColors[0]};
   }
 `;

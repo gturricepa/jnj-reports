@@ -19,13 +19,6 @@ export const PercetageHrd: React.FC = () => {
     fetchData();
   }, []);
 
-  // const handleDownload = () => {
-  //   const worksheet = XLSX.utils.json_to_sheet(data); // Use `data` para download
-  //   const workbook = XLSX.utils.book_new();
-  //   XLSX.utils.book_append_sheet(workbook, worksheet, "Dados");
-  //   XLSX.writeFile(workbook, "download.xlsx");
-  // };
-
   return (
     <>
       <S.Table>

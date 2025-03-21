@@ -7,3 +7,17 @@ export const Holder = styled.section`
   justify-content: center;
   align-items: center;
 `;
+
+export const Filters = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const PizzaChart = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+`;

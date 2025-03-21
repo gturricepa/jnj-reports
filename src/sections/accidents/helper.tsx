@@ -18,7 +18,7 @@ export const separeByYear = (
     }
 
     const date = transformExcelDate(excelDate);
-    const year = date.getUTCFullYear().toString(); // Usando UTC
+    const year = date.getUTCFullYear().toString();
 
     if (!groupedData[year]) {
       groupedData[year] = [];

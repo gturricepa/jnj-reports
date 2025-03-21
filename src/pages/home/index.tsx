@@ -25,12 +25,11 @@ export const Home: React.FC = () => {
             <HRD />
           </section>
         </section>
-        <section id="general">
-          <General />
-        </section>
-
         <section id="avoidability">
           <Avoidability />
+        </section>
+        <section id="general">
+          <General />
         </section>
 
         <section id="training">

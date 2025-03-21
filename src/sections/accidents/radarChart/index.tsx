@@ -30,8 +30,6 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
     (state: RootState) => state.user.selectedCountry
   );
 
-  console.log(classifications);
-
   if (!actual || actual.length === 0) {
     return <NoData />;
   }

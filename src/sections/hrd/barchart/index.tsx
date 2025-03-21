@@ -11,6 +11,7 @@ import {
   Cell,
 } from "recharts";
 import { HRDData } from "../../../types/HRD";
+import { redPalete } from "../../../styles/theme";
 
 interface BarChartHrdProps {
   data: HRDData[];
@@ -25,9 +26,7 @@ const BarChartHrd: React.FC<BarChartHrdProps> = ({ data }) => {
   const barChartData = Object.keys(countryCount).map((country, index) => ({
     Country: country,
     count: countryCount[country],
-    color: ["#ee1100", "#ff0000", "#ff3333", "#ff6666", "#ff9999", "#ffcccc"][
-      index % 6
-    ],
+    color: redPalete[index % redPalete.length],
   }));
 
   return (

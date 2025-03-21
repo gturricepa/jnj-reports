@@ -19,3 +19,14 @@ export const paleteColors: string[] = [
   "#a30047",
   "#c96480",
 ];
+
+export const redPalete: string[] = [
+  "#520800",
+  "#991700",
+  "#bd1C00",
+  "#eb1700",
+  "#ff4c4E",
+  "#Eb605d",
+  "#ff8984",
+  "#FFB5B3",
+];

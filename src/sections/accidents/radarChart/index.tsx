@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { NoData } from "../../../components/nodata";
+import { redPalete } from "../../../styles/theme";
 
 interface AccidentsBarChartProps {
   actual: AccidentData[];
@@ -58,14 +59,14 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
     new Set(actual.map((accident) => accident.Country))
   );
 
-  const colors = [
-    "#ee1100",
-    "#ff0000",
-    "#ff3333",
-    "#ff6666",
-    "#ff9999",
-    "#ffcccc",
-  ];
+  // const colors = [
+  //   "#ee1100",
+  //   "#ff0000",
+  //   "#ff3333",
+  //   "#ff6666",
+  //   "#ff9999",
+  //   "#ffcccc",
+  // ];
 
   const currentYear = new Date().getFullYear();
 
@@ -87,7 +88,7 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
             <Bar
               key={country}
               dataKey={country}
-              fill={colors[index % colors.length]}
+              fill={redPalete[index % redPalete.length]}
               stackId="a"
               isAnimationActive={false}
             />
@@ -111,7 +112,7 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
               style={{
                 width: 15,
                 height: 15,
-                backgroundColor: colors[index % colors.length],
+                backgroundColor: redPalete[index % redPalete.length],
                 marginLeft: 5,
                 marginRight: 3,
                 borderRadius: "50%",

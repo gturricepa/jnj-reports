@@ -1,6 +1,7 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { AccidentData } from "../../../types/Accident";
+import { redPalete } from "../../../styles/theme";
 
 interface AvoidableChartProps {
   data: AccidentData[];
@@ -19,14 +20,14 @@ const AvoidableChart: React.FC<AvoidableChartProps> = ({ data, title }) => {
     value,
   }));
 
-  const COLORS = [
-    "#ee1100",
-    "#ff0000",
-    "#ff3333",
-    "#ff6666",
-    "#ff9999",
-    "#ffcccc",
-  ];
+  // const COLORS = [
+  //   "#ee1100",
+  //   "#ff0000",
+  //   "#ff3333",
+  //   "#ff6666",
+  //   "#ff9999",
+  //   "#ffcccc",
+  // ];
 
   return (
     <div
@@ -56,7 +57,10 @@ const AvoidableChart: React.FC<AvoidableChartProps> = ({ data, title }) => {
           dataKey="value"
         >
           {chartData.map((_entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            <Cell
+              key={`cell-${index}`}
+              fill={redPalete[index % redPalete.length]}
+            />
           ))}
         </Pie>
         <Tooltip />

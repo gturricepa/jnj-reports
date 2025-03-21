@@ -49,6 +49,7 @@ export const Language = () => {
           Español
         </Option>
       </Select>
+      <p>Last Update: 21/03/2024</p>
     </S.Holder>
   );
 };

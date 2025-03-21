@@ -6,6 +6,8 @@ import useFetchData from "../../hooks/useFetchData";
 import { PreventableData } from "../../types/Preventable";
 import { Select } from "antd";
 import { PreventableBarChart } from "./barchart";
+import { PreventablePizzaChart } from "./pizzaChart";
+import { CenterTitle } from "../../components/centerTitle";
 // import { PreventablePizzaChart } from "./pizzaChart";
 
 export const Avoidability: React.FC = () => {
@@ -91,10 +93,16 @@ export const Avoidability: React.FC = () => {
           )}
         </Select>
       </S.Filters>
+
+      <CenterTitle space={false} value="Preventable Crashses" />
+
       <S.PizzaChart>
-        {/* <PreventablePizzaChart data={last} year={years[0]} />
-          <PreventablePizzaChart data={actual} year={years[1]} /> */}
-        {/* <PreventableBarChart data={last} /> */}
+        <PreventablePizzaChart data={last} year={years[0]} />
+        <PreventablePizzaChart data={actual} year={years[1]} />
+      </S.PizzaChart>
+      <div style={{ height: "2rem", width: "2rem" }}></div>
+      <CenterTitle space={false} value="Preventable CPMM Crashses" />
+      <S.PizzaChart>
         <PreventableBarChart data={last} year={years[0]} />
         <PreventableBarChart data={actual} year={years[1]} />
       </S.PizzaChart>

@@ -9,7 +9,7 @@ import { AccidentsTable } from "./table";
 import { AccidentsBarChart } from "./radarChart";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import AvoidableChart from "./pizzaChart";
+// import AvoidableChart from "./pizzaChart";
 import { CenterTitle } from "../../components/centerTitle";
 import { downloadExcel } from "../../helper/downloadExcel";
 
@@ -98,7 +98,7 @@ export const Accidents: React.FC = () => {
                 value="Distribution of Preventable Crashes"
               />
             )}{" "}
-            <S.Divsion>
+            {/* <S.Divsion>
               <AvoidableChart title={years[0]} data={result[years[0]] || []} />
               {years[1] && (
                 <AvoidableChart
@@ -106,7 +106,7 @@ export const Accidents: React.FC = () => {
                   data={result[years[1]] || []}
                 />
               )}
-            </S.Divsion>
+            </S.Divsion> */}
           </>
         ) : (
           <>
@@ -164,7 +164,7 @@ export const Accidents: React.FC = () => {
                 </div>
               );
             })}
-            <CenterTitle space={true} value="Preventable Crashses by Region" />
+            {/* <CenterTitle space={true} value="Preventable Crashses by Region" />
             <S.Divsion>
               {escope!.map((region, index) => {
                 const filteredDataByRegion = filterDataByRegion(region);
@@ -183,7 +183,7 @@ export const Accidents: React.FC = () => {
                   </div>
                 );
               })}
-            </S.Divsion>
+            </S.Divsion> */}
           </>
         )}
       </S.Content>

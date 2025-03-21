@@ -24,20 +24,16 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
 }) => {
   const totals = data.reduce(
     (acc, item) => {
-      // Soma total de Miles
       acc.totalMiles += Number(item["Miles"]);
 
-      // Soma para "CPMM Preventable" onde "Yes" é verdadeiro
       if (Number(item["Yes"]) !== 0) {
         acc["Yes"] += Number(item["Yes"]);
       }
 
-      // Soma para "CPMM Not Preventable" onde "No" é verdadeiro
       if (Number(item["No"]) !== 0) {
         acc["No"] += Number(item["No"]);
       }
 
-      // Soma para "CPMM No Data" onde "No Data" é verdadeiro
       if (Number(item["No Data"]) !== 0) {
         acc["No Data"] += Number(item["No Data"]);
       }
@@ -47,7 +43,6 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
     { totalMiles: 0, Yes: 0, No: 0, "No Data": 0 }
   );
 
-  // Calcular a proporção
   const proportion = totals.totalMiles > 0 ? 1000000 / totals.totalMiles : 0;
 
   // Calculando os valores finais
@@ -65,7 +60,6 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
     },
   ];
 
-  // Filtrando os dados
   const filteredData = {
     name: chartData[0].name,
     ...Object.fromEntries(
@@ -75,16 +69,14 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
     ),
   };
 
-  // Extraindo as chaves para a legenda
   const legendKeys = Object.keys(filteredData).filter((key) => key !== "name");
 
-  // Função para formatar valores com duas casas decimais
   const formatValue = (value: number) => value.toFixed(2);
 
   return (
     <S.ChartHolder>
       <h3>{year}</h3>
-      <BarChart width={600} height={300} data={[filteredData]}>
+      <BarChart width={650} height={250} data={[filteredData]}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />

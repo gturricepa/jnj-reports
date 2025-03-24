@@ -13,6 +13,7 @@ export const Filters = styled.div`
   width: 100%;
   align-items: center;
   gap: 1rem;
+  margin-top: 1rem;
 `;
 
 export const PizzaChart = styled.div`

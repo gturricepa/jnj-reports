@@ -52,3 +52,10 @@ export const Divsion = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+export const Filters = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+`;

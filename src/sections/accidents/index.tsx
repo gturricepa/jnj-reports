@@ -12,6 +12,8 @@ import { RootState } from "../../store/store";
 // import AvoidableChart from "./pizzaChart";
 import { CenterTitle } from "../../components/centerTitle";
 import { downloadExcel } from "../../helper/downloadExcel";
+import { Select } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 export const Accidents: React.FC = () => {
   const { filteredData, loading } =
@@ -20,13 +22,38 @@ export const Accidents: React.FC = () => {
   const escope = useSelector((state: RootState) => state.user.Escope);
   const user = useSelector((state: RootState) => state.user);
 
-  if (loading) return <LoadingIndicator />;
+  const [selectedOperatingGroups, setSelectedOperatingGroups] = React.useState<
+    string[]
+  >([]);
+  const [selectedSectors, setSelectedSectors] = React.useState<string[]>([]);
 
-  const result = separeByYear(filteredData);
+  const handleOperatingGroupChange = (value: string[]) => {
+    setSelectedOperatingGroups(value);
+  };
+
+  const handleSectorChange = (value: string[]) => {
+    setSelectedSectors(value);
+  };
+
+  const filterData = () => {
+    return filteredData.filter((item) => {
+      const matchesOperatingGroup =
+        selectedOperatingGroups.length === 0 ||
+        selectedOperatingGroups.includes(item["Operating Group"]);
+      const matchesSector =
+        selectedSectors.length === 0 ||
+        selectedSectors.includes(item["Sector"]);
+      return matchesOperatingGroup && matchesSector;
+    });
+  };
+
+  const filteredDataByFilters = filterData();
+
+  const result = separeByYear(filteredDataByFilters);
   const years = Object.keys(result);
 
   const filterDataByRegion = (region: string) => {
-    return filteredData.filter(
+    return filteredDataByFilters.filter(
       (data) => data.Region && data.Region.trim() === region.trim()
     );
   };
@@ -56,12 +83,45 @@ export const Accidents: React.FC = () => {
       "Classification",
       "Brief Report",
     ];
-    downloadExcel(filteredData, columnsToDownload, "fines.xlsx");
+    downloadExcel(filteredDataByFilters, columnsToDownload, "fines.xlsx");
   };
+
+  if (loading) return <LoadingIndicator />;
 
   return (
     <S.Holder>
       <Title title="accidents" />
+      <S.Filters>
+        <ArrowRightOutlined />
+        <Select
+          mode="multiple"
+          style={{ width: "15%" }}
+          placeholder="Operating Groups"
+          onChange={handleOperatingGroupChange}
+        >
+          {Array.from(
+            new Set(filteredData.map((item) => item["Operating Group"]))
+          ).map((group) => (
+            <Select.Option key={group} value={group}>
+              {group}
+            </Select.Option>
+          ))}
+        </Select>
+        <Select
+          mode="multiple"
+          style={{ width: "15%" }}
+          placeholder="Sectors"
+          onChange={handleSectorChange}
+        >
+          {Array.from(new Set(filteredData.map((item) => item["Sector"]))).map(
+            (sector) => (
+              <Select.Option key={sector} value={sector}>
+                {sector}
+              </Select.Option>
+            )
+          )}
+        </Select>
+      </S.Filters>
       {user!.selectedCountry!.length > 0 && perspective === "country" && (
         <CenterTitle value="Crashes by Classification" />
       )}
@@ -92,21 +152,6 @@ export const Accidents: React.FC = () => {
             {user!.selectedCountry!.length > 0 && perspective === "country" && (
               <div style={{ marginTop: "1rem" }}></div>
             )}
-            {user!.selectedCountry!.length > 0 && perspective === "country" && (
-              <CenterTitle
-                space={true}
-                value="Distribution of Preventable Crashes"
-              />
-            )}{" "}
-            {/* <S.Divsion>
-              <AvoidableChart title={years[0]} data={result[years[0]] || []} />
-              {years[1] && (
-                <AvoidableChart
-                  title={years[1]}
-                  data={result[years[1]] || []}
-                />
-              )}
-            </S.Divsion> */}
           </>
         ) : (
           <>
@@ -164,30 +209,10 @@ export const Accidents: React.FC = () => {
                 </div>
               );
             })}
-            {/* <CenterTitle space={true} value="Preventable Crashses by Region" />
-            <S.Divsion>
-              {escope!.map((region, index) => {
-                const filteredDataByRegion = filterDataByRegion(region);
-                const resultByRegion = separeByYear(filteredDataByRegion);
-                const yearsByRegion = Object.keys(resultByRegion);
-
-                return (
-                  <div key={`chart-${index}`}>
-                    <h2>
-                      {region} - {years[1]}
-                    </h2>
-                    <AvoidableChart
-                      title=""
-                      data={resultByRegion[yearsByRegion[1]] || []}
-                    />
-                  </div>
-                );
-              })}
-            </S.Divsion> */}
           </>
         )}
       </S.Content>
-      {filteredData.length > 0 ? (
+      {filteredDataByFilters.length > 0 ? (
         <button onClick={handleDownload}>Download</button>
       ) : null}
     </S.Holder>

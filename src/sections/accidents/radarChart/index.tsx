@@ -88,7 +88,7 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
               dataKey={country}
               fill={redPalete[index % redPalete.length]}
               stackId="a"
-              isAnimationActive={false}
+              isAnimationActive={true}
             />
           ))}
         </BarChart>

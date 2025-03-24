@@ -8,6 +8,9 @@ import { Select } from "antd";
 import { PreventableBarChart } from "./barchart";
 import { PreventablePizzaChart } from "./pizzaChart";
 import { CenterTitle } from "../../components/centerTitle";
+import { ArrowRightOutlined } from "@ant-design/icons";
+import { NoData } from "../../components/nodata";
+
 // import { PreventablePizzaChart } from "./pizzaChart";
 
 export const Avoidability: React.FC = () => {
@@ -41,6 +44,7 @@ export const Avoidability: React.FC = () => {
   };
 
   const filteredDataByFilters = filterData();
+
   const years = Array.from(
     new Set(filteredDataByFilters.map((item) => item.Year))
   )
@@ -57,50 +61,55 @@ export const Avoidability: React.FC = () => {
   return (
     <S.Holder>
       <Title title="Preventable" />
-      <S.Filters>
-        <Select
-          mode="multiple"
-          style={{ width: "30%", marginTop: 16 }}
-          placeholder="Select Operating Groups"
-          onChange={handleOperatingGroupChange}
-        >
-          {Array.from(
-            new Set(filteredData.map((item) => item["Operating Group"]))
-          ).map((group) => (
-            <Select.Option key={group} value={group}>
-              {group}
-            </Select.Option>
-          ))}
-        </Select>
-
-        <Select
-          mode="multiple"
-          style={{ width: "30%", marginTop: 16 }}
-          placeholder="Select Sectors"
-          onChange={handleSectorChange}
-        >
-          {Array.from(new Set(filteredData.map((item) => item["Sector"]))).map(
-            (sector) => (
-              <Select.Option key={sector} value={sector}>
-                {sector}
-              </Select.Option>
-            )
-          )}
-        </Select>
-      </S.Filters>
-
-      <CenterTitle space={false} value="Preventable Crashses" />
-
-      <S.PizzaChart>
-        <PreventablePizzaChart data={last} year={years[0]} />
-        <PreventablePizzaChart data={actual} year={years[1]} />
-      </S.PizzaChart>
-      <div style={{ height: "2rem", width: "2rem" }}></div>
-      <CenterTitle space={false} value="Preventable CPMM Crashses" />
-      <S.PizzaChart>
-        <PreventableBarChart data={last} year={years[0]} />
-        <PreventableBarChart data={actual} year={years[1]} />
-      </S.PizzaChart>
+      {filteredDataByFilters.length ? (
+        <>
+          <S.Filters>
+            <ArrowRightOutlined />
+            <Select
+              mode="multiple"
+              style={{ width: "15%" }}
+              placeholder="Operating Groups"
+              onChange={handleOperatingGroupChange}
+            >
+              {Array.from(
+                new Set(filteredData.map((item) => item["Operating Group"]))
+              ).map((group) => (
+                <Select.Option key={group} value={group}>
+                  {group}
+                </Select.Option>
+              ))}
+            </Select>
+            <Select
+              mode="multiple"
+              style={{ width: "15%" }}
+              placeholder="Sectors"
+              onChange={handleSectorChange}
+            >
+              {Array.from(
+                new Set(filteredData.map((item) => item["Sector"]))
+              ).map((sector) => (
+                <Select.Option key={sector} value={sector}>
+                  {sector}
+                </Select.Option>
+              ))}
+            </Select>
+          </S.Filters>
+          <CenterTitle space={false} value="Preventable Crashses" />
+          <S.PizzaChart>
+            <PreventablePizzaChart data={last} year={years[0]} />
+            <PreventablePizzaChart data={actual} year={years[1]} />
+          </S.PizzaChart>
+          <CenterTitle space={false} value="Preventable CPMM Crashses" />
+          <S.PizzaChart>
+            <PreventableBarChart data={last} year={years[0]} />
+            <PreventableBarChart data={actual} year={years[1]} />
+          </S.PizzaChart>
+        </>
+      ) : (
+        <>
+          <NoData />
+        </>
+      )}
     </S.Holder>
   );
 };

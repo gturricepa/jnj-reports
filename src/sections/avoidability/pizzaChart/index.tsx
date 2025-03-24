@@ -31,7 +31,7 @@ export const PreventablePizzaChart: React.FC<PreventablePizzaChartProps> = ({
   return (
     <S.ChartHolder>
       <h3>{year}</h3>
-      <PieChart width={400} height={200}>
+      <PieChart width={400} height={250}>
         <Pie
           data={chartData}
           cx="50%"

@@ -28,5 +28,6 @@
   "CurrentPerspective": "Current Perspective",
   "country": "country",
   "region": "region",
-  "clickToChange": "Click to change"
+  "clickToChange": "Click to change",
+  "lastUpdate": "Last Update"
 }

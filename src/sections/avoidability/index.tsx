@@ -54,11 +54,6 @@ export const Avoidability: React.FC = () => {
     (item) => Number(item.Year) === years[1]
   );
 
-  // console.log(years[0]);
-
-  // console.log(actual);
-  // console.log(actual);
-  // console.log(filteredDataByFilters);
   return (
     <S.Holder>
       <Title title="Preventable" />

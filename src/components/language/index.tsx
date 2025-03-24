@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import * as S from "./styles";
 import { setLanguage } from "../../store/languageSlice";
 import { RootState } from "../../store/store";
+import { LastUpdate } from "../lastupdate";
 
 const { Option } = Select;
 
@@ -49,7 +50,7 @@ export const Language = () => {
           Español
         </Option>
       </Select>
-      <p>Last Update: 21/03/2024</p>
+      <LastUpdate />
     </S.Holder>
   );
 };

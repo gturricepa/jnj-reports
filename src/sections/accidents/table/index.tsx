@@ -55,6 +55,9 @@ export const AccidentsTable: React.FC<AccidentsTableProps> = ({
       style={{
         display: "flex",
         justifyContent: "center",
+        justifySelf: "center",
+        alignContent: "center",
+        width: "40rem",
       }}
     >
       <S.Table>

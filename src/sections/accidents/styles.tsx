@@ -14,7 +14,6 @@ const appearAnimation = keyframes`
 export const Holder = styled.section`
   display: flex;
   width: 100%;
-  min-height: 35rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;

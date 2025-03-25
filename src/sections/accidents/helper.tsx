@@ -10,6 +10,12 @@ export const separeByYear = (
 ): Record<string, AccidentData[]> => {
   const groupedData: Record<string, AccidentData[]> = {};
 
+  const currentYear = new Date().getUTCFullYear();
+  const previousYear = currentYear - 1;
+
+  groupedData[currentYear.toString()] = [];
+  groupedData[previousYear.toString()] = [];
+
   data.forEach((item) => {
     const excelDate = +item.Date;
     if (isNaN(excelDate)) {
@@ -20,10 +26,9 @@ export const separeByYear = (
     const date = transformExcelDate(excelDate);
     const year = date.getUTCFullYear().toString();
 
-    if (!groupedData[year]) {
-      groupedData[year] = [];
+    if (year === currentYear.toString() || year === previousYear.toString()) {
+      groupedData[year].push(item);
     }
-    groupedData[year].push(item);
   });
 
   return groupedData;

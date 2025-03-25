@@ -9,10 +9,10 @@ export const NoData: React.FC = () => {
   return (
     <S.Holder>
       {/* <WarningOutlined style={{ fontSize: 50, color: "#ff4d4f" }} /> */}
-      <WarningOutlined style={{ fontSize: 50, color: paleteColors[3] }} />
+      <WarningOutlined style={{ fontSize: 30, color: paleteColors[3] }} />
 
       <h2>{t("NoData")}</h2>
-      <p>{t("NoDataDesc")}</p>
+      {/* <p>{t("NoDataDesc")}</p> */}
     </S.Holder>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AccidentData } from "../../types/Accident";
 import useFetchData from "../../hooks/useFetchData";
 import { LoadingIndicator } from "../../components/loading";
@@ -9,7 +9,6 @@ import { AccidentsTable } from "./table";
 import { AccidentsBarChart } from "./radarChart";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-// import AvoidableChart from "./pizzaChart";
 import { CenterTitle } from "../../components/centerTitle";
 import { downloadExcel } from "../../helper/downloadExcel";
 import { Select } from "antd";
@@ -57,7 +56,6 @@ export const Accidents: React.FC = () => {
       (data) => data.Region && data.Region.trim() === region.trim()
     );
   };
-
   const getAllClassifications = () => {
     const classifications = new Set<string>();
     filteredData.forEach((accident) => {
@@ -86,42 +84,52 @@ export const Accidents: React.FC = () => {
     downloadExcel(filteredDataByFilters, columnsToDownload, "fines.xlsx");
   };
 
-  if (loading) return <LoadingIndicator />;
+  useEffect(() => {
+    setSelectedOperatingGroups([]);
+    setSelectedSectors([]);
+  }, [perspective]);
 
+  console.log(result[years[1]]);
+  if (loading) return <LoadingIndicator />;
   return (
     <S.Holder>
       <Title title="accidents" />
-      <S.Filters>
-        <ArrowRightOutlined />
-        <Select
-          mode="multiple"
-          style={{ width: "15%" }}
-          placeholder="Operating Groups"
-          onChange={handleOperatingGroupChange}
-        >
-          {Array.from(
-            new Set(filteredData.map((item) => item["Operating Group"]))
-          ).map((group) => (
-            <Select.Option key={group} value={group}>
-              {group}
-            </Select.Option>
-          ))}
-        </Select>
-        <Select
-          mode="multiple"
-          style={{ width: "15%" }}
-          placeholder="Sectors"
-          onChange={handleSectorChange}
-        >
-          {Array.from(new Set(filteredData.map((item) => item["Sector"]))).map(
-            (sector) => (
+      {filteredData.length > 0 && (
+        <S.Filters>
+          <ArrowRightOutlined />
+          <Select
+            maxTagCount={"responsive"}
+            mode="multiple"
+            style={{ width: "15%" }}
+            placeholder="Operating Groups"
+            onChange={handleOperatingGroupChange}
+          >
+            {Array.from(
+              new Set(filteredData.map((item) => item["Operating Group"]))
+            ).map((group) => (
+              <Select.Option key={group} value={group}>
+                {group}
+              </Select.Option>
+            ))}
+          </Select>
+          <Select
+            maxTagCount={"responsive"}
+            mode="multiple"
+            style={{ width: "15%" }}
+            placeholder="Sectors"
+            onChange={handleSectorChange}
+          >
+            {Array.from(
+              new Set(filteredData.map((item) => item["Sector"]))
+            ).map((sector) => (
               <Select.Option key={sector} value={sector}>
                 {sector}
               </Select.Option>
-            )
-          )}
-        </Select>
-      </S.Filters>
+            ))}
+          </Select>
+        </S.Filters>
+      )}
+
       {user!.selectedCountry!.length > 0 && perspective === "country" && (
         <CenterTitle value="Crashes by Classification" />
       )}
@@ -131,9 +139,9 @@ export const Accidents: React.FC = () => {
             <div
               style={{
                 display: "flex",
-
-                width: years[1] ? "40rem" : "100%",
+                width: result[years[1]].length > 0 ? "40rem" : "100%",
                 justifyContent: "center",
+                alignContent: "center",
               }}
             >
               <AccidentsTable
@@ -143,7 +151,7 @@ export const Accidents: React.FC = () => {
                 classifications={allClassifications}
               />
             </div>
-            {years[1] && (
+            {result[years[1]].length > 0 && (
               <AccidentsBarChart
                 actual={result[years[1]] || []}
                 classifications={allClassifications}
@@ -203,7 +211,7 @@ export const Accidents: React.FC = () => {
                     {region} - {years[1]}
                   </h2>
                   <AccidentsBarChart
-                    actual={resultByRegion[yearsByRegion[1]] || []}
+                    actual={resultByRegion[yearsByRegion[1]].reverse() || []}
                     classifications={allClassifications}
                   />
                 </div>

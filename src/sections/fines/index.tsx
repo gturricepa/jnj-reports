@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetchData from "../../hooks/useFetchData";
 import { LoadingIndicator } from "../../components/loading";
 import * as S from "./styles";
@@ -12,6 +12,8 @@ import { FinesData } from "../../types/Fines";
 import { UnsedData } from "../../components/unsedata";
 import { CenterTitle } from "../../components/centerTitle";
 import { downloadExcel } from "../../helper/downloadExcel";
+import { Select } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 export const Fines: React.FC = () => {
   const { filteredData, loading } = useFetchData<FinesData>(
@@ -19,18 +21,52 @@ export const Fines: React.FC = () => {
   );
   const perspective = useSelector((state: RootState) => state.user.perspective);
   const escope = useSelector((state: RootState) => state.user.Escope);
-
   const user = useSelector((state: RootState) => state.user);
 
-  if (loading) return <LoadingIndicator />;
+  const [selectedOperatingGroups, setSelectedOperatingGroups] = React.useState<
+    string[]
+  >([]);
+  const [selectedSectors, setSelectedSectors] = React.useState<string[]>([]);
 
-  const result = separeByYear(filteredData);
+  const handleOperatingGroupChange = (value: string[]) => {
+    setSelectedOperatingGroups(value);
+  };
+
+  const handleSectorChange = (value: string[]) => {
+    setSelectedSectors(value);
+  };
+
+  const filterData = () => {
+    return filteredData.filter((item) => {
+      const matchesOperatingGroup =
+        selectedOperatingGroups.length === 0 ||
+        selectedOperatingGroups.includes(item["Operating Group"]);
+      const matchesSector =
+        selectedSectors.length === 0 ||
+        selectedSectors.includes(item["Sector"]);
+      return matchesOperatingGroup && matchesSector;
+    });
+  };
+
+  const filteredDataByFilters = filterData();
+
+  const result = separeByYear(filteredDataByFilters);
   const years = Object.keys(result);
 
   const filterDataByRegion = (region: string) => {
-    return filteredData.filter(
+    return filteredDataByFilters.filter(
       (data) => data.Region && data.Region.trim() === region.trim()
     );
+  };
+
+  const getAllClassifications = () => {
+    const classifications = new Set<string>();
+    filteredData.forEach((accident) => {
+      if (accident.Classification) {
+        classifications.add(accident.Classification);
+      }
+    });
+    return Array.from(classifications);
   };
 
   const handleDownload = () => {
@@ -42,8 +78,13 @@ export const Fines: React.FC = () => {
       "Sector",
       "Type",
     ];
-    downloadExcel(filteredData, columnsToDownload, "fines.xlsx");
+    downloadExcel(filteredDataByFilters, columnsToDownload, "fines.xlsx");
   };
+
+  useEffect(() => {
+    setSelectedOperatingGroups([]);
+    setSelectedSectors([]);
+  }, [perspective]);
 
   if (
     (user.selectedCountry!.length === 1 &&
@@ -67,25 +108,54 @@ export const Fines: React.FC = () => {
       </div>
     );
   }
-
-  const getAllClassifications = () => {
-    const classifications = new Set<string>();
-    filteredData.forEach((accident) => {
-      if (accident.Classification) {
-        classifications.add(accident.Classification);
-      }
-    });
-    return Array.from(classifications);
-  };
+  if (loading) return <LoadingIndicator />;
 
   const allClassifications = getAllClassifications();
 
   return (
     <S.Holder>
       <Title title="fines" />
-      {user!.selectedCountry!.length > 0 && perspective === "country" && (
-        <CenterTitle value="Fines by Classification" />
+      {filteredData.length > 0 && (
+        <S.Filters>
+          <ArrowRightOutlined />
+          <Select
+            maxTagCount={"responsive"}
+            mode="multiple"
+            style={{ width: "15%" }}
+            placeholder="Operating Groups"
+            onChange={handleOperatingGroupChange}
+          >
+            {Array.from(
+              new Set(filteredData.map((item) => item["Operating Group"]))
+            ).map((group) => (
+              <Select.Option key={group} value={group}>
+                {group}
+              </Select.Option>
+            ))}
+          </Select>
+          <Select
+            maxTagCount={"responsive"}
+            mode="multiple"
+            style={{ width: "15%" }}
+            placeholder="Sectors"
+            onChange={handleSectorChange}
+          >
+            {Array.from(
+              new Set(filteredData.map((item) => item["Sector"]))
+            ).map((sector) => (
+              <Select.Option key={sector} value={sector}>
+                {sector}
+              </Select.Option>
+            ))}
+          </Select>
+        </S.Filters>
       )}
+
+      {user!.selectedCountry!.length > 0 &&
+        perspective === "country" &&
+        filteredData.length > 0 && (
+          <CenterTitle value="Fines by Classification" />
+        )}
       <S.Content>
         {}
         {perspective === "country" ? (
@@ -97,7 +167,7 @@ export const Fines: React.FC = () => {
               years={years}
               classifications={allClassifications}
             />
-            {years[1] && (
+            {result[years[1]].length > 0 && (
               <AccidentsBarChart
                 classifications={allClassifications}
                 actual={result[years[1]] || []}

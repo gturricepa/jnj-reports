@@ -60,3 +60,10 @@ export const DButton = styled.button`
     background-color: ${paleteColors[0]};
   }
 `;
+export const FiltersSearch = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+`;

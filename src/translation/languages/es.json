@@ -29,5 +29,6 @@
   "country": "país",
   "region": "región",
   "clickToChange": "Haga clic para cambiar",
-  "lastUpdate": "Última Actualización"
+  "lastUpdate": "Última Actualización",
+  "pleaseOneCountry": "Por favor, selecciona al menos un país."
 }

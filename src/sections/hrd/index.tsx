@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetchData from "../../hooks/useFetchData";
 import { LoadingIndicator } from "../../components/loading";
 import * as S from "./styles";
@@ -17,25 +17,42 @@ export const HRD: React.FC = () => {
   const { filteredData, loading } = useFetchData<HRDData>("HRD.xlsx");
   const perspective = useSelector((state: RootState) => state.user.perspective);
   const escope = useSelector((state: RootState) => state.user.Escope);
+
   const [selectedOperatingGroups, setSelectedOperatingGroups] = React.useState<
     string[]
   >([]);
+  const [selectedSectors, setSelectedSectors] = React.useState<string[]>([]);
 
   const handleOperatingGroupChange = (value: string[]) => {
     setSelectedOperatingGroups(value);
   };
 
-  const filterDataByOperatingGroup = (data: HRDData[]) => {
-    if (selectedOperatingGroups.length === 0) return data;
-    return data.filter((item) =>
-      selectedOperatingGroups.includes(item["Operating Group"])
-    );
+  const handleSectorChange = (value: string[]) => {
+    setSelectedSectors(value);
   };
 
-  const filteredDataByOperatingGroup = filterDataByOperatingGroup(filteredData);
+  useEffect(() => {
+    setSelectedOperatingGroups([]);
+    setSelectedSectors([]);
+  }, [perspective]);
+
+  const filterDataByOperatingGroupAndSector = (data: HRDData[]) => {
+    return data.filter((item) => {
+      const matchesGroup =
+        selectedOperatingGroups.length === 0 ||
+        selectedOperatingGroups.includes(item["Operating Group"]);
+      const matchesSector =
+        selectedSectors.length === 0 ||
+        selectedSectors.includes(item["Sector"]);
+      return matchesGroup && matchesSector;
+    });
+  };
+
+  const filteredDataByOperatingGroupAndSector =
+    filterDataByOperatingGroupAndSector(filteredData);
 
   const filterDataByRegion = (region: string) => {
-    return filteredData.filter(
+    return filteredDataByOperatingGroupAndSector.filter(
       (data) => data.Region && data.Region.trim() === region.trim()
     );
   };
@@ -52,38 +69,55 @@ export const HRD: React.FC = () => {
       "Sector",
       "Type",
     ];
-    downloadExcel(filteredDataByOperatingGroup, columnsToDownload, "hrd.xlsx");
+    downloadExcel(
+      filteredDataByOperatingGroupAndSector,
+      columnsToDownload,
+      "hrd.xlsx"
+    );
   };
+
   return (
     <S.Holder>
       <Title title="HRD" />
+      {filteredData.length > 0 && (
+        <S.FiltersSearch>
+          <Select
+            maxTagCount={"responsive"}
+            mode="multiple"
+            style={{ width: "15%", marginTop: 16 }}
+            placeholder="Operating Groups"
+            onChange={handleOperatingGroupChange}
+          >
+            {Array.from(
+              new Set(filteredData.map((item) => item["Operating Group"]))
+            ).map((group) => (
+              <Select.Option key={group} value={group}>
+                {group}
+              </Select.Option>
+            ))}
+          </Select>
+
+          <Select
+            maxTagCount={"responsive"}
+            mode="multiple"
+            style={{ width: "15%", marginTop: 16 }}
+            placeholder="Sectors"
+            onChange={handleSectorChange}
+          >
+            {Array.from(
+              new Set(filteredData.map((item) => item["Sector"]))
+            ).map((sector) => (
+              <Select.Option key={sector} value={sector}>
+                {sector}
+              </Select.Option>
+            ))}
+          </Select>
+        </S.FiltersSearch>
+      )}
 
       {perspective === "country" ? (
         <>
-          {filteredDataByOperatingGroup.length > 0 && (
-            <Select
-              mode="multiple"
-              style={{
-                width: "30%",
-                marginTop: 16,
-                display: "flex",
-                justifySelf: "flex-start",
-                alignSelf: "flex-start",
-              }}
-              placeholder="Operation Groups"
-              onChange={handleOperatingGroupChange}
-            >
-              {Array.from(
-                new Set(filteredData.map((item) => item["Operating Group"]))
-              ).map((group) => (
-                <Select.Option key={group} value={group}>
-                  {group}
-                </Select.Option>
-              ))}
-            </Select>
-          )}
-
-          {filteredDataByOperatingGroup.length > 0 && (
+          {filteredDataByOperatingGroupAndSector.length > 0 && (
             <div
               style={{
                 display: "flex",
@@ -92,12 +126,12 @@ export const HRD: React.FC = () => {
                 width: "100%",
               }}
             >
-              <HRDCard data={filteredDataByOperatingGroup} />
-              <BarChartHrd data={filteredDataByOperatingGroup} />
+              <HRDCard data={filteredDataByOperatingGroupAndSector} />
+              <BarChartHrd data={filteredDataByOperatingGroupAndSector} />
             </div>
           )}
 
-          <TableHrd data={filteredDataByOperatingGroup} />
+          <TableHrd data={filteredDataByOperatingGroupAndSector} />
         </>
       ) : (
         <>

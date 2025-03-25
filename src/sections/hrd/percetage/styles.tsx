@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { paleteColors } from "../../../styles/theme";
+import { paleteColors, redPalete } from "../../../styles/theme";
 export const Table = styled.table`
   width: 100%;
   border-radius: 5px;
@@ -88,5 +88,44 @@ export const DButton = styled.button`
   &:hover {
     /* background-color: #b10000; */
     background-color: ${paleteColors[0]};
+  }
+`;
+export const Red = styled.div`
+  display: flex;
+  justify-self: center;
+  background-color: #ff00112b;
+  border: 1px solid ${redPalete[2]};
+  border-radius: 5px;
+  color: ${redPalete[2]};
+  width: 30%;
+  justify-content: center;
+  p {
+    margin: 0;
+  }
+`;
+export const Orange = styled.div`
+  display: flex;
+  justify-self: center;
+  background-color: #d75f1f33;
+  border: 1px solid #ca6a36;
+  border-radius: 5px;
+  color: #d44a00;
+  width: 30%;
+  justify-content: center;
+  p {
+    margin: 0;
+  }
+`;
+export const Blue = styled.div`
+  display: flex;
+  justify-self: center;
+  background-color: #5988c233;
+  border: 1px solid ${paleteColors[0]};
+  border-radius: 5px;
+  color: ${paleteColors[0]};
+  width: 30%;
+  justify-content: center;
+  p {
+    margin: 0;
   }
 `;

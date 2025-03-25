@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as S from "./styles";
 import { Title } from "../../components/title";
 import { LoadingIndicator } from "../../components/loading";
@@ -10,6 +10,8 @@ import { PreventablePizzaChart } from "./pizzaChart";
 import { CenterTitle } from "../../components/centerTitle";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { NoData } from "../../components/nodata";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 // import { PreventablePizzaChart } from "./pizzaChart";
 
@@ -20,6 +22,11 @@ export const Avoidability: React.FC = () => {
     string[]
   >([]);
   const [selectedSectors, setSelectedSectors] = React.useState<string[]>([]);
+  const perspective = useSelector((state: RootState) => state.user.perspective);
+  useEffect(() => {
+    setSelectedOperatingGroups([]);
+    setSelectedSectors([]);
+  }, [perspective]);
 
   if (loading) return <LoadingIndicator />;
 
@@ -66,6 +73,7 @@ export const Avoidability: React.FC = () => {
           <S.Filters>
             <ArrowRightOutlined />
             <Select
+              maxTagCount={"responsive"}
               mode="multiple"
               style={{ width: "15%" }}
               placeholder="Operating Groups"
@@ -80,6 +88,7 @@ export const Avoidability: React.FC = () => {
               ))}
             </Select>
             <Select
+              maxTagCount={"responsive"}
               mode="multiple"
               style={{ width: "15%" }}
               placeholder="Sectors"
@@ -96,13 +105,21 @@ export const Avoidability: React.FC = () => {
           </S.Filters>
           <CenterTitle space={false} value="Preventable Crashses" />
           <S.PizzaChart>
-            <PreventablePizzaChart data={last} year={years[0]} />
-            <PreventablePizzaChart data={actual} year={years[1]} />
+            {last.length > 0 && (
+              <PreventablePizzaChart data={last} year={years[0]} />
+            )}
+            {actual.length > 0 && (
+              <PreventablePizzaChart data={actual} year={years[1]} />
+            )}
           </S.PizzaChart>
           <CenterTitle space={false} value="Preventable CPMM Crashses" />
           <S.PizzaChart>
-            <PreventableBarChart data={last} year={years[0]} />
-            <PreventableBarChart data={actual} year={years[1]} />
+            {last.length > 0 && (
+              <PreventableBarChart data={last} year={years[0]} />
+            )}
+            {actual.length > 0 && (
+              <PreventableBarChart data={actual} year={years[1]} />
+            )}
           </S.PizzaChart>
         </>
       ) : (

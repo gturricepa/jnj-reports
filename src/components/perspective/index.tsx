@@ -13,6 +13,8 @@ export const Perspective = () => {
   const { t } = useTranslation();
 
   const togglePerspective = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     const countriesToselect =
       userState.perspective === "country"
         ? userState.allowedCountries

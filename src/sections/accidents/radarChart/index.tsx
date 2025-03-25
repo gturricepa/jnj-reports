@@ -29,6 +29,7 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
   const selectedCountries = useSelector(
     (state: RootState) => state.user.selectedCountry
   );
+  const perspective = useSelector((state: RootState) => state.user.perspective);
 
   if (!actual || actual.length === 0) {
     return <NoData />;
@@ -70,6 +71,9 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
 
   return (
     <S.Holder>
+      {perspective === "country" && (
+        <h2 style={{ margin: 0, padding: 0 }}>{currentYear}</h2>
+      )}
       <ResponsiveContainer height={560}>
         <BarChart layout="vertical" data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -95,8 +99,6 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
       </ResponsiveContainer>
 
       <S.Legend>
-        <p>{currentYear}</p>
-
         {uniqueCountries.map((country, index) => (
           <div
             key={country}

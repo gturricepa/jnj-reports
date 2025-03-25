@@ -14,7 +14,6 @@ const appearAnimation = keyframes`
 export const Holder = styled.section`
   display: flex;
   width: 100%;
-  min-height: 35rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -52,4 +51,12 @@ export const Divsion = styled.div`
   width: 100%;
   justify-content: space-around;
   align-items: center;
+`;
+
+export const Filters = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
 `;

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import * as S from "./styles";
 import { PercetageHRDData } from "../../../types/HRD";
 import * as XLSX from "xlsx";
+import Flag from "react-world-flags";
+import { getCountryCode } from "../../../components/country/helper";
 
 export const PercetageHrd: React.FC = () => {
   const [data, setData] = useState<PercetageHRDData[]>([]);
@@ -33,10 +35,34 @@ export const PercetageHrd: React.FC = () => {
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.Country}</td>
-              <td>{item.Actives}</td>
-              <td>{item.HRD}</td>
-              <td>{(+item.Results * 100).toFixed(2)} %</td>
+              <td
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Flag
+                  code={getCountryCode(item.Country)}
+                  style={{ width: "20px", marginRight: "5px" }}
+                />
+                <p style={{ margin: 0, width: "3rem" }}>{item.Country}</p>
+              </td>
+              <td>
+                <S.Blue>
+                  <p>{item.Actives}</p>
+                </S.Blue>
+              </td>
+              <td>
+                <S.Red>
+                  <p>{item.HRD}</p>
+                </S.Red>
+              </td>
+              <td>
+                <S.Orange>
+                  <p>{(+item.Results * 100).toFixed(2)} %</p>
+                </S.Orange>
+              </td>
             </tr>
           ))}
         </tbody>

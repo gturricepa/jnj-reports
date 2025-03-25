@@ -50,7 +50,6 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
   const notPreventableValue = totals["No"] * proportion;
   const noDataValue = totals["No Data"] * proportion;
 
-  // Dados para o gráfico
   const chartData = [
     {
       name: "Total",

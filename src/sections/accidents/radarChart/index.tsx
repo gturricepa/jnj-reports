@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { NoData } from "../../../components/nodata";
 import { redPalete } from "../../../styles/theme";
+import { ChartTitle } from "../../../components/chartitle";
 
 interface AccidentsBarChartProps {
   actual: AccidentData[];
@@ -72,7 +73,7 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
   return (
     <S.Holder>
       {perspective === "country" && (
-        <h2 style={{ margin: 0, padding: 0 }}>{currentYear}</h2>
+        <ChartTitle value={currentYear.toString()} />
       )}
       <ResponsiveContainer height={560}>
         <BarChart layout="vertical" data={data}>

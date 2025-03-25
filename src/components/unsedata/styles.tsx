@@ -8,13 +8,15 @@ export const Holder = styled.div`
   height: 100%;
   text-align: center;
   color: #595959;
-  padding: 20px;
+  padding: 16px;
   border: 1px dashed #e0e0e0;
-  background-color: #fafafa;
   background-color: white;
   border-radius: 8px;
-  margin-top: 2rem;
-  width: 30rem;
+  width: 25rem;
   justify-self: center;
   align-self: center;
+  h2 {
+    font-size: 1rem;
+    font-weight: 400;
+  }
 `;

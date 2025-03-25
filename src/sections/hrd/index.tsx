@@ -12,6 +12,7 @@ import { PercetageHrd } from "./percetage";
 import { Select } from "antd";
 import { downloadExcel } from "../../helper/downloadExcel";
 import BarChartHrd from "./barchart";
+import { CenterTitle } from "../../components/centerTitle";
 
 export const HRD: React.FC = () => {
   const { filteredData, loading } = useFetchData<HRDData>("HRD.xlsx");
@@ -84,7 +85,7 @@ export const HRD: React.FC = () => {
           <Select
             maxTagCount={"responsive"}
             mode="multiple"
-            style={{ width: "15%", marginTop: 16 }}
+            style={{ width: "15%" }}
             placeholder="Operating Groups"
             onChange={handleOperatingGroupChange}
           >
@@ -100,7 +101,7 @@ export const HRD: React.FC = () => {
           <Select
             maxTagCount={"responsive"}
             mode="multiple"
-            style={{ width: "15%", marginTop: 16 }}
+            style={{ width: "15%" }}
             placeholder="Sectors"
             onChange={handleSectorChange}
           >
@@ -137,8 +138,8 @@ export const HRD: React.FC = () => {
         <>
           <S.Division>
             {escope?.map((region, index) => (
-              <div key={index}>
-                <h3>{region}</h3>
+              <div key={index} style={{ marginTop: "1rem" }}>
+                <CenterTitle value={region} />
                 <HRDCard data={filterDataByRegion(region)} />
               </div>
             ))}

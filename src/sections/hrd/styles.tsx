@@ -37,7 +37,6 @@ export const Filters = styled.div`
   border-radius: 15px;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
   background-color: white;
 `;
 
@@ -53,7 +52,7 @@ export const DButton = styled.button`
   cursor: pointer;
   transition: background-color 0.3s;
   width: 7rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
 
   &:hover {
     /* background-color: #b10000; */
@@ -65,5 +64,4 @@ export const FiltersSearch = styled.div`
   width: 100%;
   align-items: center;
   gap: 1rem;
-  margin-top: 1rem;
 `;

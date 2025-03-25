@@ -4,6 +4,7 @@ import * as S from "./styles";
 import * as XLSX from "xlsx";
 import { RootState } from "../../store/store";
 import { useTranslation } from "react-i18next";
+import { LoadingIndicator } from "../loading";
 
 interface UpdateData {
   Update: number;
@@ -63,7 +64,12 @@ export const LastUpdate = () => {
       : `${day}/${month}/${year}`;
   };
 
-  if (loading) return <S.Holder>Loading...</S.Holder>;
+  if (loading)
+    return (
+      <S.Holder>
+        <LoadingIndicator />
+      </S.Holder>
+    );
   if (error) return <S.Holder>{error}</S.Holder>;
 
   return (

@@ -15,4 +15,5 @@ export const Title = styled.h2`
   padding-left: 0.8rem;
   padding-bottom: 0.3rem;
   font-weight: 600;
+  margin-bottom: 1rem;
 `;

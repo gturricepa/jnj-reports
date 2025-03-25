@@ -4,6 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { PreventableData } from "../../../types/Preventable";
 import { redPalete } from "../../../styles/theme";
 import * as S from "./styles";
+import { ChartTitle } from "../../../components/chartitle";
 interface PreventablePizzaChartProps {
   data: PreventableData[];
   year: number;
@@ -13,7 +14,6 @@ export const PreventablePizzaChart: React.FC<PreventablePizzaChartProps> = ({
   data,
   year,
 }) => {
-  // Preparando os dados para o gráfico de pizza
   const chartData = [
     {
       name: "No",
@@ -30,7 +30,7 @@ export const PreventablePizzaChart: React.FC<PreventablePizzaChartProps> = ({
   ].filter((item) => item.value > 0);
   return (
     <S.ChartHolder>
-      <h3>{year}</h3>
+      <ChartTitle value={year.toString()} />
       <PieChart width={400} height={250}>
         <Pie
           data={chartData}

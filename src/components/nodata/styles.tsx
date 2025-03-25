@@ -13,10 +13,10 @@ export const Holder = styled.div`
   background-color: #fafafa;
   background-color: white;
   border-radius: 8px;
-  margin-top: 2rem;
   width: 15rem;
   height: 5rem;
   h2 {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    font-weight: 400;
   }
 `;

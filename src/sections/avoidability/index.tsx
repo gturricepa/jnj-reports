@@ -112,7 +112,7 @@ export const Avoidability: React.FC = () => {
               <PreventablePizzaChart data={actual} year={years[1]} />
             )}
           </S.PizzaChart>
-          <CenterTitle space={false} value="Preventable CPMM Crashses" />
+          <CenterTitle space={true} value="Preventable CPMM Crashses" />
           <S.PizzaChart>
             {last.length > 0 && (
               <PreventableBarChart data={last} year={years[0]} />

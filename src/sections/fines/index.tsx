@@ -14,6 +14,7 @@ import { CenterTitle } from "../../components/centerTitle";
 import { downloadExcel } from "../../helper/downloadExcel";
 import { Select } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { ChartTitle } from "../../components/chartitle";
 
 export const Fines: React.FC = () => {
   const { filteredData, loading } = useFetchData<FinesData>(
@@ -186,18 +187,7 @@ export const Fines: React.FC = () => {
 
                 return (
                   <div key={index}>
-                    {region !== "NA" && (
-                      <h2
-                        style={{
-                          margin: 0,
-                          padding: 0,
-                          marginBottom: ".5rem",
-                          marginTop: ".5rem",
-                        }}
-                      >
-                        {region}
-                      </h2>
-                    )}
+                    {region !== "NA" && <ChartTitle value={region} />}
 
                     {region === "NA" && filteredDataByRegion.length === 0 ? (
                       <UnsedData />
@@ -224,9 +214,7 @@ export const Fines: React.FC = () => {
                 return (
                   <div key={`chart-${index}`}>
                     {region !== "NA" && (
-                      <h2>
-                        {region} - {years[1]}
-                      </h2>
+                      <ChartTitle value={`${region} - ${years[1]}`} />
                     )}
 
                     {region === "NA" && filteredDataByRegion.length === 0 ? (

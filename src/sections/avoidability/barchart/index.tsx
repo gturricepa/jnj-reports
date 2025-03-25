@@ -12,6 +12,7 @@ import {
 import * as S from "./styles";
 import { PreventableData } from "../../../types/Preventable";
 import { redPalete } from "../../../styles/theme";
+import { ChartTitle } from "../../../components/chartitle";
 
 interface PreventableBarChartProps {
   data: PreventableData[];
@@ -74,8 +75,8 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
 
   return (
     <S.ChartHolder>
-      <h3>{year}</h3>
-      <BarChart width={650} height={250} data={[filteredData]}>
+      <ChartTitle value={year.toString()} />
+      <BarChart width={500} height={250} data={[filteredData]}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />

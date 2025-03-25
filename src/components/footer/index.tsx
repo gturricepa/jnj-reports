@@ -8,7 +8,7 @@ export const Footer = () => {
         alt="logo"
         style={{ width: "2rem", marginRight: "1rem" }}
       />
-      <span>Cepa Mobility - © 2025.</span>
+      <span>Cepa Mobility | BRASIL - © 2025.</span>
     </S.Holder>
   );
 };

@@ -12,6 +12,8 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 import { NoData } from "../../components/nodata";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { GroupedBarChart } from "./biaxialbarchart";
+import { PreventableBarChartByRegion } from "./barpreventable";
 
 // import { PreventablePizzaChart } from "./pizzaChart";
 
@@ -103,24 +105,58 @@ export const Avoidability: React.FC = () => {
               ))}
             </Select>
           </S.Filters>
-          <CenterTitle space={false} value="Preventable Crashses" />
-          <S.PizzaChart>
-            {last.length > 0 && (
-              <PreventablePizzaChart data={last} year={years[0]} />
-            )}
-            {actual.length > 0 && (
-              <PreventablePizzaChart data={actual} year={years[1]} />
-            )}
-          </S.PizzaChart>
-          <CenterTitle space={true} value="Preventable CPMM Crashses" />
-          <S.PizzaChart>
-            {last.length > 0 && (
-              <PreventableBarChart data={last} year={years[0]} />
-            )}
-            {actual.length > 0 && (
-              <PreventableBarChart data={actual} year={years[1]} />
-            )}
-          </S.PizzaChart>
+          {perspective === "country" ? (
+            <>
+              <CenterTitle space={false} value="Preventable Crashses" />
+
+              <S.PizzaChart>
+                {last.length > 0 && (
+                  <PreventablePizzaChart data={last} year={years[0]} />
+                )}
+                {actual.length > 0 && (
+                  <PreventablePizzaChart data={actual} year={years[1]} />
+                )}
+              </S.PizzaChart>
+              <CenterTitle space={true} value="Preventable CPMM Crashses" />
+              <S.PizzaChart>
+                {last.length > 0 && (
+                  <PreventableBarChart data={last} year={years[0]} />
+                )}
+                {actual.length > 0 && (
+                  <PreventableBarChart data={actual} year={years[1]} />
+                )}
+              </S.PizzaChart>
+            </>
+          ) : (
+            <>
+              <CenterTitle
+                space={false}
+                value="Preventable Crashses by Region"
+              />
+
+              <S.PizzaChart>
+                {last.length > 0 && (
+                  <PreventableBarChartByRegion data={last} year={years[0]} />
+                )}
+                {actual.length > 0 && (
+                  <PreventableBarChartByRegion data={actual} year={years[1]} />
+                )}
+              </S.PizzaChart>
+              <CenterTitle
+                space={true}
+                value="Preventable CPMM Crashses by Region"
+              />
+
+              <S.PizzaChart>
+                {last.length > 0 && (
+                  <GroupedBarChart data={last} year={years[0]} />
+                )}
+                {actual.length > 0 && (
+                  <GroupedBarChart data={actual} year={years[1]} />
+                )}
+              </S.PizzaChart>
+            </>
+          )}
         </>
       ) : (
         <>

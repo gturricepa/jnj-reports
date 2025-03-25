@@ -23,6 +23,8 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
   data,
   year,
 }) => {
+  console.log("single", year, data);
+
   const totals = data.reduce(
     (acc, item) => {
       acc.totalMiles += Number(item["Miles"]);
@@ -75,7 +77,7 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
 
   return (
     <S.ChartHolder>
-      <ChartTitle value={year.toString()} />
+      <ChartTitle value={year.toString()} />{" "}
       <BarChart width={500} height={250} data={[filteredData]}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />

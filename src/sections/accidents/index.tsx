@@ -90,7 +90,6 @@ export const Accidents: React.FC = () => {
     setSelectedSectors([]);
   }, [perspective]);
 
-  console.log(result[years[1]]);
   if (loading) return <LoadingIndicator />;
   return (
     <S.Holder>

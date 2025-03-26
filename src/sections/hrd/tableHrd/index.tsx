@@ -3,6 +3,8 @@ import { HRDData } from "../../../types/HRD";
 import * as S from "./styles";
 import { NoData } from "../../../components/nodata";
 import { downloadExcel } from "../../../helper/downloadExcel";
+import { getCountryCode } from "../../../components/country/helper";
+import Flag from "react-world-flags";
 // import * as XLSX from "xlsx";
 
 interface TableHrdProps {
@@ -66,7 +68,14 @@ export const TableHrd: React.FC<TableHrdProps> = ({ data }) => {
             <tr key={index}>
               {/* <td>{item["First Name"]}</td> */}
               {/* <td>{item["Last Name"]}</td> */}
-              <td>{item["Country"]}</td>
+
+              <td>
+                <Flag
+                  code={getCountryCode(item.Country)}
+                  style={{ width: "20px", marginRight: "5px" }}
+                />{" "}
+                {item["Country"]}
+              </td>
               <td>{item["Corporate ID"]}</td>
               <td>{item["Operating Group"]}</td>
               <td>{item["Franchise"]}</td>

@@ -13,6 +13,7 @@ import { Select } from "antd";
 import { downloadExcel } from "../../helper/downloadExcel";
 import BarChartHrd from "./barchart";
 import { CenterTitle } from "../../components/centerTitle";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 export const HRD: React.FC = () => {
   const { filteredData, loading } = useFetchData<HRDData>("HRD.xlsx");
@@ -82,6 +83,8 @@ export const HRD: React.FC = () => {
       <Title title="HRD" />
       {filteredData.length > 0 && (
         <S.FiltersSearch>
+          <ArrowRightOutlined />
+
           <Select
             maxTagCount={"responsive"}
             mode="multiple"
@@ -144,10 +147,11 @@ export const HRD: React.FC = () => {
               </div>
             ))}
           </S.Division>
+
+          <PercetageHrd />
           {filteredData.length > 0 ? (
             <S.DButton onClick={handleDownload}>Download</S.DButton>
           ) : null}
-          <PercetageHrd />
         </>
       )}
     </S.Holder>

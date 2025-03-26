@@ -4,6 +4,7 @@ export const Table = styled.table`
   width: 40rem;
   border-radius: 5px;
   border-collapse: collapse;
+  height: 30rem;
   thead {
     /* background-color: #ee1100; */
     background-color: ${paleteColors[0]};
@@ -11,7 +12,7 @@ export const Table = styled.table`
     font-size: 14px;
 
     th {
-      padding: 10px;
+      padding: 8px;
       font-weight: bold;
       text-align: center;
       border-radius: 5px;
@@ -19,8 +20,12 @@ export const Table = styled.table`
   }
 
   tbody {
+    padding: 0;
+    margin: 0;
     tr {
       transition: background-color 0.2s;
+      padding: 0;
+      margin: 0;
     }
 
     tr:hover {
@@ -36,9 +41,10 @@ export const Table = styled.table`
     }
 
     td {
-      padding: 8px;
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
+      padding: 0;
+      margin: 0;
     }
   }
 `;

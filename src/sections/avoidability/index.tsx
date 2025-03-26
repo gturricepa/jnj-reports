@@ -6,7 +6,7 @@ import useFetchData from "../../hooks/useFetchData";
 import { PreventableData } from "../../types/Preventable";
 import { Select } from "antd";
 import { PreventableBarChart } from "./barchart";
-import { PreventablePizzaChart } from "./pizzaChart";
+import { PreventableSimpleBarChart } from "./pizzaChart";
 import { CenterTitle } from "../../components/centerTitle";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { NoData } from "../../components/nodata";
@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { GroupedBarChart } from "./biaxialbarchart";
 import { PreventableBarChartByRegion } from "./barpreventable";
+import { downloadExcel } from "../../helper/downloadExcel";
 
 // import { PreventablePizzaChart } from "./pizzaChart";
 
@@ -67,6 +68,24 @@ export const Avoidability: React.FC = () => {
     (item) => Number(item.Year) === years[1]
   );
 
+  const handleDownload = () => {
+    const columnsToDownload: (keyof PreventableData)[] = [
+      "Country",
+      "CPMM No Data",
+      "CPMM Not Preventable",
+      "CPMM Preventable",
+      "Miles",
+      "Year",
+      "Operating Group",
+      "Sector",
+      "Region",
+      "Yes",
+      "No",
+      "No Data",
+    ];
+    downloadExcel(filteredDataByFilters, columnsToDownload, "preventable.xlsx");
+  };
+
   return (
     <S.Holder>
       <Title title="Preventable" />
@@ -111,10 +130,10 @@ export const Avoidability: React.FC = () => {
 
               <S.PizzaChart>
                 {last.length > 0 && (
-                  <PreventablePizzaChart data={last} year={years[0]} />
+                  <PreventableSimpleBarChart data={last} year={years[0]} />
                 )}
                 {actual.length > 0 && (
-                  <PreventablePizzaChart data={actual} year={years[1]} />
+                  <PreventableSimpleBarChart data={actual} year={years[1]} />
                 )}
               </S.PizzaChart>
               <CenterTitle space={true} value="Preventable CPMM Crashses" />
@@ -163,6 +182,9 @@ export const Avoidability: React.FC = () => {
           <NoData />
         </>
       )}
+      {filteredDataByFilters.length > 0 ? (
+        <button onClick={handleDownload}>Download</button>
+      ) : null}
     </S.Holder>
   );
 };

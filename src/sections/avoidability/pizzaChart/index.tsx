@@ -1,56 +1,55 @@
-// PreventablePizzaChart.tsx
 import React from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
 import { PreventableData } from "../../../types/Preventable";
 import { redPalete } from "../../../styles/theme";
 import * as S from "./styles";
 import { ChartTitle } from "../../../components/chartitle";
-interface PreventablePizzaChartProps {
+
+interface PreventableBarChartProps {
   data: PreventableData[];
   year: number;
 }
 
-export const PreventablePizzaChart: React.FC<PreventablePizzaChartProps> = ({
+export const PreventableSimpleBarChart: React.FC<PreventableBarChartProps> = ({
   data,
   year,
 }) => {
   const chartData = [
     {
-      name: "No",
-      value: data.reduce((acc, item) => acc + Number(item.No), 0),
+      name: "Total",
+      Yes: data.reduce((acc, item) => acc + Number(item.Yes), 0),
+      No: data.reduce((acc, item) => acc + Number(item.No), 0),
+      "No Data": data.reduce((acc, item) => acc + Number(item["No Data"]), 0),
     },
-    {
-      name: "No Data",
-      value: data.reduce((acc, item) => acc + Number(item["No Data"]), 0),
-    },
-    {
-      name: "Yes",
-      value: data.reduce((acc, item) => acc + Number(item.Yes), 0),
-    },
-  ].filter((item) => item.value > 0);
+  ];
+
+  const formatValue = (value: number) => value.toFixed(0);
+
   return (
     <S.ChartHolder>
       <ChartTitle value={year.toString()} />
-      <PieChart width={400} height={250}>
-        <Pie
-          data={chartData}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          label={({ name, percent }) =>
-            `${name}: ${(percent * 100).toFixed(0)}%`
-          }
-          outerRadius={80}
-          innerRadius={65}
-          dataKey="value"
-        >
-          {chartData.map((_entry, index) => (
-            <Cell key={`cell-${index}`} fill={redPalete[index]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-      </PieChart>
+      <ResponsiveContainer width={400} height={200}>
+        <BarChart data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip formatter={(value) => formatValue(Number(value))} />
+          <Legend />
+
+          <Bar dataKey="Yes" fill={redPalete[0]} />
+          <Bar dataKey="No" fill={redPalete[1]} />
+          <Bar dataKey="No Data" fill={redPalete[2]} />
+        </BarChart>
+      </ResponsiveContainer>
     </S.ChartHolder>
   );
 };

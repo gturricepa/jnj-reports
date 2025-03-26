@@ -23,8 +23,6 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
   data,
   year,
 }) => {
-  console.log("single", year, data);
-
   const totals = data.reduce(
     (acc, item) => {
       acc.totalMiles += Number(item["Miles"]);
@@ -48,7 +46,6 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
 
   const proportion = totals.totalMiles > 0 ? 1000000 / totals.totalMiles : 0;
 
-  // Calculando os valores finais
   const preventableValue = totals["Yes"] * proportion;
   const notPreventableValue = totals["No"] * proportion;
   const noDataValue = totals["No Data"] * proportion;
@@ -78,7 +75,7 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
   return (
     <S.ChartHolder>
       <ChartTitle value={year.toString()} />{" "}
-      <BarChart width={500} height={250} data={[filteredData]}>
+      <BarChart width={400} height={200} data={[filteredData]}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />

@@ -75,17 +75,23 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
       {perspective === "country" && (
         <ChartTitle value={currentYear.toString()} />
       )}
-      <ResponsiveContainer height={560}>
+      <ResponsiveContainer height={460}>
         <BarChart layout="vertical" data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <YAxis
             dataKey="classification"
             type="category"
-            width={250}
-            style={{ fontSize: "14px" }}
+            width={290}
+            style={{ fontSize: "13px" }}
           />
           <XAxis type="number" />
-          <Tooltip contentStyle={{ maxWidth: "300px", whiteSpace: "normal" }} />
+          <Tooltip
+            contentStyle={{
+              maxWidth: "300px",
+              whiteSpace: "normal",
+              fontSize: "13px",
+            }}
+          />
 
           {uniqueCountries.map((country, index) => (
             <Bar
@@ -107,6 +113,7 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
               display: "flex",
               alignItems: "center",
               padding: "5px",
+              fontSize: "13px",
             }}
           >
             <div

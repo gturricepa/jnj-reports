@@ -46,7 +46,11 @@ export const PercetageHrd: React.FC = () => {
                   code={getCountryCode(item.Country)}
                   style={{ width: "20px", marginRight: "5px" }}
                 />
-                <p style={{ margin: 0, width: "3rem" }}>{item.Country}</p>
+                <p style={{ margin: 0, width: "3rem" }}>
+                  {item.Country === "United States of America"
+                    ? "USA"
+                    : item.Country}
+                </p>
               </td>
               <td>
                 <S.Blue>

@@ -29,7 +29,6 @@ export const Holder = styled.section`
     cursor: pointer;
     transition: background-color 0.3s;
     width: 7rem;
-    margin-top: 2rem;
 
     &:hover {
       /* background-color: #b10000; */

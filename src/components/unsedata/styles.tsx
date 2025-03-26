@@ -12,7 +12,6 @@ export const Holder = styled.div`
   border: 1px dashed #e0e0e0;
   background-color: white;
   border-radius: 8px;
-  width: 25rem;
   justify-self: center;
   align-self: center;
   h2 {

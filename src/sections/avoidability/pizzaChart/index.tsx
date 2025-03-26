@@ -37,7 +37,7 @@ export const PreventableSimpleBarChart: React.FC<PreventableBarChartProps> = ({
   return (
     <S.ChartHolder>
       <ChartTitle value={year.toString()} />
-      <ResponsiveContainer width={400} height={200}>
+      <ResponsiveContainer width={500} height={200}>
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />

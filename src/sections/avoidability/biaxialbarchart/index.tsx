@@ -59,7 +59,7 @@ export const GroupedBarChart: React.FC<PreventableBarChartProps> = ({
   return (
     <S.ChartHolder>
       <ChartTitle value={year.toString()} />
-      <BarChart width={400} height={200} data={chartData}>
+      <BarChart width={500} height={200} data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />

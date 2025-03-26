@@ -176,62 +176,88 @@ export const Fines: React.FC = () => {
             )}
           </>
         ) : (
-          <>
-            <CenterTitle value="Fines Classification by Region" />
-
+          <div
+            style={{
+              display: "flex",
+              marginTop: "1rem",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <S.Divsion>
-              {escope!.map((region, index) => {
-                const filteredDataByRegion = filterDataByRegion(region);
-                const resultByRegion = separeByYear(filteredDataByRegion);
-                const yearsByRegion = Object.keys(resultByRegion);
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: "1rem",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <CenterTitle value="Fines Classification by Region" />
 
-                return (
-                  <div key={index}>
-                    {region !== "NA" && <ChartTitle value={region} />}
+                {escope!.map((region, index) => {
+                  const filteredDataByRegion = filterDataByRegion(region);
+                  const resultByRegion = separeByYear(filteredDataByRegion);
+                  const yearsByRegion = Object.keys(resultByRegion);
+                  return (
+                    <div key={index}>
+                      {region !== "NA" && <ChartTitle value={region} />}
 
-                    {region === "NA" && filteredDataByRegion.length === 0 ? (
-                      <UnsedData />
-                    ) : (
-                      <AccidentsTable
-                        last={resultByRegion[yearsByRegion[0]] || []}
-                        actual={resultByRegion[yearsByRegion[1]] || []}
-                        years={yearsByRegion}
-                        classifications={allClassifications}
-                      />
-                    )}
-                  </div>
-                );
-              })}
+                      {region === "NA" && filteredDataByRegion.length === 0 ? (
+                        <></>
+                      ) : (
+                        <AccidentsTable
+                          last={resultByRegion[yearsByRegion[0]] || []}
+                          actual={resultByRegion[yearsByRegion[1]] || []}
+                          years={yearsByRegion}
+                          classifications={allClassifications}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              <S.Divsion>
+                <div style={{ marginTop: "1rem" }}>
+                  <CenterTitle value="Distribution of Fines by Country/Region" />
+
+                  {escope!.map((region, index) => {
+                    const filteredDataByRegion = filterDataByRegion(region);
+                    const resultByRegion = separeByYear(filteredDataByRegion);
+                    const yearsByRegion = Object.keys(resultByRegion);
+
+                    return (
+                      <div key={`chart-${index}`}>
+                        {region !== "NA" && (
+                          <ChartTitle value={`${region} - ${years[1]}`} />
+                        )}
+
+                        {region === "NA" &&
+                        filteredDataByRegion.length === 0 ? (
+                          <></>
+                        ) : (
+                          <AccidentsBarChart
+                            actual={resultByRegion[yearsByRegion[1]] || []}
+                            classifications={allClassifications}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </S.Divsion>
             </S.Divsion>
-            <CenterTitle value="Distribution of Fines by Country/Region" />
-
-            <S.Divsion>
-              {escope!.map((region, index) => {
-                const filteredDataByRegion = filterDataByRegion(region);
-                const resultByRegion = separeByYear(filteredDataByRegion);
-                const yearsByRegion = Object.keys(resultByRegion);
-
-                return (
-                  <div key={`chart-${index}`}>
-                    {region !== "NA" && (
-                      <ChartTitle value={`${region} - ${years[1]}`} />
-                    )}
-
-                    {region === "NA" && filteredDataByRegion.length === 0 ? (
-                      <UnsedData />
-                    ) : (
-                      <AccidentsBarChart
-                        actual={resultByRegion[yearsByRegion[1]] || []}
-                        classifications={allClassifications}
-                      />
-                    )}
-                  </div>
-                );
-              })}
-            </S.Divsion>
-          </>
+          </div>
         )}
       </S.Content>
+      <div style={{ marginTop: "2rem" }}>
+        <UnsedData />
+      </div>
+
       {filteredData.length > 0 ? (
         <button onClick={handleDownload}>Download</button>
       ) : null}

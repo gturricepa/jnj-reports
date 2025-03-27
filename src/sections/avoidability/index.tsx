@@ -26,10 +26,12 @@ export const Avoidability: React.FC = () => {
   >([]);
   const [selectedSectors, setSelectedSectors] = React.useState<string[]>([]);
   const perspective = useSelector((state: RootState) => state.user.perspective);
+  const user = useSelector((state: RootState) => state.user);
+
   useEffect(() => {
     setSelectedOperatingGroups([]);
     setSelectedSectors([]);
-  }, [perspective]);
+  }, [perspective, user.selectedCountry]);
 
   if (loading) return <LoadingIndicator />;
 

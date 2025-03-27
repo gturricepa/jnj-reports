@@ -88,7 +88,7 @@ export const Accidents: React.FC = () => {
   useEffect(() => {
     setSelectedOperatingGroups([]);
     setSelectedSectors([]);
-  }, [perspective]);
+  }, [perspective, user.selectedCountry]);
 
   if (loading) return <LoadingIndicator />;
   return (

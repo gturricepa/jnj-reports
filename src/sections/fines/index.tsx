@@ -85,7 +85,7 @@ export const Fines: React.FC = () => {
   useEffect(() => {
     setSelectedOperatingGroups([]);
     setSelectedSectors([]);
-  }, [perspective]);
+  }, [perspective, user.selectedCountry]);
 
   if (
     (user.selectedCountry!.length === 1 &&
@@ -103,10 +103,10 @@ export const Fines: React.FC = () => {
       user.selectedCountry![1] === "United States of America")
   ) {
     return (
-      <div style={{ width: "99.5%" }}>
+      <S.Holder>
         <Title title="fines" />
         <UnsedData />
-      </div>
+      </S.Holder>
     );
   }
   if (loading) return <LoadingIndicator />;
@@ -254,7 +254,14 @@ export const Fines: React.FC = () => {
           </div>
         )}
       </S.Content>
-      <div style={{ marginTop: "2rem" }}>
+      <div
+        style={{
+          marginTop: "2rem",
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
         <UnsedData />
       </div>
 

@@ -4,7 +4,7 @@ import { LoadingIndicator } from "../../components/loading";
 import * as S from "./styles";
 import { Title } from "../../components/title";
 import { HRDData } from "../../types/HRD";
-import { HRDCard } from "./card";
+// import { HRDCard } from "./card";
 import { TableHrd } from "./tableHrd";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -13,12 +13,14 @@ import { Select } from "antd";
 import { downloadExcel } from "../../helper/downloadExcel";
 import BarChartHrd from "./barchart";
 import { CenterTitle } from "../../components/centerTitle";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { AlertOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import { Card } from "../../components/card";
 
 export const HRD: React.FC = () => {
   const { filteredData, loading } = useFetchData<HRDData>("HRD.xlsx");
   const perspective = useSelector((state: RootState) => state.user.perspective);
   const escope = useSelector((state: RootState) => state.user.Escope);
+  const user = useSelector((state: RootState) => state.user);
 
   const [selectedOperatingGroups, setSelectedOperatingGroups] = React.useState<
     string[]
@@ -36,7 +38,7 @@ export const HRD: React.FC = () => {
   useEffect(() => {
     setSelectedOperatingGroups([]);
     setSelectedSectors([]);
-  }, [perspective]);
+  }, [perspective, user.selectedCountry]);
 
   const filterDataByOperatingGroupAndSector = (data: HRDData[]) => {
     return data.filter((item) => {
@@ -77,6 +79,8 @@ export const HRD: React.FC = () => {
       "hrd.xlsx"
     );
   };
+
+  const total = filteredDataByOperatingGroupAndSector.length;
 
   return (
     <S.Holder>
@@ -130,7 +134,8 @@ export const HRD: React.FC = () => {
                 width: "100%",
               }}
             >
-              <HRDCard data={filteredDataByOperatingGroupAndSector} />
+              {/* <HRDCard data={filteredDataByOperatingGroupAndSector} /> */}
+              <Card text="HRD Drivers" total={total} icon={<AlertOutlined />} />
               <BarChartHrd data={filteredDataByOperatingGroupAndSector} />
             </div>
           )}
@@ -143,7 +148,12 @@ export const HRD: React.FC = () => {
             {escope?.map((region, index) => (
               <div key={index} style={{ marginTop: "1rem" }}>
                 <CenterTitle value={region} />
-                <HRDCard data={filterDataByRegion(region)} />
+                {/* <HRDCard data={filterDataByRegion(region)} /> */}
+                <Card
+                  text="HRD Drivers"
+                  total={filterDataByRegion(region).length}
+                  icon={<AlertOutlined />}
+                />
               </div>
             ))}
           </S.Division>

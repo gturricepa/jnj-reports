@@ -36,11 +36,11 @@ export const Home: React.FC = () => {
             <section id="avoidability">
               <Avoidability />
             </section>
-            <section id="general">
-              <General />
-            </section>
             <section id="training">
               <Training />
+            </section>
+            <section id="general">
+              <General />
             </section>
           </>
         ) : (

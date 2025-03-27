@@ -6,8 +6,8 @@ import en from "./languages/en.json";
 import es from "./languages/es.json";
 
 i18n.use(initReactI18next).init({
-  lng: "pt",
-  fallbackLng: "pt",
+  lng: "en",
+  fallbackLng: "en",
   resources: {
     pt: { translation: pt },
     en: { translation: en },

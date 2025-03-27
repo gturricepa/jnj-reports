@@ -9,7 +9,7 @@ export const Holder = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
-  background-color: #ffffff;
+  background-color: #f3ecec;
 
   p {
     font-weight: bold;

@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { Select } from "antd";
 import { CenterTitle } from "../../components/centerTitle";
+import { DownloadButton } from "../../components/card/downloadButton";
 
 export const Training: React.FC = () => {
   const { filteredData, loading } = useFetchData<TrainingData>("training.xlsx");
@@ -266,7 +267,7 @@ export const Training: React.FC = () => {
         </>
       )}
       {filteredData.length > 0 ? (
-        <button onClick={handleDownload}>Download</button>
+        <DownloadButton onClick={handleDownload} />
       ) : null}
     </S.Holder>
   );

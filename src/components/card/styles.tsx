@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Holder = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
+  border: 2px solid gray;
   justify-content: flex-start;
   align-items: center;
   border-radius: 15px;

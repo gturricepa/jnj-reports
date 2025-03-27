@@ -15,6 +15,7 @@ import BarChartHrd from "./barchart";
 import { CenterTitle } from "../../components/centerTitle";
 import { AlertOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { Card } from "../../components/card";
+import { DownloadButton } from "../../components/card/downloadButton";
 
 export const HRD: React.FC = () => {
   const { filteredData, loading } = useFetchData<HRDData>("HRD.xlsx");
@@ -146,7 +147,10 @@ export const HRD: React.FC = () => {
         <>
           <S.Division>
             {escope?.map((region, index) => (
-              <div key={index} style={{ marginTop: "1rem" }}>
+              <div
+                key={index}
+                style={{ marginTop: "1rem }}
+              >
                 <CenterTitle value={region} />
                 {/* <HRDCard data={filterDataByRegion(region)} /> */}
                 <Card
@@ -160,7 +164,7 @@ export const HRD: React.FC = () => {
 
           <PercetageHrd />
           {filteredData.length > 0 ? (
-            <S.DButton onClick={handleDownload}>Download</S.DButton>
+            <DownloadButton onClick={handleDownload} />
           ) : null}
         </>
       )}

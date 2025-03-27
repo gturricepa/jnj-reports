@@ -1,6 +1,11 @@
 import * as S from "./styles";
 import logoJnJ from "../../assets/jj.svg";
 import logoCepa from "../../assets/cepa23.png";
+import svg from "../../assets/world2.svg";
+// import svg from "../../assets/word2.svg";
+
+// import svg from "../../assets/texture.svg";
+// import svg from "../../assets/texture3.avif";
 
 import { Language } from "../../components/language";
 import { LoginForm } from "../../components/form";
@@ -13,6 +18,19 @@ export const Login = () => {
       </S.LeftPanel>
       <Language />
       <S.RightPanel>
+        <img
+          style={{
+            width: "40%",
+            zIndex: "-155555",
+            position: "fixed",
+            opacity: "0.05",
+            // opacity: "0.02",
+            left: "30%",
+            top: "0",
+          }}
+          src={svg}
+        />
+
         <S.Content>
           <h1>CEPA REPORTS</h1>
           <h2>SAFE FLEET</h2>

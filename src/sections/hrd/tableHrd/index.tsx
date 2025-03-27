@@ -5,6 +5,7 @@ import { NoData } from "../../../components/nodata";
 import { downloadExcel } from "../../../helper/downloadExcel";
 import { getCountryCode } from "../../../components/country/helper";
 import Flag from "react-world-flags";
+import { DownloadButton } from "../../../components/card/downloadButton";
 // import * as XLSX from "xlsx";
 
 interface TableHrdProps {
@@ -86,7 +87,7 @@ export const TableHrd: React.FC<TableHrdProps> = ({ data }) => {
         </tbody>
       </S.Table>
 
-      <div>
+      <div style={{ marginBottom: "1rem" }}>
         {Array.from({ length: totalPages }, (_, index) => (
           <S.PaginationButton
             key={index + 1}
@@ -97,9 +98,7 @@ export const TableHrd: React.FC<TableHrdProps> = ({ data }) => {
           </S.PaginationButton>
         ))}
       </div>
-      {data.length > 0 ? (
-        <S.DButton onClick={handleDownload}>Download</S.DButton>
-      ) : null}
+      {data.length > 0 ? <DownloadButton onClick={handleDownload} /> : null}
     </>
   );
 };

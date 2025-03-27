@@ -15,6 +15,7 @@ import { RootState } from "../../store/store";
 import { GroupedBarChart } from "./biaxialbarchart";
 import { PreventableBarChartByRegion } from "./barpreventable";
 import { downloadExcel } from "../../helper/downloadExcel";
+import { DownloadButton } from "../../components/card/downloadButton";
 
 // import { PreventablePizzaChart } from "./pizzaChart";
 
@@ -185,7 +186,7 @@ export const Avoidability: React.FC = () => {
         </>
       )}
       {filteredDataByFilters.length > 0 ? (
-        <button onClick={handleDownload}>Download</button>
+        <DownloadButton onClick={handleDownload} />
       ) : null}
     </S.Holder>
   );

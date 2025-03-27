@@ -15,6 +15,7 @@ import { downloadExcel } from "../../helper/downloadExcel";
 import { Select } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { ChartTitle } from "../../components/chartitle";
+import { DownloadButton } from "../../components/card/downloadButton";
 
 export const Fines: React.FC = () => {
   const { filteredData, loading } = useFetchData<FinesData>(
@@ -262,11 +263,11 @@ export const Fines: React.FC = () => {
           alignContent: "center",
         }}
       >
-        <UnsedData />
+        {perspective !== "country" && <UnsedData />}
       </div>
 
       {filteredData.length > 0 ? (
-        <button onClick={handleDownload}>Download</button>
+        <DownloadButton onClick={handleDownload} />
       ) : null}
     </S.Holder>
   );

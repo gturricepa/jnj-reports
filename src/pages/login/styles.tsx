@@ -1,6 +1,6 @@
 // src/styles.ts
+import { paleteColors } from "../../styles/theme";
 import styled from "styled-components";
-
 export const Holder = styled.div`
   display: flex;
   width: 100%;
@@ -8,8 +8,10 @@ export const Holder = styled.div`
 `;
 
 export const LeftPanel = styled.div`
-  width: 35%;
-  background-color: #ee1100;
+  width: 30%;
+  /* background-color: #ee1100; */
+  background-color: #bd1c00;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,19 +28,29 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  /* background-color: white; */
+  backdrop-filter: blur(2px);
+  border-radius: 15px;
+  /* background: rgba(255, 255, 255, 0.5); */
+
   h1 {
     font-size: 4rem;
-    font-weight: 400;
-    color: #322d2d;
+    /* color: #322d2d;
+     */
+    color: ${paleteColors[0]};
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
   }
   h2 {
     font-size: 3rem;
     font-weight: 100;
-    color: #ee1100;
-  }
-  h1,
-  h2 {
+    /* color: #ee1100;
+     */
+    color: #bd1c00;
     margin: 0;
     padding: 0;
+    width: 100%;
   }
 `;

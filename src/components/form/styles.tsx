@@ -16,18 +16,21 @@ export const Form = styled.form`
 
     &:focus {
       outline: none;
-      border-color: #ee1100;
+      /* border-color: #ee1100; */
+      border-color: #bd1c00;
     }
   }
 
   button {
     padding: 0.5rem;
-    background-color: #ee1100;
+    /* background-color: #ee1100; */
+    background-color: #bd1c00;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 1rem;
 
     &:hover {
       background-color: #b10000;

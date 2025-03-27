@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { User, UserState } from "../../types/User";
 import { setUser } from "../../store/userSlice";
 import { ErrorMsg } from "../errormsg";
-
+import { LoginOutlined } from "@ant-design/icons";
 export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -64,7 +64,9 @@ export const LoginForm: React.FC = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit">Login</button>
+      <button type="submit">
+        <LoginOutlined />
+      </button>
       {error && <ErrorMsg text={error} />}
     </S.Form>
   );

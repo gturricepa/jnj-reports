@@ -14,6 +14,7 @@ import { downloadExcel } from "../../helper/downloadExcel";
 import { Select } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { ChartTitle } from "../../components/chartitle";
+import { DownloadButton } from "../../components/card/downloadButton";
 
 export const Accidents: React.FC = () => {
   const { filteredData, loading } =
@@ -207,7 +208,8 @@ export const Accidents: React.FC = () => {
         )}
       </S.Content>
       {filteredDataByFilters.length > 0 ? (
-        <button onClick={handleDownload}>Download</button>
+        // <button onClick={handleDownload}>Download</button>
+        <DownloadButton onClick={handleDownload} />
       ) : null}
     </S.Holder>
   );

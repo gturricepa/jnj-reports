@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { paleteColors } from "../../styles/theme";
 
 export const Holder = styled.section`
   display: flex;

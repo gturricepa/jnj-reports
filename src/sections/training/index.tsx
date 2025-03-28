@@ -17,6 +17,7 @@ import { RootState } from "../../store/store";
 import { Select } from "antd";
 import { CenterTitle } from "../../components/centerTitle";
 import { DownloadButton } from "../../components/card/downloadButton";
+import { downloadExcel } from "../../helper/downloadExcel";
 
 export const Training: React.FC = () => {
   const { filteredData, loading } = useFetchData<TrainingData>("training.xlsx");
@@ -93,7 +94,21 @@ export const Training: React.FC = () => {
   if (loading) return <LoadingIndicator />;
 
   const handleDownload = () => {
-    // console.log("dwa");
+    const columnsToDownload: (keyof TrainingData)[] = [
+      "WWID",
+      "Realized",
+      "Status",
+      "Expiration Date",
+      "Country",
+      "Operating Group",
+      "Sector",
+      "Type",
+    ];
+    downloadExcel(
+      filteredDataByOperatingGroupAndSector,
+      columnsToDownload,
+      "training.xlsx"
+    );
   };
 
   const filterByRegion = (data: TrainingData[], region: string) => {

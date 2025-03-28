@@ -27,6 +27,7 @@ export const Main = styled.div`
   width: 100%;
   justify-content: space-evenly;
   margin-top: 1rem;
+  margin-bottom: 2rem;
 `;
 
 export const MapHolder = styled.div`

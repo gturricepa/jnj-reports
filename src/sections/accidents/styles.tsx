@@ -24,6 +24,7 @@ export const Content = styled.div`
   width: 100%;
   justify-content: space-around;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 `;
 
 export const Divsion = styled.div`

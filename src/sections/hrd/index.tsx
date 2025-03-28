@@ -161,7 +161,9 @@ export const HRD: React.FC = () => {
 
           <PercetageHrd />
           {filteredData.length > 0 ? (
-            <DownloadButton onClick={handleDownload} />
+            <div>
+              <DownloadButton onClick={handleDownload} />
+            </div>
           ) : null}
         </>
       )}

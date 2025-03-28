@@ -54,6 +54,7 @@ export const PaginationButton = styled.button`
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
+  margin-bottom: 2rem;
   /* background-color: #ff0000; */
   background-color: ${paleteColors[1]};
 

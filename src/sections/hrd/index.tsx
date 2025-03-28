@@ -147,10 +147,7 @@ export const HRD: React.FC = () => {
         <>
           <S.Division>
             {escope?.map((region, index) => (
-              <div
-                key={index}
-                style={{ marginTop: "1rem }}
-              >
+              <div key={index} style={{ marginTop: "1rem" }}>
                 <CenterTitle value={region} />
                 {/* <HRDCard data={filterDataByRegion(region)} /> */}
                 <Card

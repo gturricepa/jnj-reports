@@ -6,7 +6,6 @@ interface GeneralTableProps {
 }
 
 export const GeneralTable: React.FC<GeneralTableProps> = ({ data }) => {
-  // Calcular somas
   const total = data.reduce(
     (acc, item) => {
       acc.vehiclesCount += Number(item["Vehicles Count"]) || 0;

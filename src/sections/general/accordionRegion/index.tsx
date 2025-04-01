@@ -7,7 +7,9 @@ import {
   AlertOutlined,
   CarOutlined,
   DashboardOutlined,
+  ForkOutlined,
 } from "@ant-design/icons";
+import { paleteColors } from "../../../styles/theme";
 
 const { Panel } = Collapse;
 
@@ -125,10 +127,26 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
     >
       {regionKeys.map((region) => (
         <Panel
+          style={{ backgroundColor: "" }}
           header={
-            <span style={{ fontSize: "1rem", fontWeight: "bold" }}>
-              {region}
-            </span>
+            <>
+              <ForkOutlined
+                style={{
+                  fontSize: "1.2rem",
+                  marginRight: "1rem",
+                  color: paleteColors[2],
+                }}
+              />
+              <span
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  color: paleteColors[2],
+                }}
+              >
+                {region}
+              </span>
+            </>
           }
           key={region}
         >

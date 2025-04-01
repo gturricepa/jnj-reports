@@ -24,6 +24,9 @@ export const Home: React.FC = () => {
         {user!.selectedCountry!.length > 0 ? (
           <>
             <Perspective />
+            <section id="general">
+              <General />
+            </section>
             <section id="accidents">
               <Accidents />
               <section id="fines">
@@ -38,9 +41,6 @@ export const Home: React.FC = () => {
             </section>
             <section id="training">
               <Training />
-            </section>
-            <section id="general">
-              <General />
             </section>
           </>
         ) : (

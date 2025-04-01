@@ -34,13 +34,13 @@ export const Menu: React.FC = () => {
         alt="logo"
         style={{ width: "2.6rem", borderRadius: "50px" }}
       />
+      <h4 onClick={() => handleScroll("general")}>{t("general")}</h4>
+
       <h4 onClick={() => handleScroll("accidents")}>{t("accidents")}</h4>
       <h4 onClick={() => handleScroll("fines")}>{t("fines")}</h4>
       <h4 onClick={() => handleScroll("hrd")}>{t("HRD")}</h4>
       <h4 onClick={() => handleScroll("avoidability")}>{t("avoidability")}</h4>
       <h4 onClick={() => handleScroll("training")}>{t("training")}</h4>
-
-      <h4 onClick={() => handleScroll("general")}>{t("general")}</h4>
 
       <div>
         {user.perspective === "country" ? <Country /> : <Escope />}

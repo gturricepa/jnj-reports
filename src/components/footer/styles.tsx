@@ -8,7 +8,7 @@ export const Holder = styled.div`
   align-items: center;
   /* background-color: #ee1100; */
   background-color: ${paleteColors[0]};
-
+  margin-top: 3rem;
   height: 5rem;
   color: white;
 `;

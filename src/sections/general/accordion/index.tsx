@@ -9,20 +9,22 @@ import {
   AlertOutlined,
   CarOutlined,
   DashboardOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-
 const { Panel } = Collapse;
 
 interface SectorData {
   Miles: number;
   AccidentCount: number;
   VehiclesCount: number;
+  AccidentsWithInjuries: number;
 }
 
 interface OperationGroupData {
   Miles: number;
   AccidentCount: number;
   VehiclesCount: number;
+  AccidentsWithInjuries: number;
   sectors: Record<string, SectorData>;
 }
 
@@ -30,6 +32,7 @@ interface CountryData {
   Miles: number;
   AccidentCount: number;
   VehiclesCount: number;
+  AccidentsWithInjuries: number;
   operationGroups: Record<string, OperationGroupData>;
 }
 
@@ -44,23 +47,27 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
       Miles,
       "Accident Count": accidentCount,
       "Vehicles Count": vehiclesCount,
+      "# Accidents with Injuries": accidentsWithInjuries,
     } = item;
 
     const milesValue = parseFloat(Miles) || 0;
     const accidentCountValue = parseInt(accidentCount, 10) || 0;
     const vehiclesCountValue = parseInt(vehiclesCount, 10) || 0;
+    const accidentsWithInjuriesValue = parseInt(accidentsWithInjuries, 10) || 0;
 
     if (!acc[Country]) {
       acc[Country] = {
         Miles: 0,
         AccidentCount: 0,
         VehiclesCount: 0,
+        AccidentsWithInjuries: 0,
         operationGroups: {},
       };
     }
     acc[Country].Miles += milesValue;
     acc[Country].AccidentCount += accidentCountValue;
     acc[Country].VehiclesCount += vehiclesCountValue;
+    acc[Country].AccidentsWithInjuries += accidentsWithInjuriesValue;
 
     const groupKey = item["Operating Group"];
     const sectorKey = item.Sector;
@@ -70,6 +77,7 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
         Miles: 0,
         AccidentCount: 0,
         VehiclesCount: 0,
+        AccidentsWithInjuries: 0,
         sectors: {},
       };
     }
@@ -77,12 +85,15 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
     acc[Country].operationGroups[groupKey].Miles += milesValue;
     acc[Country].operationGroups[groupKey].AccidentCount += accidentCountValue;
     acc[Country].operationGroups[groupKey].VehiclesCount += vehiclesCountValue;
+    acc[Country].operationGroups[groupKey].AccidentsWithInjuries +=
+      accidentsWithInjuriesValue;
 
     if (!acc[Country].operationGroups[groupKey].sectors[sectorKey]) {
       acc[Country].operationGroups[groupKey].sectors[sectorKey] = {
         Miles: 0,
         AccidentCount: 0,
         VehiclesCount: 0,
+        AccidentsWithInjuries: 0,
       };
     }
     acc[Country].operationGroups[groupKey].sectors[sectorKey].Miles +=
@@ -91,6 +102,9 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
       accidentCountValue;
     acc[Country].operationGroups[groupKey].sectors[sectorKey].VehiclesCount +=
       vehiclesCountValue;
+    acc[Country].operationGroups[groupKey].sectors[
+      sectorKey
+    ].AccidentsWithInjuries += accidentsWithInjuriesValue;
 
     return acc;
   }, {});
@@ -143,6 +157,11 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                 text="Total Vehicles"
                 icon={<CarOutlined />}
               />
+              <Card
+                total={countryData[country].AccidentsWithInjuries}
+                text="Accidents with Injuries"
+                icon={<UserOutlined />}
+              />
             </S.CardHolder>
             <S.ListHolder>
               <ul style={{ paddingLeft: "20px" }}>
@@ -171,6 +190,13 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                               {
                                 countryData[country].operationGroups[groupKey]
                                   .VehiclesCount
+                              }
+                            </span>
+                            <span>
+                              Accidents with Injuries:{" "}
+                              {
+                                countryData[country].operationGroups[groupKey]
+                                  .AccidentsWithInjuries
                               }
                             </span>
                           </S.ValueHolder>
@@ -203,6 +229,14 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                                       countryData[country].operationGroups[
                                         groupKey
                                       ].sectors[sectorKey].VehiclesCount
+                                    }
+                                  </span>
+                                  <span>
+                                    Accidents with Injuries:{" "}
+                                    {
+                                      countryData[country].operationGroups[
+                                        groupKey
+                                      ].sectors[sectorKey].AccidentsWithInjuries
                                     }
                                   </span>
                                 </S.ValueHolder>

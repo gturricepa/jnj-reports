@@ -125,7 +125,11 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
     >
       {regionKeys.map((region) => (
         <Panel
-          header={<span style={{ fontSize: "1rem" }}>{region}</span>}
+          header={
+            <span style={{ fontSize: "1rem", fontWeight: "bold" }}>
+              {region}
+            </span>
+          }
           key={region}
         >
           <div
@@ -153,7 +157,7 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
               />
               <Card
                 total={regionData[region].AccidentsWithInjuries}
-                text="# Accidents with Injuries"
+                text="Accidents with Injuries"
                 icon={<AlertOutlined />}
               />
             </S.CardHolder>
@@ -226,7 +230,7 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
                                     }
                                   </span>
                                   <span>
-                                    # Accidents with Injuries:{" "}
+                                    Accidents with Injuries:{" "}
                                     {
                                       regionData[region].operationGroups[
                                         groupKey

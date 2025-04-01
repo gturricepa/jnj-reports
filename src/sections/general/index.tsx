@@ -13,6 +13,8 @@ import { Select } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 // import { GeneralTable } from "./tableGeral";
 import { CollapseGeneral } from "./accordion";
+// import { GeneralTable } from "./tableGeral";
+import { CollapseGeneralRegion } from "./accordionRegion";
 
 export const General: React.FC = () => {
   const { filteredData, loading } = useFetchData<MainData>("maindata.xlsx");
@@ -105,11 +107,23 @@ export const General: React.FC = () => {
             </Select>
           </S.FiltersSearch>
 
+          {perspective === "country" ? (
+            <>
+              <CollapseGeneral data={filteredDataByOperatingGroupAndSector} />{" "}
+            </>
+          ) : (
+            <>
+              <CollapseGeneralRegion
+                data={filteredDataByOperatingGroupAndSector}
+              />
+            </>
+          )}
+
           <>
-            {/* <GeneralTable data={filteredDataByOperatingGroupAndSector} />
+            {/*
              */}
             {/* <GeneralTable data={filteredDataByOperatingGroupAndSector} /> */}
-            <CollapseGeneral data={filteredDataByOperatingGroupAndSector} />{" "}
+            {/* <GeneralTable data={filteredDataByOperatingGroupAndSector} /> */}
           </>
         </>
       ) : (

@@ -4,5 +4,5 @@ export const Holder = styled.h3`
   margin: 0;
   padding: 0;
   padding: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
 `;

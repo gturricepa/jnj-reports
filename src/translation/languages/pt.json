@@ -30,5 +30,12 @@
   "region": "região",
   "clickToChange": "Clique para mudar",
   "lastUpdate": "Ultima Atualização",
-  "pleaseOneCountry": "Por favor, selecione ao menos um país."
+  "pleaseOneCountry": "Por favor, selecione ao menos um país.",
+  "trainingStatistics": "Estatisticas do Treinamento",
+  "drivers": "Motoristas",
+  "trainingsRealized": "Treinamentos Realizados",
+  "fleetTrained": "Frota Treinada",
+  "trainingCompleted": "Treinamento Concluído",
+  "pending": "Pendente",
+  "noTraining": "Sem Treinamento"
 }

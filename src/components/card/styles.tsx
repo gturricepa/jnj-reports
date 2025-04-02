@@ -8,13 +8,13 @@ export const Holder = styled.div`
   justify-content: flex-start;
   align-items: center;
   border-radius: 15px;
-  width: 10.5rem;
+  width: 12rem;
   padding: 0.3rem;
   background-color: #ffffff;
   box-shadow: 0 2px 0px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   position: relative;
-  height: 4.8rem;
+  height: 5rem;
 
   &:hover {
     box-shadow: 0 2px px rgba(0, 0, 0, 0.2);

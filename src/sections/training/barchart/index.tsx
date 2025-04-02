@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { redPalete } from "../../../styles/theme";
 import * as S from "./styles";
-import { ChartTitle } from "../../../components/chartitle";
+import { useTranslation } from "react-i18next";
 
 interface TrainingSimpleBarChartProps {
   data: {
@@ -30,8 +30,10 @@ export const TrainingSimpleBarChart: React.FC<TrainingSimpleBarChartProps> = ({
   pendingCount,
   noTrainingCount,
 }) => {
+  const { t } = useTranslation();
   const cData = [
     {
+      name: t("trainingStatistics"),
       "Training Completed": trainingCompleteCount,
       Pending: pendingCount,
       "No training": noTrainingCount,
@@ -42,17 +44,29 @@ export const TrainingSimpleBarChart: React.FC<TrainingSimpleBarChartProps> = ({
 
   return (
     <S.ChartHolder>
-      <ChartTitle value="Trainnig Statistics" />
       <ResponsiveContainer width={700} height={250}>
         <BarChart data={cData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
-          <Tooltip formatter={(value) => formatValue(Number(value))} />
-          <Legend />
-          <Bar dataKey="Training Completed" fill={redPalete[0]} />
-          <Bar dataKey="Pending" fill={redPalete[1]} />
-          <Bar dataKey="No training" fill={redPalete[2]} />
+          <Tooltip
+            formatter={(value: number, name: string) => [
+              formatValue(value),
+              t(name),
+            ]}
+          />
+          <Legend formatter={(value) => t(value as string)} />
+          <Bar
+            dataKey="Training Completed"
+            fill={redPalete[0]}
+            name={t("trainingCompleted")}
+          />
+          <Bar dataKey="Pending" fill={redPalete[1]} name={t("pending")} />
+          <Bar
+            dataKey="No training"
+            fill={redPalete[2]}
+            name={t("noTraining")}
+          />
         </BarChart>
       </ResponsiveContainer>
     </S.ChartHolder>

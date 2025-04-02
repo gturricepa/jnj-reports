@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import * as S from "./styles";
+import { useTranslation } from "react-i18next";
 
 interface CardProps {
   icon?: ReactNode;
@@ -9,6 +10,7 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ total, text, icon, helper }) => {
+  const { t } = useTranslation();
   return (
     <S.Holder>
       {/* <S.Header> */}
@@ -18,7 +20,7 @@ export const Card: React.FC<CardProps> = ({ total, text, icon, helper }) => {
         {total}
         {helper}
       </S.Main>
-      <S.Text>{text}</S.Text>
+      <S.Text>{t(text)}</S.Text>
     </S.Holder>
   );
 };

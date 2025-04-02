@@ -19,12 +19,14 @@ import { CenterTitle } from "../../components/centerTitle";
 import { DownloadButton } from "../../components/card/downloadButton";
 import { downloadExcel } from "../../helper/downloadExcel";
 import { NoData } from "../../components/nodata";
+import { useTranslation } from "react-i18next";
 
 export const Training: React.FC = () => {
   const { filteredData, loading } = useFetchData<TrainingData>("training.xlsx");
   const perspective = useSelector((state: RootState) => state.user.perspective);
   const escope = useSelector((state: RootState) => state.user.Escope);
   const user = useSelector((state: RootState) => state.user);
+  const { t } = useTranslation();
 
   const [selectedOperatingGroups, setSelectedOperatingGroups] = React.useState<
     string[]
@@ -118,7 +120,7 @@ export const Training: React.FC = () => {
 
   return (
     <S.Holder>
-      <Title title="Training" />
+      <Title title="training" />
       {filteredData.length > 0 && (
         <>
           <S.Filters>
@@ -169,17 +171,18 @@ export const Training: React.FC = () => {
                   <Card
                     icon={<UsergroupAddOutlined />}
                     total={totalDrives}
-                    text={"Drivers"}
+                    text={"drivers"}
                   />
                   <Card
                     icon={<RiseOutlined />}
                     total={count2025}
-                    text={"Trainings Realized 2025"}
+                    // text={"Trainings Realized 2025"}
+                    text={`${t("trainingsRealized")} 2025`}
                   />
                   <Card
                     icon={<TrophyOutlined />}
                     total={+okPercetage.toFixed()}
-                    text={"Fleet Trained"}
+                    text={"fleetTrained"}
                     helper="%"
                   />
                 </S.CardHolder>
@@ -228,7 +231,7 @@ export const Training: React.FC = () => {
                           region
                         ).length
                       }
-                      text={"Drivers"}
+                      text={"drivers"}
                     />
 
                     <Card
@@ -246,7 +249,7 @@ export const Training: React.FC = () => {
                           region
                         ).length
                       }
-                      text={"Trainings Realized 2025"}
+                      text={`${t("trainingsRealized")} 2025`}
                     />
 
                     <Card
@@ -268,7 +271,7 @@ export const Training: React.FC = () => {
                             ).toFixed()
                           : 0
                       }
-                      text={"Fleet Trained"}
+                      text={"fleetTrained"}
                       helper="%"
                     />
                   </S.MapHolder>

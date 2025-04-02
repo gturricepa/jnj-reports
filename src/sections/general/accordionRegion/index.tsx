@@ -4,6 +4,7 @@ import { MainData } from "../../../types/MainData";
 import * as S from "./styles";
 import { Card } from "../../../components/card";
 import {
+  AimOutlined,
   AlertOutlined,
   CarOutlined,
   DashboardOutlined,
@@ -177,6 +178,14 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
                 total={regionData[region].AccidentsWithInjuries}
                 text="Accidents with Injuries"
                 icon={<AlertOutlined />}
+              />
+              <Card
+                total={(
+                  (regionData[region].AccidentCount * 1000000) /
+                  regionData[region].Miles
+                ).toFixed(2)}
+                text="Accumlated CPMM"
+                icon={<AimOutlined />}
               />
             </S.CardHolder>
             <S.ListHolder>

@@ -1,26 +1,24 @@
 import React, { useEffect } from "react";
-// import { AccidentData } from "../../types/Accident";
 import useFetchData from "../../hooks/useFetchData";
 import { LoadingIndicator } from "../../components/loading";
 import * as S from "./styles";
 import { Title } from "../../components/title";
-// import { MockSpace } from "../../components/mockspace";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
 import { MainData } from "../../types/MainData";
 import { NoData } from "../../components/nodata";
 import { Select } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
-// import { GeneralTable } from "./tableGeral";
 import { CollapseGeneral } from "./accordion";
-// import { GeneralTable } from "./tableGeral";
 import { CollapseGeneralRegion } from "./accordionRegion";
+import { CPMMBarChart } from "./cpmmbarChart";
+import { CPMMBarChartByRegion } from "./cpmmbarChartRegion";
 
 export const General: React.FC = () => {
   const { filteredData, loading } = useFetchData<MainData>("maindata.xlsx");
 
   const perspective = useSelector((state: RootState) => state.user.perspective);
-  // const escope = useSelector((state: RootState) => state.user.Escope);
+  const escope = useSelector((state: RootState) => state.user.Escope);
   const user = useSelector((state: RootState) => state.user);
 
   const [selectedOperatingGroups, setSelectedOperatingGroups] = React.useState<
@@ -56,13 +54,11 @@ export const General: React.FC = () => {
   const filteredDataByOperatingGroupAndSector =
     filterDataByOperatingGroupAndSector(filteredData);
 
-  // const filterDataByRegion = (region: string) => {
-  //   return filteredDataByOperatingGroupAndSector.filter(
-  //     (data) => data.Region && data.Region.trim() === region.trim()
-  //   );
-  // };
-
   if (loading) return <LoadingIndicator />;
+
+  const separeByRegion = (data: MainData[], region: string) => {
+    return data.filter((item) => item.Region === region);
+  };
 
   return (
     <S.Holder>
@@ -71,7 +67,6 @@ export const General: React.FC = () => {
         <>
           <S.FiltersSearch>
             <ArrowRightOutlined />
-
             <Select
               maxTagCount={"responsive"}
               mode="multiple"
@@ -87,7 +82,6 @@ export const General: React.FC = () => {
                 </Select.Option>
               ))}
             </Select>
-
             <Select
               maxTagCount={"responsive"}
               mode="multiple"
@@ -106,22 +100,35 @@ export const General: React.FC = () => {
           </S.FiltersSearch>
           {perspective === "country" ? (
             <>
-              <CollapseGeneral data={filteredDataByOperatingGroupAndSector} />{" "}
+              <CollapseGeneral data={filteredDataByOperatingGroupAndSector} />
+              <CPMMBarChart data={filteredDataByOperatingGroupAndSector} />
             </>
           ) : (
             <>
               <CollapseGeneralRegion
                 data={filteredDataByOperatingGroupAndSector}
               />
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {escope?.map((region) => (
+                  <>
+                    <CPMMBarChartByRegion
+                      data={separeByRegion(
+                        filteredDataByOperatingGroupAndSector,
+                        region
+                      )}
+                    />
+                  </>
+                ))}
+              </div>
             </>
           )}
-
-          <>
-            {/*
-             */}
-            {/* <GeneralTable data={filteredDataByOperatingGroupAndSector} /> */}
-            {/* <GeneralTable data={filteredDataByOperatingGroupAndSector} /> */}
-          </>
         </>
       ) : (
         <NoData />

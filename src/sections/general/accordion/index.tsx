@@ -6,6 +6,7 @@ import Flag from "react-world-flags";
 import * as S from "./styles";
 import { Card } from "../../../components/card";
 import {
+  AimOutlined,
   AlertOutlined,
   CarOutlined,
   DashboardOutlined,
@@ -161,6 +162,14 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                 total={countryData[country].AccidentsWithInjuries}
                 text="Accidents with Injuries"
                 icon={<UserOutlined />}
+              />
+              <Card
+                total={(
+                  (countryData[country].AccidentCount * 1000000) /
+                  countryData[country].Miles
+                ).toFixed(2)}
+                text="Accumlated CPMM"
+                icon={<AimOutlined />}
               />
             </S.CardHolder>
             <S.ListHolder>

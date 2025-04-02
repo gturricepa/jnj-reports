@@ -4,12 +4,13 @@ import { CalendarOutlined } from "@ant-design/icons";
 import * as S from "./styles";
 import * as XLSX from "xlsx";
 import { RangeTimeData } from "../../types/RageTime";
+import { useTranslation } from "react-i18next";
 
 export const RangeTime = () => {
   const [data, setData] = useState<RangeTimeData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const { t } = useTranslation();
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -42,7 +43,9 @@ export const RangeTime = () => {
   return (
     <S.Holder>
       <Tooltip
-        title={`Showing Accumulated Data  from ${data[0].From} - ${data[0].To}`}
+        title={`${t("showingAccumulatedDataFrom")} ${t(data[0].From)} ${t(
+          "-"
+        )} ${t(data[0].To)}`}
         placement="bottom"
       >
         <CalendarOutlined style={{ fontSize: "12px", cursor: "pointer" }} />

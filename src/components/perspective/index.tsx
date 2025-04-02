@@ -41,7 +41,7 @@ export const Perspective = () => {
             <>
               {t("CurrentPerspective")}:{" "}
               <span style={{ fontWeight: "bold" }}>
-                BY {t(userState.perspective).toUpperCase()}
+                {t(userState.perspective).toUpperCase()}
               </span>
               <br />
               {t("clickToChange")}

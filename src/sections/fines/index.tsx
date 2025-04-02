@@ -16,6 +16,7 @@ import { Select } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { ChartTitle } from "../../components/chartitle";
 import { DownloadButton } from "../../components/card/downloadButton";
+import { useTranslation } from "react-i18next";
 
 export const Fines: React.FC = () => {
   const { filteredData, loading } = useFetchData<FinesData>(
@@ -24,7 +25,7 @@ export const Fines: React.FC = () => {
   const perspective = useSelector((state: RootState) => state.user.perspective);
   const escope = useSelector((state: RootState) => state.user.Escope);
   const user = useSelector((state: RootState) => state.user);
-
+  const { t } = useTranslation();
   const [selectedOperatingGroups, setSelectedOperatingGroups] = React.useState<
     string[]
   >([]);
@@ -156,7 +157,7 @@ export const Fines: React.FC = () => {
       {user!.selectedCountry!.length > 0 &&
         perspective === "country" &&
         filteredData.length > 0 && (
-          <CenterTitle value="Fines by Classification" />
+          <CenterTitle value={t("finesByClassification")} />
         )}
       <S.Content>
         {}
@@ -197,7 +198,7 @@ export const Fines: React.FC = () => {
                   flexDirection: "column",
                 }}
               >
-                <CenterTitle value="Fines Classification by Region" />
+                <CenterTitle value={t("finesClassificationByRegion")} />
 
                 {escope!.map((region, index) => {
                   const filteredDataByRegion = filterDataByRegion(region);
@@ -224,7 +225,7 @@ export const Fines: React.FC = () => {
 
               <S.Divsion>
                 <div style={{ marginTop: "1rem" }}>
-                  <CenterTitle value="Distribution of Fines by Country/Region" />
+                  <CenterTitle value={t("finesbyClassification")} />
 
                   {escope!.map((region, index) => {
                     const filteredDataByRegion = filterDataByRegion(region);

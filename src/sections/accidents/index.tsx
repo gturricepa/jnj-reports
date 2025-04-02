@@ -15,6 +15,7 @@ import { Select } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { ChartTitle } from "../../components/chartitle";
 import { DownloadButton } from "../../components/card/downloadButton";
+import { useTranslation } from "react-i18next";
 
 export const Accidents: React.FC = () => {
   const { filteredData, loading } =
@@ -22,7 +23,7 @@ export const Accidents: React.FC = () => {
   const perspective = useSelector((state: RootState) => state.user.perspective);
   const escope = useSelector((state: RootState) => state.user.Escope);
   const user = useSelector((state: RootState) => state.user);
-
+  const { t } = useTranslation();
   const [selectedOperatingGroups, setSelectedOperatingGroups] = React.useState<
     string[]
   >([]);
@@ -132,7 +133,7 @@ export const Accidents: React.FC = () => {
       )}
 
       {user!.selectedCountry!.length > 0 && perspective === "country" && (
-        <CenterTitle value="Crashes by Classification" />
+        <CenterTitle value={t("crashesByClassification")} />
       )}
       <S.Content>
         {perspective === "country" ? (
@@ -162,7 +163,7 @@ export const Accidents: React.FC = () => {
         ) : (
           <>
             {user!.selectedCountry!.length > 0 && (
-              <CenterTitle value="Crashes Classification by Region" />
+              <CenterTitle value={t("crashesClassificationByRegion")} />
             )}{" "}
             {escope!.map((region, index) => {
               const filteredDataByRegion = filterDataByRegion(region);
@@ -185,7 +186,7 @@ export const Accidents: React.FC = () => {
               <>
                 <CenterTitle
                   space={true}
-                  value="Distribution of Crashes by Country/Region"
+                  value={t("distributionOfCrashesByCountry/Region")}
                 />
               </>
             )}{" "}

@@ -11,6 +11,7 @@ import {
   ForkOutlined,
 } from "@ant-design/icons";
 import { paleteColors } from "../../../styles/theme";
+import { useTranslation } from "react-i18next";
 
 const { Panel } = Collapse;
 
@@ -44,6 +45,7 @@ interface CollapseGeneralProps {
 export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
   data,
 }) => {
+  const { t } = useTranslation();
   const regionData = data.reduce<Record<string, RegionData>>((acc, item) => {
     const {
       Region,
@@ -161,22 +163,22 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
             <S.CardHolder>
               <Card
                 total={regionData[region].Miles}
-                text="Total Miles"
+                text="totalMiles"
                 icon={<DashboardOutlined />}
               />
               <Card
                 total={regionData[region].AccidentCount}
-                text="Total Accidents"
+                text="totalAccidents"
                 icon={<AlertOutlined />}
               />
               <Card
                 total={regionData[region].VehiclesCount}
-                text="Total Vehicles"
+                text="totalVehicles"
                 icon={<CarOutlined />}
               />
               <Card
                 total={regionData[region].AccidentsWithInjuries}
-                text="Accidents with Injuries"
+                text="accidentsWithInjuries"
                 icon={<AlertOutlined />}
               />
               <Card
@@ -184,7 +186,7 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
                   (regionData[region].AccidentCount * 1000000) /
                   regionData[region].Miles
                 ).toFixed(2)}
-                text="Accumlated CPMM"
+                text="accumulatedCPMM"
                 icon={<AimOutlined />}
               />
             </S.CardHolder>
@@ -197,35 +199,35 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
                         <Panel header={groupKey} key={groupKey}>
                           <S.ValueHolder>
                             <span>
-                              Total Miles:{" "}
+                              {t("totalMiles")}:{" "}
                               {
                                 regionData[region].operationGroups[groupKey]
                                   .Miles
                               }
                             </span>
                             <span>
-                              Total Accidents:{" "}
+                              {t("totalAccidents")}:{" "}
                               {
                                 regionData[region].operationGroups[groupKey]
                                   .AccidentCount
                               }
                             </span>
                             <span>
-                              Total Vehicles:{" "}
+                              {t("totalVehicles")}:{" "}
                               {
                                 regionData[region].operationGroups[groupKey]
                                   .VehiclesCount
                               }
                             </span>
                             <span>
-                              Accidents with Injuries:{" "}
+                              {t("accidentsWithInjuries")}:{" "}
                               {
                                 regionData[region].operationGroups[groupKey]
                                   .AccidentsWithInjuries
                               }
                             </span>
                             <span>
-                              Accumulated CPMM:{" "}
+                              {t("accumulatedCPMM")}:{" "}
                               {(
                                 (regionData[region].operationGroups[groupKey]
                                   .AccidentCount *

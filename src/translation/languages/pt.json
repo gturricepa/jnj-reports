@@ -48,5 +48,17 @@
   "cpmmNoData": "CPMM Sem Dados",
   "preventableCrashesByRegion": "Acidentes Evitáveis por Região",
   "preventableCPMMCrashesByRegion": "Acidentes CPMM Evitáveis por Região",
-  "actives": "Ativos"
+  "actives": "Ativos",
+  "totalMiles": "Total de Milhas",
+  "totalAccidents": "Total de Acidentes",
+  "totalVehicles": "Total de Veículos",
+  "accidentsWithInjuries": "Acidentes com Feridos",
+  "accumulatedCPMM": "CPMM Acumulado",
+  "miles": "Milhas",
+  "vehicles": "Veículos",
+  "CPMMacumulatedValues": "Valores Acumulados de CPMM",
+  "CPMMacumulatedValuesBYRegion": "Valores Acumulados de CPMM por Regiões",
+  "crashesByClassification": "Acidentes por Classificação",
+  "crashesClassificationByRegion": "Classificação de Acidentes por Região",
+  "distributionOfCrashesByCountry/Region": "Distribuição de Acidentes por País/Região"
 }

@@ -42,7 +42,7 @@ export const RangeTime = () => {
   return (
     <S.Holder>
       <Tooltip
-        title={`Accumulated data from ${data[0].From} - ${data[0].To}`}
+        title={`Showing Accumulated Data  from ${data[0].From} - ${data[0].To}`}
         placement="bottom"
       >
         <CalendarOutlined style={{ fontSize: "12px", cursor: "pointer" }} />

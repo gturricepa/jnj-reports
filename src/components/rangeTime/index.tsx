@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Tooltip } from "antd";
 import { CalendarOutlined } from "@ant-design/icons";
 import * as S from "./styles";

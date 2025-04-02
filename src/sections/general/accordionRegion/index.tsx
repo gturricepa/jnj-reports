@@ -224,6 +224,16 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
                                   .AccidentsWithInjuries
                               }
                             </span>
+                            <span>
+                              Accumulated CPMM:{" "}
+                              {(
+                                (regionData[region].operationGroups[groupKey]
+                                  .AccidentCount *
+                                  1000000) /
+                                regionData[region].operationGroups[groupKey]
+                                  .Miles
+                              ).toFixed(2)}
+                            </span>
                           </S.ValueHolder>
                           <Collapse style={{ backgroundColor: "white" }}>
                             {Object.keys(

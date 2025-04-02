@@ -3,7 +3,7 @@ const countryCodes: { [key: string]: string } = {
   Argentina: "AR",
   Chile: "CL",
   "Costa Rica": "CR",
-  "Republica Dominicana": "DO",
+  "Dominican Republic": "DO",
   Panama: "PA",
   Guatemala: "GT",
   Mexico: "MX",
@@ -13,7 +13,16 @@ const countryCodes: { [key: string]: string } = {
   "Puerto Rico NA": "PR",
   Colombia: "CO",
   Peru: "PE",
+  Ecuador: "EC",
+  Uruguay: "UY",
+  Venezuela: "VE",
 };
+
 export const getCountryCode = (countryName: string): string => {
-  return countryCodes[countryName];
+  const code = countryCodes[countryName];
+  if (code) {
+    return code;
+  } else {
+    throw new Error(`Country "${countryName}" not found.`);
+  }
 };

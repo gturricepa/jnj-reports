@@ -9,12 +9,15 @@ import { ErrorMsg } from "../errormsg";
 import { LoginOutlined } from "@ant-design/icons";
 export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState<string>("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    console.log(email);
+    console.log(password);
 
     try {
       const usersResponse = await fetch("/assets/users.xlsx");
@@ -22,9 +25,10 @@ export const LoginForm: React.FC = () => {
       const usersWorkbook = XLSX.read(usersArrayBuffer, { type: "array" });
       const usersWorksheet = usersWorkbook.Sheets[usersWorkbook.SheetNames[0]];
       const usersData: User[] = XLSX.utils.sheet_to_json(usersWorksheet);
+      console.log(usersData);
 
       const currentUser = usersData.find(
-        (user) => user.Name === email && user.Password === password
+        (user) => user.Name === email && user.Password === Number(password)
       );
 
       if (currentUser) {

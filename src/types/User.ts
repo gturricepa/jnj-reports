@@ -1,6 +1,6 @@
 export interface User {
   Name: string;
-  Password: string;
+  Password: number;
   Country: string;
   "Operating Group": string;
   Sector: string;

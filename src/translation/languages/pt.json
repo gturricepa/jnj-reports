@@ -26,7 +26,7 @@
   "NoData": "Nenhum Dado Disponível",
   "NoDataDesc": "Por favor, verifique seus filtros!",
   "CurrentPerspective": "Perspectiva Atual",
-  "country": "país",
+  "country": "País",
   "region": "região",
   "clickToChange": "Clique para mudar",
   "lastUpdate": "Ultima Atualização",
@@ -47,5 +47,6 @@
   "cpmmNotPreventable": "CPMM Não Evitável",
   "cpmmNoData": "CPMM Sem Dados",
   "preventableCrashesByRegion": "Acidentes Evitáveis por Região",
-  "preventableCPMMCrashesByRegion": "Acidentes CPMM Evitáveis por Região"
+  "preventableCPMMCrashesByRegion": "Acidentes CPMM Evitáveis por Região",
+  "actives": "Ativos"
 }

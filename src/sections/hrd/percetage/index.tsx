@@ -4,10 +4,11 @@ import { PercetageHRDData } from "../../../types/HRD";
 import * as XLSX from "xlsx";
 import Flag from "react-world-flags";
 import { getCountryCode } from "../../../components/country/helper";
+import { useTranslation } from "react-i18next";
 
 export const PercetageHrd: React.FC = () => {
   const [data, setData] = useState<PercetageHRDData[]>([]);
-
+  const { t } = useTranslation();
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("/assets/percetage_hrd.xlsx");
@@ -26,7 +27,7 @@ export const PercetageHrd: React.FC = () => {
       <S.Table>
         <thead>
           <tr>
-            <th>Country</th>
+            <th>{t("country")}</th>
             <th>Actives</th>
             <th>HRD</th>
             <th>%</th>

@@ -6,6 +6,7 @@ import { downloadExcel } from "../../../helper/downloadExcel";
 import { getCountryCode } from "../../../components/country/helper";
 import Flag from "react-world-flags";
 import { DownloadButton } from "../../../components/card/downloadButton";
+import { useTranslation } from "react-i18next";
 // import * as XLSX from "xlsx";
 
 interface TableHrdProps {
@@ -15,7 +16,7 @@ interface TableHrdProps {
 export const TableHrd: React.FC<TableHrdProps> = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
+  const { t } = useTranslation();
   if (data.length === 0) {
     return <NoData />;
   }
@@ -56,7 +57,7 @@ export const TableHrd: React.FC<TableHrdProps> = ({ data }) => {
           <tr>
             {/* <th>First Name</th> */}
             {/* <th>Last Name</th> */}
-            <th>Country</th>
+            <th>{t("country")}</th>
             <th>Corporate ID</th>
             <th>Operating Group</th>
             <th>Franchise</th>

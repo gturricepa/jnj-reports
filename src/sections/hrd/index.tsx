@@ -136,7 +136,7 @@ export const HRD: React.FC = () => {
               }}
             >
               {/* <HRDCard data={filteredDataByOperatingGroupAndSector} /> */}
-              <Card text="HRD Drivers" total={total} icon={<AlertOutlined />} />
+              <Card text="HRD" total={total} icon={<AlertOutlined />} />
               <BarChartHrd data={filteredDataByOperatingGroupAndSector} />
             </div>
           )}
@@ -151,7 +151,7 @@ export const HRD: React.FC = () => {
                 <CenterTitle value={region} />
                 {/* <HRDCard data={filterDataByRegion(region)} /> */}
                 <Card
-                  text="HRD Drivers"
+                  text="HRD"
                   total={filterDataByRegion(region).length}
                   icon={<AlertOutlined />}
                 />

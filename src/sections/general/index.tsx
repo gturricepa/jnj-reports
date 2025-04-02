@@ -64,8 +64,6 @@ export const General: React.FC = () => {
 
   if (loading) return <LoadingIndicator />;
 
-  console.log(filteredDataByOperatingGroupAndSector);
-
   return (
     <S.Holder>
       <Title title="general" />

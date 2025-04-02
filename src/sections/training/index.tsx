@@ -112,10 +112,6 @@ export const Training: React.FC = () => {
   };
 
   const filterByRegion = (data: TrainingData[], region: string) => {
-    console.log(
-      region,
-      data.filter((item) => item.Region === region)
-    );
     return data.filter((item) => item.Region === region);
   };
 

@@ -26,7 +26,6 @@ interface TrainingSimpleBarChartProps {
 }
 
 export const TrainingSimpleBarChart: React.FC<TrainingSimpleBarChartProps> = ({
-  data,
   trainingCompleteCount,
   pendingCount,
   noTrainingCount,
@@ -38,10 +37,6 @@ export const TrainingSimpleBarChart: React.FC<TrainingSimpleBarChartProps> = ({
       "No training": noTrainingCount,
     },
   ];
-
-  // console.log(trainingCompleteCount, pendingCount, noTrainingCount);
-  console.log("data", data);
-  console.log("cData", cData);
 
   const formatValue = (value: number) => value.toFixed(0);
 

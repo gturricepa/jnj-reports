@@ -16,16 +16,12 @@ export const LoginForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    console.log(email);
-    console.log(password);
-
     try {
       const usersResponse = await fetch("/assets/users.xlsx");
       const usersArrayBuffer = await usersResponse.arrayBuffer();
       const usersWorkbook = XLSX.read(usersArrayBuffer, { type: "array" });
       const usersWorksheet = usersWorkbook.Sheets[usersWorkbook.SheetNames[0]];
       const usersData: User[] = XLSX.utils.sheet_to_json(usersWorksheet);
-      console.log(usersData);
 
       const currentUser = usersData.find(
         (user) => user.Name === email && user.Password === Number(password)

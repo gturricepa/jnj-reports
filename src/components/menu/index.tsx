@@ -9,6 +9,7 @@ import { RootState } from "../../store/store";
 import { Country } from "../country";
 import { Escope } from "../escope";
 import logo from "../../assets/jnj2.png";
+import { RangeTime } from "../rangeTime";
 export const Menu: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export const Menu: React.FC = () => {
 
       <div>
         {user.perspective === "country" ? <Country /> : <Escope />}
-
+        <RangeTime />
         <p>
           {t("welcome")}, {user.Nick}
         </p>

@@ -5,7 +5,7 @@ export const Table = styled.table`
   width: 100%;
   border-radius: 5px;
   border-collapse: collapse;
-  min-height: 27rem;
+  max-height: 27rem;
   thead {
     /* background-color: #ee1100; */
     background-color: ${paleteColors[0]};
@@ -46,6 +46,7 @@ export const Table = styled.table`
       font-size: 13px;
       padding: 0;
       margin: 0;
+      padding: 0.8rem;
     }
   }
 `;

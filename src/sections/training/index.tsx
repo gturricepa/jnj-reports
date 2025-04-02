@@ -18,6 +18,7 @@ import { Select } from "antd";
 import { CenterTitle } from "../../components/centerTitle";
 import { DownloadButton } from "../../components/card/downloadButton";
 import { downloadExcel } from "../../helper/downloadExcel";
+import { NoData } from "../../components/nodata";
 
 export const Training: React.FC = () => {
   const { filteredData, loading } = useFetchData<TrainingData>("training.xlsx");
@@ -280,6 +281,11 @@ export const Training: React.FC = () => {
       {filteredData.length > 0 ? (
         <DownloadButton onClick={handleDownload} />
       ) : null}
+      {filteredData.length === 0 && (
+        <>
+          <NoData />
+        </>
+      )}
     </S.Holder>
   );
 };

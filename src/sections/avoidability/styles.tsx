@@ -20,4 +20,5 @@ export const PizzaChart = styled.div`
   width: 100%;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: 1rem;
 `;

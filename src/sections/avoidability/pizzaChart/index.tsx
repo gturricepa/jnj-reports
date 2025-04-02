@@ -13,6 +13,7 @@ import { PreventableData } from "../../../types/Preventable";
 import { redPalete } from "../../../styles/theme";
 import * as S from "./styles";
 import { ChartTitle } from "../../../components/chartitle";
+import { useTranslation } from "react-i18next";
 
 interface PreventableBarChartProps {
   data: PreventableData[];
@@ -23,12 +24,17 @@ export const PreventableSimpleBarChart: React.FC<PreventableBarChartProps> = ({
   data,
   year,
 }) => {
+  const { t } = useTranslation();
+
   const chartData = [
     {
       name: "Total",
-      Yes: data.reduce((acc, item) => acc + Number(item.Yes), 0),
-      No: data.reduce((acc, item) => acc + Number(item.No), 0),
-      "No Data": data.reduce((acc, item) => acc + Number(item["No Data"]), 0),
+      [t("yes")]: data.reduce((acc, item) => acc + Number(item.Yes), 0),
+      [t("no")]: data.reduce((acc, item) => acc + Number(item.No), 0),
+      [t("noData")]: data.reduce(
+        (acc, item) => acc + Number(item["No Data"]),
+        0
+      ),
     },
   ];
 
@@ -45,9 +51,9 @@ export const PreventableSimpleBarChart: React.FC<PreventableBarChartProps> = ({
           <Tooltip formatter={(value) => formatValue(Number(value))} />
           <Legend />
 
-          <Bar dataKey="Yes" fill={redPalete[0]} />
-          <Bar dataKey="No" fill={redPalete[1]} />
-          <Bar dataKey="No Data" fill={redPalete[2]} />
+          <Bar dataKey={t("yes")} fill={redPalete[0]} />
+          <Bar dataKey={t("no")} fill={redPalete[1]} />
+          <Bar dataKey={t("noData")} fill={redPalete[2]} />
         </BarChart>
       </ResponsiveContainer>
     </S.ChartHolder>

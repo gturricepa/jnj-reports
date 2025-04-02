@@ -13,6 +13,7 @@ import * as S from "./styles";
 import { PreventableData } from "../../../types/Preventable";
 import { redPalete } from "../../../styles/theme";
 import { ChartTitle } from "../../../components/chartitle";
+import { useTranslation } from "react-i18next";
 
 interface PreventableBarChartProps {
   data: PreventableData[];
@@ -23,6 +24,8 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
   data,
   year,
 }) => {
+  const { t } = useTranslation();
+
   const totals = data.reduce(
     (acc, item) => {
       acc.totalMiles += Number(item["Miles"]);
@@ -53,9 +56,9 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
   const chartData = [
     {
       name: "Total",
-      "CPMM Preventable": preventableValue,
-      "CPMM Not Preventable": notPreventableValue,
-      "CPMM No Data": noDataValue,
+      [t("cpmmPreventable")]: preventableValue,
+      [t("cpmmNotPreventable")]: notPreventableValue,
+      [t("cpmmNoData")]: noDataValue,
     },
   ];
 
@@ -63,7 +66,8 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
     name: chartData[0].name,
     ...Object.fromEntries(
       Object.entries(chartData[0]).filter(
-        ([key, value]) => key === "name" || Number(value) > 0
+        ([key, value]) =>
+          key === "name" || (typeof value === "number" && value > 0)
       )
     ),
   };
@@ -87,14 +91,14 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
             </span>
           ))}
         </Legend>
-        {legendKeys.includes("CPMM Preventable") && (
-          <Bar dataKey="CPMM Preventable" fill={redPalete[0]} />
+        {legendKeys.includes(t("cpmmPreventable")) && (
+          <Bar dataKey={t("cpmmPreventable")} fill={redPalete[0]} />
         )}
-        {legendKeys.includes("CPMM Not Preventable") && (
-          <Bar dataKey="CPMM Not Preventable" fill={redPalete[1]} />
+        {legendKeys.includes(t("cpmmNotPreventable")) && (
+          <Bar dataKey={t("cpmmNotPreventable")} fill={redPalete[1]} />
         )}
-        {legendKeys.includes("CPMM No Data") && (
-          <Bar dataKey="CPMM No Data" fill={redPalete[2]} />
+        {legendKeys.includes(t("cpmmNoData")) && (
+          <Bar dataKey={t("cpmmNoData")} fill={redPalete[2]} />
         )}
       </BarChart>
     </S.ChartHolder>

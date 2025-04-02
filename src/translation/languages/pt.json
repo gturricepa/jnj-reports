@@ -37,5 +37,15 @@
   "fleetTrained": "Frota Treinada",
   "trainingCompleted": "Treinamento Concluído",
   "pending": "Pendente",
-  "noTraining": "Sem Treinamento"
+  "noTraining": "Sem Treinamento",
+  "preventableCrashes": "Acidentes Evitáveis",
+  "PreventableCPMMCrashes": "CPMM Acidentes Evitáveis",
+  "yes": "Sim",
+  "no": "Não",
+  "noData": "Sem Dados",
+  "cpmmPreventable": "CPMM Evitável",
+  "cpmmNotPreventable": "CPMM Não Evitável",
+  "cpmmNoData": "CPMM Sem Dados",
+  "preventableCrashesByRegion": "Acidentes Evitáveis por Região",
+  "preventableCPMMCrashesByRegion": "Acidentes CPMM Evitáveis por Região"
 }

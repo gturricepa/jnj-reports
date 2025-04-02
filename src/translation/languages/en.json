@@ -37,5 +37,15 @@
   "fleetTrained": "Fleet Trained",
   "trainingCompleted": "Training Completed",
   "pending": "Pending",
-  "noTraining": "No Training"
+  "noTraining": "No Training",
+  "preventableCrashes": "Preventable Crashses",
+  "PreventableCPMMCrashses": "Preventable CPMM Crashses",
+  "yes": "Yes",
+  "no": "No",
+  "noData": "No Data",
+  "cpmmPreventable": "CPMM Preventable",
+  "cpmmNotPreventable": "CPMM Not Preventable",
+  "cpmmNoData": "CPMM No Data",
+  "preventableCrashsesByRegion": "Preventable Crashses by Region",
+  "preventableCPMMCrashsesByRegion": "Preventable CPMM Crashses by Region"
 }

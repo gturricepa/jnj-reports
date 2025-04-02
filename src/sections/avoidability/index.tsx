@@ -16,6 +16,7 @@ import { GroupedBarChart } from "./biaxialbarchart";
 import { PreventableBarChartByRegion } from "./barpreventable";
 import { downloadExcel } from "../../helper/downloadExcel";
 import { DownloadButton } from "../../components/card/downloadButton";
+import { useTranslation } from "react-i18next";
 
 // import { PreventablePizzaChart } from "./pizzaChart";
 
@@ -28,6 +29,8 @@ export const Avoidability: React.FC = () => {
   const [selectedSectors, setSelectedSectors] = React.useState<string[]>([]);
   const perspective = useSelector((state: RootState) => state.user.perspective);
   const user = useSelector((state: RootState) => state.user);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSelectedOperatingGroups([]);
@@ -91,7 +94,7 @@ export const Avoidability: React.FC = () => {
 
   return (
     <S.Holder>
-      <Title title="Preventable" />
+      <Title title="avoidability" />
       {filteredDataByFilters.length ? (
         <>
           <S.Filters>
@@ -129,7 +132,7 @@ export const Avoidability: React.FC = () => {
           </S.Filters>
           {perspective === "country" ? (
             <>
-              <CenterTitle space={false} value="Preventable Crashses" />
+              <CenterTitle space={false} value={t("preventableCrashes")} />
 
               <S.PizzaChart>
                 {last.length > 0 && (
@@ -139,7 +142,7 @@ export const Avoidability: React.FC = () => {
                   <PreventableSimpleBarChart data={actual} year={years[1]} />
                 )}
               </S.PizzaChart>
-              <CenterTitle space={true} value="Preventable CPMM Crashses" />
+              <CenterTitle space={true} value={t("PreventableCPMMCrashes")} />
               <S.PizzaChart>
                 {last.length > 0 && (
                   <PreventableBarChart data={last} year={years[0]} />
@@ -153,7 +156,7 @@ export const Avoidability: React.FC = () => {
             <>
               <CenterTitle
                 space={false}
-                value="Preventable Crashses by Region"
+                value={t("preventableCrashesByRegion")}
               />
 
               <S.PizzaChart>
@@ -166,7 +169,7 @@ export const Avoidability: React.FC = () => {
               </S.PizzaChart>
               <CenterTitle
                 space={true}
-                value="Preventable CPMM Crashses by Region"
+                value={t("preventableCPMMCrashesByRegion")}
               />
 
               <S.PizzaChart>

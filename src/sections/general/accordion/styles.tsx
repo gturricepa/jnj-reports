@@ -53,7 +53,7 @@ export const ValueHolder = styled.div`
     border: 1px solid lightgray;
     display: flex;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 1rem;
     margin-bottom: 1rem;
   }

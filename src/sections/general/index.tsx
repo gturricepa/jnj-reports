@@ -106,7 +106,6 @@ export const General: React.FC = () => {
               ))}
             </Select>
           </S.FiltersSearch>
-
           {perspective === "country" ? (
             <>
               <CollapseGeneral data={filteredDataByOperatingGroupAndSector} />{" "}

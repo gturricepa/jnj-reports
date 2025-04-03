@@ -9,15 +9,20 @@ interface CardProps {
   helper?: string;
 }
 
+const formatNumberWithCommas = (number: number | string) => {
+  return typeof number === "string"
+    ? number.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    : number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 export const Card: React.FC<CardProps> = ({ total, text, icon, helper }) => {
   const { t } = useTranslation();
+
   return (
     <S.Holder>
-      {/* <S.Header> */}
       <S.Icon>{icon}</S.Icon>
-      {/* </S.Header> */}
       <S.Main>
-        {total}
+        {formatNumberWithCommas(total)}
         {helper}
       </S.Main>
       <S.Text>{t(text)}</S.Text>

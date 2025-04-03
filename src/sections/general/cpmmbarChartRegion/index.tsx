@@ -1,19 +1,20 @@
 import React from "react";
 import {
-  BarChart,
+  ComposedChart,
   Bar,
   XAxis,
   YAxis,
   Tooltip,
   CartesianGrid,
   Cell,
+  Line,
 } from "recharts";
 import { MainData } from "../../../types/MainData";
 import { redPalete } from "../../../styles/theme";
 import * as S from "./styles";
 import { ChartTitle } from "../../../components/chartitle";
 import { useTranslation } from "react-i18next";
-
+import { paleteColors } from "../../../styles/theme";
 interface GroupedData {
   totalAccidents: number;
   totalMiles: number;
@@ -22,6 +23,7 @@ interface GroupedData {
 interface ChartData {
   name: string;
   CPMM: number;
+  Goal: number;
 }
 
 export const CPMMBarChartByRegion: React.FC<{ data: MainData[] }> = ({
@@ -52,6 +54,7 @@ export const CPMMBarChartByRegion: React.FC<{ data: MainData[] }> = ({
           values.totalMiles > 0
             ? (values.totalAccidents * 1000000) / values.totalMiles
             : 0,
+        Goal: region === "NA" ? 4.74 : 10.43,
       }))
       .filter((item) => item.CPMM > 0);
   };
@@ -61,7 +64,7 @@ export const CPMMBarChartByRegion: React.FC<{ data: MainData[] }> = ({
   return (
     <S.Holder>
       <ChartTitle value={t("CPMMacumulatedValuesBYRegion")} />
-      <BarChart width={400} height={200} data={chartData}>
+      <ComposedChart width={400} height={200} data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
@@ -74,7 +77,14 @@ export const CPMMBarChartByRegion: React.FC<{ data: MainData[] }> = ({
             />
           ))}
         </Bar>
-      </BarChart>
+        <Line
+          type="monotone"
+          dataKey="Goal"
+          stroke={paleteColors[2]}
+          strokeWidth={2}
+          dot={false}
+        />
+      </ComposedChart>
     </S.Holder>
   );
 };

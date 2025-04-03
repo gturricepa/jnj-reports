@@ -1,19 +1,20 @@
 import React from "react";
 import {
-  BarChart,
   Bar,
   XAxis,
   YAxis,
   Tooltip,
-  //   Legend,
   CartesianGrid,
   Cell,
+  Line,
+  ComposedChart,
 } from "recharts";
 import { MainData } from "../../../types/MainData";
 import { redPalete } from "../../../styles/theme";
 import * as S from "./styles";
 import { ChartTitle } from "../../../components/chartitle";
 import { useTranslation } from "react-i18next";
+import { paleteColors } from "../../../styles/theme";
 interface GroupedData {
   totalAccidents: number;
   totalMiles: number;
@@ -22,10 +23,12 @@ interface GroupedData {
 interface ChartData {
   name: string;
   CPMM: number;
+  Goal: number;
 }
 
 export const CPMMBarChart: React.FC<{ data: MainData[] }> = ({ data }) => {
   const { t } = useTranslation();
+
   const calculateCPMM = (data: MainData[]): ChartData[] => {
     const groupedData: Record<string, GroupedData> = {};
 
@@ -43,29 +46,48 @@ export const CPMMBarChart: React.FC<{ data: MainData[] }> = ({ data }) => {
     });
 
     return Object.entries(groupedData)
-      .map(([country, values]) => ({
-        name: country,
-        CPMM:
-          values.totalMiles > 0
-            ? (values.totalAccidents * 1000000) / values.totalMiles
-            : 0,
-      }))
+      .map(([country, values]) => {
+        const goal =
+          data.find((item) => item.Country === country)?.Region === "NA"
+            ? 4.74
+            : 10.43;
+
+        return {
+          name: country,
+          CPMM:
+            values.totalMiles > 0
+              ? (values.totalAccidents * 1000000) / values.totalMiles
+              : 0,
+          Goal: goal,
+        };
+      })
       .filter((item) => item.CPMM > 0);
   };
 
   const chartData = calculateCPMM(data);
 
-  //   if (data.length >= 0) return <></>;
+  const organizeData = (data: ChartData[]) => {
+    data.sort((a, b) => {
+      if (a.name === "United States of America") return -1;
+      if (b.name === "United States of America") return 1;
+
+      if (a.name === "Canada") return -1;
+      if (b.name === "Canada") return 1;
+
+      return 0;
+    });
+  };
+
+  organizeData(chartData);
 
   return (
     <S.Holder>
       <ChartTitle value={t("CPMMacumulatedValues")} />
-      <BarChart width={500} height={250} data={chartData}>
+      <ComposedChart width={600} height={250} data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip formatter={(value: number) => value.toFixed(2)} />
-        {/* <Legend /> */}
         <Bar dataKey="CPMM">
           {chartData.map((_entry, index) => (
             <Cell
@@ -74,7 +96,14 @@ export const CPMMBarChart: React.FC<{ data: MainData[] }> = ({ data }) => {
             />
           ))}
         </Bar>
-      </BarChart>
+        <Line
+          type="monotone"
+          dataKey="Goal"
+          stroke={paleteColors[2]}
+          strokeWidth={1}
+          dot={false}
+        />
+      </ComposedChart>
     </S.Holder>
   );
 };

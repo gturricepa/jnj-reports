@@ -230,7 +230,7 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                               <Panel header={sectorKey} key={sectorKey}>
                                 <S.ValueHolder>
                                   <span>
-                                    Miles:{" "}
+                                    {t("miles")}:{" "}
                                     {
                                       countryData[country].operationGroups[
                                         groupKey
@@ -238,7 +238,7 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                                     }
                                   </span>
                                   <span>
-                                    Accidents:{" "}
+                                    {t("accidents")}:{" "}
                                     {
                                       countryData[country].operationGroups[
                                         groupKey
@@ -246,7 +246,7 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                                     }
                                   </span>
                                   <span>
-                                    Vehicles:{" "}
+                                    {t("vehicles")}:{" "}
                                     {
                                       countryData[country].operationGroups[
                                         groupKey
@@ -254,7 +254,7 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                                     }
                                   </span>
                                   <span>
-                                    Accidents with Injuries:{" "}
+                                    {t("accidentsWithInjuries")}:{" "}
                                     {
                                       countryData[country].operationGroups[
                                         groupKey

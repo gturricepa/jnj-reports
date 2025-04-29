@@ -118,6 +118,18 @@ export const ComplianceTable: React.FC<TableData> = ({ data }) => {
 
     downloadExcel(currentItems, columnsToDownload, "compliance.xlsx");
   };
+  const language = useSelector((state: RootState) => state.language.language);
+
+  const formatDate = (value: string, language: string) => {
+    if (typeof value === "undefined") return;
+    if (language === "en") return value;
+    const parts = value.split("/");
+    if (parts.length !== 3) return;
+    const [mes, dia, ano] = parts;
+    if (!mes || !dia || !ano) return;
+
+    return `${dia.padStart(2, "0")}/${mes.padStart(2, "0")}/${ano}`;
+  };
 
   return (
     <>
@@ -251,22 +263,36 @@ export const ComplianceTable: React.FC<TableData> = ({ data }) => {
                     />
                   )}
                 </td>
-                <td>{item["Assigned date"]}</td>
-                <td>{item["Data Privacy Policy"]}</td>
+                <td>{formatDate(item["Assigned date"], language)}</td>
+                <td>{formatDate(item["Data Privacy Policy"], language)}</td>
+
                 {selectedCountry?.includes("Canada") && (
-                  <td>{item["Canadian / New Driver & Manager Orientation"]}</td>
-                )}{" "}
-                {selectedCountry?.includes("United States of America") ? (
-                  <td>{item["MVR Release Form"]}</td>
-                ) : null}{" "}
-                <td>{item["SAFE FLEET Policy Acceptance"]}</td>
-                <td>{item["Pledge"]}</td>
-                {allowedToShowLatamAssessment && (
-                  <td>{item["Driver Assessment LATAM 2025"]}</td>
+                  <td>
+                    {formatDate(
+                      item["Canadian / New Driver & Manager Orientation"],
+                      language
+                    )}
+                  </td>
                 )}
-                <td>{item["Manager Pledge"]}</td>
-                <td>{item["Academy"]}</td>
-                <td>{item["Academy2"]}</td>
+
+                {selectedCountry?.includes("United States of America") ? (
+                  <td>{formatDate(item["MVR Release Form"], language)}</td>
+                ) : null}
+
+                <td>
+                  {formatDate(item["SAFE FLEET Policy Acceptance"], language)}
+                </td>
+                <td>{formatDate(item["Pledge"], language)}</td>
+
+                {allowedToShowLatamAssessment && (
+                  <td>
+                    {formatDate(item["Driver Assessment LATAM 2025"], language)}
+                  </td>
+                )}
+
+                <td>{formatDate(item["Manager Pledge"], language)}</td>
+                <td>{formatDate(item["Academy"], language)}</td>
+                <td>{formatDate(item["Academy2"], language)}</td>
               </tr>
             ))}
           </tbody>

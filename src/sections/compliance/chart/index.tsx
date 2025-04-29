@@ -2,6 +2,7 @@ import React from "react";
 import { PieChart, Pie, Cell, Legend, Tooltip } from "recharts";
 import { ComplianceData } from "../types";
 import { paleteColors, redPalete } from "../../../styles/theme";
+import { ChartTitle } from "../../../components/chartitle";
 
 interface ComplianceChartByRegionProps {
   data: ComplianceData[];
@@ -44,8 +45,8 @@ export const ComplianceChartByRegion: React.FC<
         if (total === 0) return null;
 
         const chartData = [
-          { name: "Approved", value: completeCount },
-          { name: "Reproved", value: incompleteCount },
+          { name: "Complete", value: completeCount },
+          { name: "Incomoplete", value: incompleteCount },
         ];
 
         return (
@@ -55,9 +56,11 @@ export const ComplianceChartByRegion: React.FC<
               textAlign: "center",
               justifyContent: "center",
               alignItems: "center",
+              marginTop: "1rem",
             }}
           >
-            <h3>{region}</h3>
+            <ChartTitle value={region} />
+            {/* <h3></h3> */}
             <PieChart width={500} height={300}>
               <Pie
                 data={chartData}

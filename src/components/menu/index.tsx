@@ -42,6 +42,7 @@ export const Menu: React.FC = () => {
       <h4 onClick={() => handleScroll("hrd")}>{t("HRD")}</h4>
       <h4 onClick={() => handleScroll("avoidability")}>{t("avoidability")}</h4>
       <h4 onClick={() => handleScroll("training")}>{t("training")}</h4>
+      <h4 onClick={() => handleScroll("compliance")}>Compliance</h4>
 
       <div>
         {user.perspective === "country" ? <Country /> : <Escope />}

@@ -10,7 +10,7 @@ import {
   DashboardOutlined,
   ForkOutlined,
 } from "@ant-design/icons";
-import { paleteColors } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
 import { useTranslation } from "react-i18next";
 
 const { Panel } = Collapse;
@@ -137,14 +137,14 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
                 style={{
                   fontSize: "1.2rem",
                   marginRight: "1rem",
-                  color: paleteColors[2],
+                  color: chartPalete[0],
                 }}
               />
               <span
                 style={{
                   fontSize: "1rem",
                   fontWeight: "bold",
-                  color: paleteColors[2],
+                  color: chartPalete[0],
                 }}
               >
                 {region}

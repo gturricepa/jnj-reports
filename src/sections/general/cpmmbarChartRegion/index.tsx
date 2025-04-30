@@ -10,11 +10,10 @@ import {
   Line,
 } from "recharts";
 import { MainData } from "../../../types/MainData";
-import { redPalete } from "../../../styles/theme";
 import * as S from "./styles";
 import { ChartTitle } from "../../../components/chartitle";
 import { useTranslation } from "react-i18next";
-import { paleteColors } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
 interface GroupedData {
   totalAccidents: number;
   totalMiles: number;
@@ -73,14 +72,14 @@ export const CPMMBarChartByRegion: React.FC<{ data: MainData[] }> = ({
           {chartData.map((_entry, index) => (
             <Cell
               key={`cell-${index}`}
-              fill={redPalete[index % redPalete.length]}
+              fill={chartPalete[index % chartPalete.length]}
             />
           ))}
         </Bar>
         <Line
           type="monotone"
           dataKey="Goal"
-          stroke={paleteColors[2]}
+          stroke={chartPalete[2]}
           strokeWidth={2}
           dot={false}
         />

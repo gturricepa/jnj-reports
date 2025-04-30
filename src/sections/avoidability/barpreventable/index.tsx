@@ -10,7 +10,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import { PreventableData } from "../../../types/Preventable";
-import { redPalete } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
 import { ChartTitle } from "../../../components/chartitle";
 import * as S from "./styles";
 import { useTranslation } from "react-i18next";
@@ -61,9 +61,9 @@ export const PreventableBarChartByRegion: React.FC<
         <Tooltip formatter={(value) => formatValue(Number(value))} />
         <Legend />
 
-        <Bar dataKey={t("yes")} fill={redPalete[0]} />
-        <Bar dataKey={t("no")} fill={redPalete[1]} />
-        <Bar dataKey={t("noData")} fill={redPalete[2]} />
+        <Bar dataKey={t("yes")} fill={chartPalete[0]} />
+        <Bar dataKey={t("no")} fill={chartPalete[1]} />
+        <Bar dataKey={t("noData")} fill={chartPalete[2]} />
       </BarChart>
     </S.ChartHolder>
   );

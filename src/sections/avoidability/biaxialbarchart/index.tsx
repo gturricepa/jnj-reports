@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import * as S from "./styles";
 import { PreventableData } from "../../../types/Preventable";
-import { redPalete } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
 import { ChartTitle } from "../../../components/chartitle";
 import { useTranslation } from "react-i18next";
 
@@ -69,9 +69,9 @@ export const GroupedBarChart: React.FC<PreventableBarChartProps> = ({
         <Tooltip formatter={(value) => formatValue(Number(value))} />
         <Legend />
 
-        <Bar dataKey={t("cpmmPreventable")} fill={redPalete[0]} />
-        <Bar dataKey={t("cpmmNotPreventable")} fill={redPalete[1]} />
-        <Bar dataKey={t("cpmmNoData")} fill={redPalete[2]} />
+        <Bar dataKey={t("cpmmPreventable")} fill={chartPalete[0]} />
+        <Bar dataKey={t("cpmmNotPreventable")} fill={chartPalete[1]} />
+        <Bar dataKey={t("cpmmNoData")} fill={chartPalete[2]} />
       </BarChart>
     </S.ChartHolder>
   );

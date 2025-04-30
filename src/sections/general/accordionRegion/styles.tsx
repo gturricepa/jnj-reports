@@ -50,10 +50,10 @@ export const ValueHolder = styled.div`
     margin: 0;
     width: 10rem;
     padding: 0;
-    border: 1px solid lightgray;
+    border: 2px solid black;
     display: flex;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 1rem;
     margin-bottom: 1rem;
   }

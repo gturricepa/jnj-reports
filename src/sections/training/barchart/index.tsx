@@ -9,7 +9,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
-import { redPalete } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
 import * as S from "./styles";
 import { useTranslation } from "react-i18next";
 
@@ -58,13 +58,13 @@ export const TrainingSimpleBarChart: React.FC<TrainingSimpleBarChartProps> = ({
           <Legend formatter={(value) => t(value as string)} />
           <Bar
             dataKey="Training Completed"
-            fill={redPalete[0]}
+            fill={chartPalete[0]}
             name={t("trainingCompleted")}
           />
-          <Bar dataKey="Pending" fill={redPalete[1]} name={t("pending")} />
+          <Bar dataKey="Pending" fill={chartPalete[1]} name={t("pending")} />
           <Bar
             dataKey="No training"
-            fill={redPalete[2]}
+            fill={chartPalete[2]}
             name={t("noTraining")}
           />
         </BarChart>

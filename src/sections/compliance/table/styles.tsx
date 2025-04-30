@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { paleteColors } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
 
 export const Table = styled.table`
   width: 100%;
@@ -9,7 +9,7 @@ export const Table = styled.table`
   margin-top: 1rem;
   thead {
     /* background-color: #ee1100; */
-    background-color: ${paleteColors[0]};
+    background-color: ${chartPalete[0]};
     color: white;
     font-size: 14px;
 
@@ -67,7 +67,7 @@ export const PaginationButton = styled.button`
   border-radius: 5px;
   margin-bottom: 2rem;
   /* background-color: #ff0000; */
-  background-color: ${paleteColors[1]};
+  background-color: ${chartPalete[0]};
 
   color: white;
   cursor: pointer;
@@ -76,12 +76,12 @@ export const PaginationButton = styled.button`
 
   &:hover {
     /* background-color: #b30000; */
-    background-color: ${paleteColors[0]};
+    background-color: ${chartPalete[1]};
   }
 
   &:disabled {
     /* background-color: #ab1818; */
-    background-color: ${paleteColors[0]};
+    background-color: ${chartPalete[1]};
 
     cursor: not-allowed;
   }

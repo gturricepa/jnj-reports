@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { paleteColors } from "../../styles/theme";
+import { chartPalete } from "../../styles/theme";
 export const Title = styled.h2`
   display: flex;
   width: 100%;
   font-weight: 400;
   /* border-bottom: 1px solid ${(props) => props.theme.colors.red}; */
   /* color: ${(props) => props.theme.colors.red}; */
-  border-bottom: 1px solid ${paleteColors[0]};
-  color: ${paleteColors[0]};
+  border-bottom: 1px solid ${chartPalete[0]};
+  color: ${chartPalete[0]};
   font-size: 1.5rem;
   padding: 0;
   margin: 0;

@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { paleteColors } from "../../styles/theme";
+import { chartPalete } from "../../styles/theme";
 const appearAnimation = keyframes`
   0% {
     opacity: 0;
@@ -22,7 +22,7 @@ export const Holder = styled.section`
   button {
     padding: 0.5rem;
     /* background-color: #ee1100; */
-    background-color: ${paleteColors[1]};
+    background-color: ${chartPalete[0]};
 
     color: white;
     border: none;
@@ -34,7 +34,7 @@ export const Holder = styled.section`
 
     &:hover {
       /* background-color: #b10000; */
-      background-color: ${paleteColors[0]};
+      background-color: ${chartPalete[1]};
     }
   }
 `;

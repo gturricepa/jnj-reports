@@ -1,7 +1,7 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { AccidentData } from "../../../types/Accident";
-import { redPalete } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
 
 interface AvoidableChartProps {
   data: AccidentData[];
@@ -59,7 +59,7 @@ const AvoidableChart: React.FC<AvoidableChartProps> = ({ data, title }) => {
           {chartData.map((_entry, index) => (
             <Cell
               key={`cell-${index}`}
-              fill={redPalete[index % redPalete.length]}
+              fill={chartPalete[index % chartPalete.length]}
             />
           ))}
         </Pie>

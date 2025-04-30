@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { paleteColors } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
 export const Holder = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.2rem;
-  background-color: ${paleteColors[2]};
+  background-color: ${chartPalete[0]};
   color: white;
   border: none;
   border-radius: 4px;
@@ -16,6 +16,6 @@ export const Holder = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${paleteColors[0]};
+    background-color: ${chartPalete[1]};
   }
 `;

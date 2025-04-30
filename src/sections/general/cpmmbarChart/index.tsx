@@ -10,11 +10,10 @@ import {
   ComposedChart,
 } from "recharts";
 import { MainData } from "../../../types/MainData";
-import { redPalete } from "../../../styles/theme";
 import * as S from "./styles";
 import { ChartTitle } from "../../../components/chartitle";
 import { useTranslation } from "react-i18next";
-import { paleteColors } from "../../../styles/theme";
+import { chartPalete, paleteColors } from "../../../styles/theme";
 interface GroupedData {
   totalAccidents: number;
   totalMiles: number;
@@ -92,7 +91,7 @@ export const CPMMBarChart: React.FC<{ data: MainData[] }> = ({ data }) => {
           {chartData.map((_entry, index) => (
             <Cell
               key={`cell-${index}`}
-              fill={redPalete[index % redPalete.length]}
+              fill={chartPalete[index % chartPalete.length]}
             />
           ))}
         </Bar>

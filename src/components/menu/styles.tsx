@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-import { paleteColors } from "../../styles/theme";
+import { chartPalete } from "../../styles/theme";
 
 export const Menu = styled.header`
   display: flex;
   /* color: ${(props) => props.theme.colors.red}; */
-  color: ${paleteColors[0]};
+  color: ${chartPalete[0]};
 
   width: 100%;
   justify-content: space-around;
@@ -22,7 +22,7 @@ export const Menu = styled.header`
   h4 {
     /* border-bottom: 1px solid white; */
     /* border: 1px solid ${(props) => props.theme.colors.red}; */
-    border: 1px solid ${paleteColors[0]};
+    border: 1px solid ${chartPalete[0]};
 
     display: flex;
     justify-content: center;
@@ -33,7 +33,7 @@ export const Menu = styled.header`
     cursor: pointer;
     &:hover {
       /* background-color: ${(props) => props.theme.colors.red}; */
-      background-color: ${paleteColors[0]};
+      background-color: ${chartPalete[0]};
       color: white;
     }
   }

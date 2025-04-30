@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { paleteColors } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
 
 export const Table = styled.table`
   width: 100%;
@@ -9,7 +9,7 @@ export const Table = styled.table`
   margin-top: 1rem;
   thead {
     /* background-color: #ee1100; */
-    background-color: ${paleteColors[0]};
+    background-color: ${chartPalete[0]};
     color: white;
     font-size: 14px;
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { paleteColors, redPalete } from "../../../styles/theme";
+import { chartPalete, redPalete } from "../../../styles/theme";
 export const Table = styled.table`
   width: 100%;
   border-radius: 5px;
@@ -9,7 +9,7 @@ export const Table = styled.table`
 
   thead {
     /* background-color: #ee1100; */
-    background-color: ${paleteColors[0]};
+    background-color: ${chartPalete[0]};
 
     color: white;
     font-size: 14px;
@@ -53,7 +53,7 @@ export const PaginationButton = styled.button`
   border: none;
   border-radius: 5px;
   /* background-color: #ff0000; */
-  background-color: ${paleteColors[1]};
+  background-color: ${chartPalete[0]};
 
   color: white;
   cursor: pointer;
@@ -62,12 +62,12 @@ export const PaginationButton = styled.button`
 
   &:hover {
     /* background-color: #b30000; */
-    background-color: ${paleteColors[0]};
+    background-color: ${chartPalete[1]};
   }
 
   &:disabled {
     /* background-color: #ab1818; */
-    background-color: ${paleteColors[0]};
+    background-color: ${chartPalete[1]};
 
     cursor: not-allowed;
   }
@@ -89,10 +89,10 @@ export const Red = styled.div`
 export const Orange = styled.div`
   display: flex;
   justify-self: center;
-  background-color: #d75f1f33;
-  border: 1px solid #ca6a36;
+  background-color: #8c3bbb17;
+  border: 1px solid #8c3bbb;
   border-radius: 5px;
-  color: #d44a00;
+  color: #8c3bbb;
   width: 30%;
   justify-content: center;
   p {
@@ -103,9 +103,9 @@ export const Blue = styled.div`
   display: flex;
   justify-self: center;
   background-color: #5988c233;
-  border: 1px solid ${paleteColors[0]};
+  border: 1px solid ${chartPalete[0]};
   border-radius: 5px;
-  color: ${paleteColors[0]};
+  color: ${chartPalete[0]};
   width: 30%;
   justify-content: center;
   p {

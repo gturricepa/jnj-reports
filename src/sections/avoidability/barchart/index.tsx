@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import * as S from "./styles";
 import { PreventableData } from "../../../types/Preventable";
-import { chartPalete } from "../../../styles/theme";
+import { threePositionsChartPalete } from "../../../styles/theme";
 import { ChartTitle } from "../../../components/chartitle";
 import { useTranslation } from "react-i18next";
 
@@ -86,19 +86,28 @@ export const PreventableBarChart: React.FC<PreventableBarChartProps> = ({
         <Tooltip formatter={(value) => formatValue(Number(value))} />
         <Legend>
           {legendKeys.map((key, index) => (
-            <span key={index} style={{ color: chartPalete[index] }}>
+            <span
+              key={index}
+              style={{ color: threePositionsChartPalete[index] }}
+            >
               {key}
             </span>
           ))}
         </Legend>
         {legendKeys.includes(t("cpmmPreventable")) && (
-          <Bar dataKey={t("cpmmPreventable")} fill={chartPalete[0]} />
+          <Bar
+            dataKey={t("cpmmPreventable")}
+            fill={threePositionsChartPalete[0]}
+          />
         )}
         {legendKeys.includes(t("cpmmNotPreventable")) && (
-          <Bar dataKey={t("cpmmNotPreventable")} fill={chartPalete[1]} />
+          <Bar
+            dataKey={t("cpmmNotPreventable")}
+            fill={threePositionsChartPalete[1]}
+          />
         )}
         {legendKeys.includes(t("cpmmNoData")) && (
-          <Bar dataKey={t("cpmmNoData")} fill={chartPalete[2]} />
+          <Bar dataKey={t("cpmmNoData")} fill={threePositionsChartPalete[2]} />
         )}
       </BarChart>
     </S.ChartHolder>

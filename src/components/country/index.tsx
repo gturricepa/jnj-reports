@@ -21,15 +21,6 @@ export const Country: React.FC = () => {
     dispatch(setUser({ ...user, selectedCountry: value }));
     dispatch(toggle());
   };
-
-  const size = user!.selectedCountry!.length > 0 ? "350px" : "150px";
-  const sharedProps: SelectProps = {
-    mode: "multiple",
-    style: { width: size, transition: "width .3s ease" },
-    placeholder: "Select...",
-    maxTagCount: "responsive",
-  };
-
   const selectedCountries = Array.isArray(user.selectedCountry)
     ? user.selectedCountry
     : user.selectedCountry
@@ -39,6 +30,20 @@ export const Country: React.FC = () => {
   const truncateString = (str: string, maxLength: number) => {
     return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
   };
+
+  const size = user!.selectedCountry!.length > 0 ? "350px" : "150px";
+  const sharedProps: SelectProps = {
+    mode: "multiple",
+    style: {
+      width: size,
+      transition: "width .3s ease",
+      border: selectedCountries?.length > 0 ? "" : "2px solid red",
+      borderRadius: "6px",
+    },
+    placeholder: "Select...",
+    maxTagCount: "responsive",
+  };
+
   return (
     <S.Holder>
       <Select

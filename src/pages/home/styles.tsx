@@ -27,6 +27,7 @@ export const SelectCountry = styled.section`
   align-items: center;
   div {
     width: 25rem;
+    background-color: white;
     height: 10rem;
     border: 1px dashed lightgrey;
     border-radius: 5px;
@@ -37,7 +38,7 @@ export const SelectCountry = styled.section`
     align-items: center;
     span {
       font-size: 3rem;
-      color: ${paleteColors[3]};
+      color: ${paleteColors[0]};
     }
   }
 `;

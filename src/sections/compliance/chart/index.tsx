@@ -1,14 +1,14 @@
 import React from "react";
 import { PieChart, Pie, Cell, Legend, Tooltip } from "recharts";
 import { ComplianceData } from "../types";
-import { chartPalete } from "../../../styles/theme";
+import { towPositionsChartPalete } from "../../../styles/theme";
 import { ChartTitle } from "../../../components/chartitle";
 
 interface ComplianceChartByRegionProps {
   data: ComplianceData[];
 }
 
-const COLORS = [chartPalete[0], chartPalete[1]];
+const COLORS = [towPositionsChartPalete[0], towPositionsChartPalete[1]];
 
 export const ComplianceChartByRegion: React.FC<
   ComplianceChartByRegionProps

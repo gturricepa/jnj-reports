@@ -54,7 +54,7 @@ export const chartPalete: string[] = [
 export const threePositionsChartPalete: string[] = [
   "#004685",
   "#9e0000",
-  "#60666b",
+  "#aeabab",
 ];
 
 export const towPositionsChartPalete: string[] = ["#328714", "#9e0000"];

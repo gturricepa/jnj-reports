@@ -46,7 +46,7 @@ export const ComplianceChartByRegion: React.FC<
 
         const chartData = [
           { name: "Complete", value: completeCount },
-          { name: "Incomoplete", value: incompleteCount },
+          { name: "Incomplete", value: incompleteCount },
         ];
 
         return (

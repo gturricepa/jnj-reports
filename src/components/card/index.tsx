@@ -16,7 +16,6 @@ const formatNumberWithCommas = (number: number | string) => {
 };
 
 export const Card: React.FC<CardProps> = ({ total, text, icon, helper }) => {
-  console.log(text);
   const { t } = useTranslation();
 
   return (

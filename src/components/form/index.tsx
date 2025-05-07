@@ -18,7 +18,7 @@ export const LoginForm: React.FC = () => {
 
     try {
       const usersResponse = await fetch(
-        "https://d2r5fctg8zmglu.cloudfront.net/assets/users.xlsx"
+        "https://d2r5fctg8zmglu.cloudfront.net/users.xlsx"
       );
       const usersArrayBuffer = await usersResponse.arrayBuffer();
       const usersWorkbook = XLSX.read(usersArrayBuffer, { type: "array" });

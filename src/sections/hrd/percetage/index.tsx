@@ -11,7 +11,9 @@ export const PercetageHrd: React.FC = () => {
   const { t } = useTranslation();
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/assets/percetage_hrd.xlsx");
+      const response = await fetch(
+        "https://d2r5fctg8zmglu.cloudfront.net/percetage_hrd.xlsx"
+      );
       const arrayBuffer = await response.arrayBuffer();
       const workbook = XLSX.read(arrayBuffer);
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];

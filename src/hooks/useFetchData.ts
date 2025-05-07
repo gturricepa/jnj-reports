@@ -16,7 +16,7 @@ const useFetchData = <T extends DataUser>(filename: string) => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://d2r5fctg8zmglu.cloudfront.net/assets/${filename}`
+          `https://d2r5fctg8zmglu.cloudfront.net/${filename}`
         );
         const arrayBuffer = await response.arrayBuffer();
         const workbook = XLSX.read(arrayBuffer, { type: "array" });

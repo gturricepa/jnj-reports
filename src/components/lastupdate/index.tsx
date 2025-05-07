@@ -25,7 +25,9 @@ export const LastUpdate = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch("/assets/update.xlsx");
+        const response = await fetch(
+          "https://d2r5fctg8zmglu.cloudfront.net/assets/update.xlsx"
+        );
         if (!response.ok) throw new Error("Network response was not ok");
         const arrayBuffer = await response.arrayBuffer();
         const workbook = XLSX.read(arrayBuffer);

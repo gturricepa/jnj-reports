@@ -4,7 +4,7 @@ export const Table = styled.table`
   width: 40rem;
   border-radius: 5px;
   border-collapse: collapse;
-  height: 30rem;
+  height: 40rem;
   thead {
     /* background-color: #ee1100; */
     background-color: ${chartPalete[0]};

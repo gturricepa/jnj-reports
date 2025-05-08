@@ -61,6 +61,7 @@
   "CPMMacumulatedValues": "CPMM Acumulated Values",
   "CPMMacumulatedValuesBYRegion": "CPMM Accumulated Values by Regions",
   "crashesByClassification": "Crashes by Classification",
+  "PreventableCPMMCrashes": "Preventable CPMM Crashes",
   "crashesClassificationByRegion": "Crashes Classification by Region",
   "distributionOfCrashesByCountry/Region": "Distribution of Crashes by Country/Region",
   "fineNotFOrNA": "Fine data is not registred for the NA region",
@@ -90,5 +91,11 @@
   "October": "October",
   "November": "November",
   "December": "December",
-  "showingAccumulatedDataFrom": "Showing Accumulated Data from"
+  "showingAccumulatedDataFrom": "Showing Accumulated Data from",
+  "activities": "Activities",
+  "Seat belt code violation, driver and/or passenger": "Seat belt code violation, driver and/or passenger",
+  "Stopping, standing, or parking in prohibited areas": "Stopping, standing, or parking in prohibited areas",
+  "Moving by day, stop keeping low light on the highways": "Moving by day, stop keeping low light on the highways",
+  "Driving in wrong lane or direction on a one-way street or road": "Driving in wrong lane or direction on a one-way street or road",
+  "Operating an unsafe vehicle or vehicle w/defective or unlawful equipment": "Operating an unsafe vehicle or vehicle w/defective or unlawful equipment"
 }

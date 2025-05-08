@@ -13,7 +13,9 @@ import { MainData } from "../../../types/MainData";
 import * as S from "./styles";
 import { ChartTitle } from "../../../components/chartitle";
 import { useTranslation } from "react-i18next";
-import { chartPalete, paleteColors } from "../../../styles/theme";
+import { chartPalete } from "../../../styles/theme";
+import { RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
 interface GroupedData {
   totalAccidents: number;
   totalMiles: number;
@@ -79,10 +81,31 @@ export const CPMMBarChart: React.FC<{ data: MainData[] }> = ({ data }) => {
 
   organizeData(chartData);
 
+  const user = useSelector((state: RootState) => state.user);
+
+  const setSize = (value: string | string[]): number => {
+    if (typeof value === "string") {
+      return 600;
+    }
+
+    const length = value.length;
+    if (length === 1) {
+      return 600;
+    }
+    if (length > 1 && length < 3) {
+      return 800;
+    }
+
+    return 1200;
+  };
   return (
     <S.Holder>
       <ChartTitle value={t("CPMMacumulatedValues")} />
-      <ComposedChart width={600} height={250} data={chartData}>
+      <ComposedChart
+        width={setSize(user.selectedCountry!)}
+        height={250}
+        data={chartData}
+      >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
@@ -98,7 +121,7 @@ export const CPMMBarChart: React.FC<{ data: MainData[] }> = ({ data }) => {
         <Line
           type="monotone"
           dataKey="Goal"
-          stroke={paleteColors[2]}
+          stroke={"green"}
           strokeWidth={1}
           dot={false}
         />

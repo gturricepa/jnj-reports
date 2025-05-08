@@ -97,5 +97,11 @@
   "October": "Octubre",
   "November": "Noviembre",
   "December": "Diciembre",
-  "showingAccumulatedDataFrom": "Mostrando Datos Acumulados desde"
+  "showingAccumulatedDataFrom": "Mostrando Datos Acumulados desde",
+  "activities": "Actividades",
+  "Seat belt code violation, driver and/or passenger": "Conductor o Acompañante Sin Cinturón de Seguridad",
+  "Stopping, standing, or parking in prohibited areas": "Parar/Estacionar en Lugares Prohibidos",
+  "Moving by day, stop keeping low light on the highways": "De día en movimiento, no mantiene luz baja en carreteras",
+  "Driving in wrong lane or direction on a one-way street or road": "Transitar a Contramano",
+  "Operating an unsafe vehicle or vehicle w/defective or unlawful equipment": "Conducir el Vehículo Sin el Equipamiento Obligatorio o en Mal Estado de Conservación"
 }

@@ -75,7 +75,7 @@ export const AccidentsBarChart: React.FC<AccidentsBarChartProps> = ({
       {perspective === "country" && (
         <ChartTitle value={currentYear.toString()} />
       )}
-      <ResponsiveContainer height={460}>
+      <ResponsiveContainer height={550}>
         <BarChart layout="vertical" data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <YAxis

@@ -63,7 +63,7 @@ export const CPMMBarChartByRegion: React.FC<{ data: MainData[] }> = ({
   return (
     <S.Holder>
       <ChartTitle value={t("CPMMacumulatedValuesBYRegion")} />
-      <ComposedChart width={400} height={200} data={chartData}>
+      <ComposedChart width={600} height={200} data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />

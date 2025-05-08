@@ -1,28 +1,28 @@
-import React, { useEffect } from "react";
-import * as S from "./styles";
+import { useSelector } from "react-redux";
 import { Title } from "../../components/title";
-import { LoadingIndicator } from "../../components/loading";
 import useFetchData from "../../hooks/useFetchData";
-import { TrainingData } from "../../types/Training";
-import { TrainingSimpleBarChart } from "./barchart";
-import { Card } from "../../components/card";
+import * as S from "./styles";
+import { ActivitesData } from "./types";
+import { RootState } from "../../store/store";
+import { useTranslation } from "react-i18next";
+import React, { useEffect } from "react";
+import { DownloadButton } from "../../components/card/downloadButton";
+import { NoData } from "../../components/nodata";
+import { Select } from "antd";
+import { CenterTitle } from "../../components/centerTitle";
 import {
   ArrowRightOutlined,
   RiseOutlined,
+  ThunderboltOutlined,
   TrophyOutlined,
-  UsergroupAddOutlined,
 } from "@ant-design/icons";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { Select } from "antd";
-import { CenterTitle } from "../../components/centerTitle";
-import { DownloadButton } from "../../components/card/downloadButton";
+import { LoadingIndicator } from "../../components/loading";
 import { downloadExcel } from "../../helper/downloadExcel";
-import { NoData } from "../../components/nodata";
-import { useTranslation } from "react-i18next";
-
-export const Training: React.FC = () => {
-  const { filteredData, loading } = useFetchData<TrainingData>("training.xlsx");
+import { ActivitiesSimpleBarChart } from "./barchart";
+import { Card } from "../../components/card";
+export const Acitivities = () => {
+  const { filteredData, loading } =
+    useFetchData<ActivitesData>("activities.xlsx"); //mudei o xlsx para Operationg group e sector para franchise e Sector  e Region
   const perspective = useSelector((state: RootState) => state.user.perspective);
   const escope = useSelector((state: RootState) => state.user.Escope);
   const user = useSelector((state: RootState) => state.user);
@@ -46,7 +46,7 @@ export const Training: React.FC = () => {
     setSelectedSectors([]);
   }, [perspective, user.selectedCountry]);
 
-  const filterDataByOperatingGroupAndSector = (data: TrainingData[]) => {
+  const filterDataByOperatingGroupAndSector = (data: ActivitesData[]) => {
     return data.filter((item) => {
       const matchesGroup =
         selectedOperatingGroups.length === 0 ||
@@ -61,66 +61,54 @@ export const Training: React.FC = () => {
   const filteredDataByOperatingGroupAndSector =
     filterDataByOperatingGroupAndSector(filteredData);
 
-  const excelDateToUTC = (excelDate: string) => {
-    const serial = parseInt(excelDate, 10);
-    const utcDate = new Date((serial - 25569) * 86400 * 1000);
-    return utcDate;
-  };
-
-  const count2025 = filteredDataByOperatingGroupAndSector.filter((item) => {
-    const realizedDate = excelDateToUTC(item.Realized);
-    return realizedDate.getUTCFullYear() === 2025;
-  }).length;
-
   const OkCount = filteredDataByOperatingGroupAndSector.filter(
-    (item) => item.Status === "Ok"
+    (item) => item.Status === "Complete"
   ).length;
   const PendingCount = filteredDataByOperatingGroupAndSector.filter(
     (item) => item.Status === "Pending"
-  ).length;
-  const NoTrainingCount = filteredDataByOperatingGroupAndSector.filter(
-    (item) => item.Status === "No training"
   ).length;
 
   const chartData = [
     {
       name: "",
-      "Training Completed": OkCount,
+      Completed: OkCount,
       Pending: PendingCount,
-      "No training": NoTrainingCount,
     },
   ];
 
-  const totalDrives = OkCount + PendingCount + NoTrainingCount;
+  const totalDrives = OkCount + PendingCount;
+
   const okPercetage =
     (OkCount / filteredDataByOperatingGroupAndSector.length) * 100;
   if (loading) return <LoadingIndicator />;
 
   const handleDownload = () => {
-    const columnsToDownload: (keyof TrainingData)[] = [
-      "WWID",
-      "Realized",
+    const columnsToDownload: (keyof ActivitesData)[] = [
+      "Region",
+      "Corporate ID",
       "Status",
-      "Expiration Date",
+      "Operating Group",
       "Country",
       "Operating Group",
       "Sector",
-      "Type",
+      "Status",
+      "Classification",
     ];
+
     downloadExcel(
       filteredDataByOperatingGroupAndSector,
       columnsToDownload,
-      "training.xlsx"
+      "activities.xlsx"
     );
   };
 
-  const filterByRegion = (data: TrainingData[], region: string) => {
+  const filterByRegion = (data: ActivitesData[], region: string) => {
     return data.filter((item) => item.Region === region);
   };
 
   return (
     <S.Holder>
-      <Title title="training" complement=" - BTW" />
+      <Title title="activities" complement=" - PIFS" />
       {filteredData.length > 0 && (
         <>
           <S.Filters>
@@ -161,28 +149,28 @@ export const Training: React.FC = () => {
           <S.Main>
             {perspective === "country" ? (
               <>
-                <TrainingSimpleBarChart
+                <ActivitiesSimpleBarChart
                   data={chartData}
                   trainingCompleteCount={OkCount}
-                  noTrainingCount={NoTrainingCount}
                   pendingCount={PendingCount}
                 />
+
                 <S.CardHolder>
                   <Card
-                    icon={<UsergroupAddOutlined />}
+                    icon={<ThunderboltOutlined />}
                     total={totalDrives}
-                    text={"drivers"}
+                    text={t("accidents")}
                   />
                   <Card
                     icon={<RiseOutlined />}
-                    total={count2025}
+                    total={OkCount}
                     // text={"Trainings Realized 2025"}
-                    text={`${t("trainingsRealized")} 2025`}
+                    text={`${t("Complete")}`}
                   />
                   <Card
                     icon={<TrophyOutlined />}
                     total={+okPercetage.toFixed()}
-                    text={"fleetTrained"}
+                    text={"Complete"}
                     helper="%"
                   />
                 </S.CardHolder>
@@ -193,34 +181,63 @@ export const Training: React.FC = () => {
                 <S.Escope>
                   <S.Region>
                     <CenterTitle value={region} />
-                    <TrainingSimpleBarChart
-                      data={chartData}
-                      trainingCompleteCount={
-                        filterByRegion(
-                          filteredDataByOperatingGroupAndSector.filter(
-                            (item) => item.Status === "Ok"
-                          ),
-                          region
-                        ).length
-                      }
-                      pendingCount={
-                        filterByRegion(
-                          filteredDataByOperatingGroupAndSector.filter(
-                            (item) => item.Status === "Pending"
-                          ),
-                          region
-                        ).length
-                      }
-                      noTrainingCount={
-                        filterByRegion(
-                          filteredDataByOperatingGroupAndSector.filter(
-                            (item) => item.Status === "No training"
-                          ),
-                          region
-                        ).length
-                      }
-                    />
+                    {filteredDataByOperatingGroupAndSector.length > 0 ? (
+                      <ActivitiesSimpleBarChart
+                        data={chartData}
+                        trainingCompleteCount={
+                          filterByRegion(
+                            filteredDataByOperatingGroupAndSector.filter(
+                              (item) => item.Status === "Complete"
+                            ),
+                            region
+                          ).length
+                        }
+                        pendingCount={
+                          filterByRegion(
+                            filteredDataByOperatingGroupAndSector.filter(
+                              (item) => item.Status === "Pending"
+                            ),
+                            region
+                          ).length
+                        }
+                      />
+                    ) : (
+                      <NoData />
+                    )}
                   </S.Region>
+                  {region === "NA" ? (
+                    <S.MapHolder>
+                      <Card
+                        icon={<ThunderboltOutlined />}
+                        total={totalDrives}
+                        text={t("accidents")}
+                      />
+                      <Card
+                        icon={<RiseOutlined />}
+                        total={OkCount}
+                        // text={"Trainings Realized 2025"}
+                        text={`${t("Complete")}`}
+                      />
+                      <Card
+                        icon={<TrophyOutlined />}
+                        total={+okPercetage.toFixed()}
+                        text={"Complete"}
+                        helper="%"
+                      />
+                    </S.MapHolder>
+                  ) : (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <NoData />
+                    </div>
+                  )}
+
+                  {/* 
 
                   <S.MapHolder>
                     <Card
@@ -274,7 +291,7 @@ export const Training: React.FC = () => {
                       text={"fleetTrained"}
                       helper="%"
                     />
-                  </S.MapHolder>
+                  </S.MapHolder> */}
                 </S.Escope>
               ))
             )}

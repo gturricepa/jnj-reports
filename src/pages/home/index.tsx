@@ -14,6 +14,7 @@ import { RootState } from "../../store/store";
 import { FlagOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { Compliance } from "../../sections/compliance";
+import { Acitivities } from "../../sections/activities";
 
 export const Home: React.FC = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -44,6 +45,9 @@ export const Home: React.FC = () => {
             </section>
             <section id="training">
               <Training />
+            </section>
+            <section id="activities">
+              <Acitivities />
             </section>
             <section id="compliance">
               <Compliance />

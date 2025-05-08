@@ -84,7 +84,7 @@ export const Accidents: React.FC = () => {
       "Classification",
       "Brief Report",
     ];
-    downloadExcel(filteredDataByFilters, columnsToDownload, "fines.xlsx");
+    downloadExcel(filteredDataByFilters, columnsToDownload, "accidents.xlsx");
   };
 
   useEffect(() => {

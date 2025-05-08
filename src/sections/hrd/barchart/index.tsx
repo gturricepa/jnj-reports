@@ -12,6 +12,8 @@ import {
 } from "recharts";
 import { HRDData } from "../../../types/HRD";
 import { chartPalete } from "../../../styles/theme";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 interface BarChartHrdProps {
   data: HRDData[];
@@ -28,9 +30,25 @@ const BarChartHrd: React.FC<BarChartHrdProps> = ({ data }) => {
     count: countryCount[country],
     color: chartPalete[index % chartPalete.length],
   }));
+  const user = useSelector((state: RootState) => state.user);
 
+  const setSize = (value: string | string[]): number => {
+    if (typeof value === "string") {
+      return 600;
+    }
+
+    const length = value.length;
+    if (length === 1) {
+      return 600;
+    }
+    if (length > 1 && length < 3) {
+      return 800;
+    }
+
+    return 1000;
+  };
   return (
-    <ResponsiveContainer width={400} height={200}>
+    <ResponsiveContainer width={setSize(user.selectedCountry!)} height={200}>
       <BarChart data={barChartData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="Country" />

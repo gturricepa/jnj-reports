@@ -188,6 +188,20 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
                 ).toFixed(2)}
                 text="accumulatedCPMM"
                 icon={<AimOutlined />}
+                color={true}
+                region={region}
+                type="CPMM"
+              />
+              <Card
+                total={(
+                  (regionData[region].AccidentsWithInjuries * 1000000) /
+                  regionData[region].Miles
+                ).toFixed(2)}
+                text="Accumulated IPMM"
+                icon={<AimOutlined />}
+                color={true}
+                region={region}
+                type="IPMM"
               />
             </S.CardHolder>
             <S.ListHolder>
@@ -231,6 +245,16 @@ export const CollapseGeneralRegion: React.FC<CollapseGeneralProps> = ({
                               {(
                                 (regionData[region].operationGroups[groupKey]
                                   .AccidentCount *
+                                  1000000) /
+                                regionData[region].operationGroups[groupKey]
+                                  .Miles
+                              ).toFixed(2)}
+                            </span>
+                            <span>
+                              {t("Accumulated IPMM")}:{" "}
+                              {(
+                                (regionData[region].operationGroups[groupKey]
+                                  .AccidentsWithInjuries *
                                   1000000) /
                                 regionData[region].operationGroups[groupKey]
                                   .Miles

@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearUser } from "../../store/userSlice";
-import { LogoutOutlined, QuestionCircleOutlined } from "@ant-design/icons";
+import { LogoutOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { RootState } from "../../store/store";
 import { Country } from "../country";
@@ -45,7 +45,7 @@ export const Menu: React.FC = () => {
       <h4 onClick={() => handleScroll("training")}>{t("training")}</h4>
       <h4 onClick={() => handleScroll("activities")}>{t("activities")}</h4>
       <h4 onClick={() => handleScroll("compliance")}>Compliance</h4>
-      <div
+      {/* <div
         style={{
           display: "flex",
           flexDirection: "column",
@@ -69,7 +69,7 @@ export const Menu: React.FC = () => {
             }}
           />
         </Tooltip>
-      </div>
+      </div> */}
 
       <div>
         {user.perspective === "country" ? <Country /> : <Escope />}

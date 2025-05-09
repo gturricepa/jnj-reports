@@ -31,6 +31,7 @@ interface OperationGroupData {
 }
 
 interface CountryData {
+  Region: string;
   Miles: number;
   AccidentCount: number;
   VehiclesCount: number;
@@ -47,6 +48,7 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
 
   const countryData = data.reduce<Record<string, CountryData>>((acc, item) => {
     const {
+      Region,
       Country,
       Miles,
       "Accident Count": accidentCount,
@@ -61,6 +63,7 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
 
     if (!acc[Country]) {
       acc[Country] = {
+        Region: Region,
         Miles: 0,
         AccidentCount: 0,
         VehiclesCount: 0,
@@ -173,6 +176,20 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                 ).toFixed(2)}
                 text="accumulatedCPMM"
                 icon={<AimOutlined />}
+                color={true}
+                region={countryData[country].Region}
+                type="CPMM"
+              />
+              <Card
+                total={(
+                  (countryData[country].AccidentsWithInjuries * 1000000) /
+                  countryData[country].Miles
+                ).toFixed(2)}
+                text="Acumulated IPMM"
+                icon={<AimOutlined />}
+                color={true}
+                region={countryData[country].Region}
+                type="IPMM"
               />
             </S.CardHolder>
             <S.ListHolder>
@@ -216,6 +233,16 @@ export const CollapseGeneral: React.FC<CollapseGeneralProps> = ({ data }) => {
                               {(
                                 (countryData[country].operationGroups[groupKey]
                                   .AccidentCount *
+                                  1000000) /
+                                countryData[country].operationGroups[groupKey]
+                                  .Miles
+                              ).toFixed(2)}
+                            </span>
+                            <span>
+                              {t("Accumulated IPMM")}:{" "}
+                              {(
+                                (countryData[country].operationGroups[groupKey]
+                                  .AccidentsWithInjuries *
                                   1000000) /
                                 countryData[country].operationGroups[groupKey]
                                   .Miles

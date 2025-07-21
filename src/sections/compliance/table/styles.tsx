@@ -89,7 +89,6 @@ export const PaginationButton = styled.button`
 export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   width: 100%;
 `;
 

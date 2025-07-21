@@ -32,7 +32,7 @@ export const Login = () => {
         />
 
         <S.Content>
-          <h1>CEPA REPORTS</h1>
+          {/* <h1>CEPA REPORTS</h1> */}
           <h2>SAFE FLEET</h2>
           <LoginForm />
           <img

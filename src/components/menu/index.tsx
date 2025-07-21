@@ -73,7 +73,7 @@ export const Menu: React.FC = () => {
 
       <div>
         {user.perspective === "country" ? <Country /> : <Escope />}
-        <RangeTime />
+        {/* <RangeTime /> */}
 
         <p>
           {t("welcome")}, {user.Nick}

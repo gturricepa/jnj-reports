@@ -55,6 +55,8 @@ export const ComplianceTable: React.FC<TableData> = ({ data }) => {
     }
   };
 
+  console.log(filteredData);
+
   const renderPageNumbers = () => {
     const pages = [];
     const maxVisiblePages = 5;

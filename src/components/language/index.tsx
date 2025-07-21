@@ -50,7 +50,7 @@ export const Language = () => {
           Español
         </Option>
       </Select>
-      <LastUpdate />
+      {/* <LastUpdate /> */}
     </S.Holder>
   );
 };

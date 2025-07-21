@@ -9,7 +9,7 @@ import { RootState } from "../../store/store";
 import { Country } from "../country";
 import { Escope } from "../escope";
 import logo from "../../assets/jnj2.png";
-import { RangeTime } from "../rangeTime";
+// import { RangeTime } from "../rangeTime";
 import { Tooltip } from "antd";
 export const Menu: React.FC = () => {
   const dispatch = useDispatch();

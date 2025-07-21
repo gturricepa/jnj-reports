@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import * as S from "./styles";
 import { setLanguage } from "../../store/languageSlice";
 import { RootState } from "../../store/store";
-import { LastUpdate } from "../lastupdate";
+// import { LastUpdate } from "../lastupdate";
 
 const { Option } = Select;
 
